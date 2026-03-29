@@ -1,3 +1,6 @@
+
+Copiar
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -597,6 +600,20 @@ function doLogin(){
     if(crmContactCtx && crmContactCtx.name) {
       applyContextBanners();
     }
+    // Pedir contexto ao Chatwoot após login
+    // O Chatwoot reenvia quando recebe este evento
+    try {
+      window.parent.postMessage('chatwoot-dashboard-app:fetch-info', '*');
+    } catch(e) {}
+    // Tentar novamente após 1s e 3s (Chatwoot pode demorar para responder)
+    setTimeout(function(){
+      try { window.parent.postMessage('chatwoot-dashboard-app:fetch-info', '*'); } catch(e) {}
+    }, 1000);
+    setTimeout(function(){
+      try { window.parent.postMessage('chatwoot-dashboard-app:fetch-info', '*'); } catch(e) {}
+      // Se ainda não tem contexto, verificar se o campo está vazio
+      if(crmContactCtx && crmContactCtx.name) applyContextBanners();
+    }, 3000);
     // Se CRM token já configurado, pré-carregar contatos
     if(crmCfg.token) {
       const pill=document.getElementById('crm-pill');
