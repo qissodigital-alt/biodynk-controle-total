@@ -1,6 +1,3 @@
-
-Copiar
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -19,7 +16,7 @@ Copiar
   --font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
 }
 body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;font-size:13px;overflow-x:hidden}
- 
+
 /* LOGIN */
 #login-screen{position:fixed;inset:0;background:var(--brand);display:flex;align-items:center;justify-content:center;z-index:1000}
 .login-box{background:#fff;border-radius:18px;padding:36px 32px;width:340px;box-shadow:0 24px 60px rgba(0,0,0,0.3)}
@@ -31,7 +28,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 .login-btn:hover{background:#2d2d50}
 .login-err{color:var(--danger);font-size:11px;margin-top:7px;display:none;text-align:center}
 .login-hint{font-size:10px;color:#ccc;text-align:center;margin-top:12px}
- 
+
 /* LAYOUT */
 #app{display:none;height:100vh;display:none;flex-direction:column}
 #topbar{background:var(--brand);height:48px;display:flex;align-items:center;justify-content:space-between;padding:0 16px;flex-shrink:0}
@@ -42,7 +39,7 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 .crm-pill.off{background:rgba(224,82,82,0.2);color:#e05252}
 .logout-btn{background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:11px;font-family:var(--font-body);padding:4px 10px;border-radius:6px}
 .logout-btn:hover{background:rgba(255,255,255,0.2);color:#fff}
- 
+
 #body{display:flex;flex:1;overflow:hidden}
 #sidebar{width:var(--sidebar-w);background:var(--brand);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}
 .nav-sec{padding:14px 16px 5px;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:600}
@@ -53,15 +50,15 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 .nav-icon{font-size:13px;width:16px;text-align:center}
 .sidebar-footer{margin-top:auto;padding:12px 16px;border-top:1px solid rgba(255,255,255,0.08)}
 .sidebar-user{font-size:10px;color:rgba(255,255,255,0.35)}
- 
+
 /* CRM CONTEXT BANNER */
 #crm-context-bar{background:#e8f7ef;border-bottom:1px solid #b8dfc9;padding:7px 16px;font-size:11px;color:#1a6b3c;display:none;flex-shrink:0}
 #crm-context-bar strong{font-weight:600}
- 
+
 #main{flex:1;overflow-y:auto}
 .content{padding:20px}
 .page{display:none}.page.active{display:block}
- 
+
 /* CARDS & UTILS */
 .card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:16px}
 .card-title{font-family:var(--font-head);font-size:13px;font-weight:600;margin-bottom:14px}
@@ -113,7 +110,7 @@ tr:hover td{background:#faf9f7}
 .calc-row.profit.neg{color:var(--danger)}
 .mbadge{display:inline-flex;align-items:center;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:500}
 .mbadge-g{background:#e8f7ee;color:#2e7d52}.mbadge-a{background:#faeeda;color:#854f0b}.mbadge-r{background:#fdeaea;color:#b52e2e}
- 
+
 /* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(26,26,46,0.55);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.2s}
 .modal-overlay.open{opacity:1;pointer-events:all}
@@ -122,7 +119,7 @@ tr:hover td{background:#faf9f7}
 .modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}
 .modal-title{font-family:var(--font-head);font-size:14px;font-weight:700}
 .modal-close{background:none;border:none;font-size:17px;cursor:pointer;color:var(--muted);padding:3px}
- 
+
 /* CONFIRM */
 .confirm-overlay{position:fixed;inset:0;background:rgba(26,26,46,0.6);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.15s}
 .confirm-overlay.open{opacity:1;pointer-events:all}
@@ -130,12 +127,12 @@ tr:hover td{background:#faf9f7}
 .confirm-title{font-family:var(--font-head);font-size:14px;font-weight:700;margin-bottom:7px}
 .confirm-text{font-size:12px;color:var(--muted);margin-bottom:18px}
 .confirm-actions{display:flex;gap:8px}
- 
+
 /* TOAST */
 .toast{position:fixed;bottom:18px;right:18px;background:var(--brand);color:#fff;padding:9px 16px;border-radius:9px;font-size:12px;font-weight:500;z-index:999;transform:translateY(80px);transition:transform 0.25s;pointer-events:none}
 .toast.show{transform:translateY(0)}
 .toast.error{background:var(--danger)}
- 
+
 /* CRM contact picker */
 .contact-list{max-height:160px;overflow-y:auto;border:1px solid var(--border);border-radius:7px;background:var(--card);margin-bottom:10px}
 .contact-item{padding:8px 10px;cursor:pointer;font-size:12px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;transition:background 0.1s}
@@ -145,14 +142,14 @@ tr:hover td{background:#faf9f7}
 .contact-phone{font-size:10px;color:var(--muted)}
 .crm-section{background:var(--bg);border-radius:8px;padding:11px;margin-bottom:11px}
 .crm-section-title{font-size:10px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between}
- 
+
 /* CHATWOOT CONTEXT highlight */
 .ctx-banner{background:linear-gradient(90deg,#e8f7ef,#f7fdf9);border:1px solid #b8dfc9;border-radius:9px;padding:10px 14px;margin-bottom:16px;font-size:12px;color:#1a6b3c;display:none}
 .ctx-banner strong{font-weight:600}
 </style>
 </head>
 <body>
- 
+
 <!-- LOGIN -->
 <div id="login-screen">
   <div class="login-box">
@@ -165,10 +162,10 @@ tr:hover td{background:#faf9f7}
     <div class="login-hint">Padrão: admin / biodynk2024</div>
   </div>
 </div>
- 
+
 <!-- APP -->
 <div id="app" style="display:none;flex-direction:column;height:100vh">
- 
+
   <!-- TOPBAR -->
   <div id="topbar">
     <div class="topbar-brand">Biodynk <span>Controle Total</span></div>
@@ -178,10 +175,10 @@ tr:hover td{background:#faf9f7}
       <button class="logout-btn" onclick="doLogout()">Sair</button>
     </div>
   </div>
- 
+
   <!-- CRM CONTEXT BAR (preenchido pelo evento Chatwoot) -->
   <div id="crm-context-bar"></div>
- 
+
   <div id="body" style="display:flex;flex:1;overflow:hidden">
     <!-- SIDEBAR -->
     <div id="sidebar">
@@ -197,11 +194,11 @@ tr:hover td{background:#faf9f7}
         <div class="sidebar-user" id="sidebar-user"></div>
       </div>
     </div>
- 
+
     <!-- MAIN -->
     <div id="main">
       <div class="content">
- 
+
         <!-- DASHBOARD -->
         <div id="page-dashboard" class="page active">
           <!-- Chatwoot context banner -->
@@ -224,7 +221,7 @@ tr:hover td{background:#faf9f7}
             <div class="card"><div class="card-title">Últimos atendimentos</div><div id="dash-ultimos"></div></div>
           </div>
         </div>
- 
+
         <!-- PROCEDIMENTOS -->
         <div id="page-procedimentos" class="page">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
@@ -236,7 +233,7 @@ tr:hover td{background:#faf9f7}
             <tbody id="proc-tbody"></tbody>
           </table></div></div>
         </div>
- 
+
         <!-- CALCULADORA -->
         <div id="page-calculadora" class="page">
           <div class="section-title">Calculadora</div>
@@ -275,7 +272,7 @@ tr:hover td{background:#faf9f7}
             </div>
           </div>
         </div>
- 
+
         <!-- PRODUTOS -->
         <div id="page-produtos" class="page">
           <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
@@ -290,7 +287,7 @@ tr:hover td{background:#faf9f7}
           </div>
           <div class="grid-3" id="produtos-grid"></div>
         </div>
- 
+
         <!-- RELATÓRIOS -->
         <div id="page-relatorios" class="page">
           <div class="section-title">Relatórios</div>
@@ -299,7 +296,7 @@ tr:hover td{background:#faf9f7}
           <div class="card" style="margin-bottom:12px"><div class="card-title">Por tipo de procedimento</div><div id="rel-por-tipo"></div></div>
           <div class="card"><div class="card-title">Consumo de produtos</div><div id="rel-consumo"></div></div>
         </div>
- 
+
         <!-- CONFIGURAÇÕES -->
         <div id="page-configuracoes" class="page">
           <div class="section-title">Configurações</div>
@@ -339,12 +336,12 @@ tr:hover td{background:#faf9f7}
             </div>
           </div>
         </div>
- 
+
       </div>
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL PROCEDIMENTO -->
 <div class="modal-overlay" id="modal-proc">
   <div class="modal">
@@ -383,7 +380,7 @@ tr:hover td{background:#faf9f7}
     </div>
   </div>
 </div>
- 
+
 <!-- MODAL PRODUTO -->
 <div class="modal-overlay" id="modal-produto">
   <div class="modal">
@@ -411,7 +408,7 @@ tr:hover td{background:#faf9f7}
     </div>
   </div>
 </div>
- 
+
 <!-- CONFIRM -->
 <div class="confirm-overlay" id="confirm-overlay">
   <div class="confirm-box">
@@ -423,17 +420,17 @@ tr:hover td{background:#faf9f7}
     </div>
   </div>
 </div>
- 
+
 <!-- TOAST -->
 <div class="toast" id="toast"><span id="toast-msg"></span></div>
- 
+
 <script>
 // =========================================================
 // BIODYNK CONTROLE TOTAL — Dashboard App para Chatwoot
 // Instalação: Settings → Integrations → Dashboard Apps
 // Adicione o nome "Controle Total" e a URL deste arquivo
 // =========================================================
- 
+
 // --- DEFAULTS ---
 const DEFAULT_USERS=[{user:'admin',pass:'biodynk2024'},{user:'biomedica',pass:'iris2024'}];
 const DEFAULT_CFG={horaSala:84,gov:7,maq:10,comissao:10};
@@ -450,7 +447,7 @@ const DEFAULT_PROCS=[
   {id:2,data:'2025-06-11',cliente:'Paula Andrade',tipo:'preenchedor',prodId:3,prof:'Biomédica',consumo:1,tempo:45,cobrado:1200,custoTotal:662.8,lucro:537.2},
   {id:3,data:'2025-06-12',cliente:'Renata Silva',tipo:'bioestimulador',prodId:5,prof:'Biomédica',consumo:2,tempo:60,cobrado:1800,custoTotal:1116,lucro:684},
 ];
- 
+
 // --- STORAGE ---
 function ls(k,d){try{const v=localStorage.getItem('bct2_'+k);return v?JSON.parse(v):d;}catch(e){return d;}}
 function lss(k,v){try{localStorage.setItem('bct2_'+k,JSON.stringify(v));}catch(e){}}
@@ -462,7 +459,7 @@ let crmCfg=ls('crm',{url:'https://appv3.biodynk.com.br',token:'',account:'1'});
 let nextId=ls('nextid',20);
 function saveAll(){lss('users',users);lss('cfg',cfg);lss('produtos',produtos);lss('procs',procedimentos);lss('crm',crmCfg);lss('nextid',nextId);}
 function nid(){return nextId++;}
- 
+
 // --- STATE ---
 let loggedUser=null;
 let crmContacts=[];
@@ -471,7 +468,7 @@ let prodFiltro='todos';
 let confirmCb=null;
 const tipoLabel={botox:'Botox',preenchedor:'Preenchedor',bioestimulador:'Bioestimulador'};
 const tipoChip={botox:'chip-botox',preenchedor:'chip-preen',bioestimulador:'chip-bio'};
- 
+
 // --- UTILS ---
 function brl(v){return(+v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
 function pct(v){return(+v||0).toFixed(1)+'%'}
@@ -491,7 +488,7 @@ function openConfirm(title,text,cb){
 }
 function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('open');confirmCb=null;}
 document.getElementById('confirm-ok-btn').onclick=()=>{if(confirmCb)confirmCb();closeConfirm();};
- 
+
 function calcCusto(tipo,prodId,consumo,tempo,cobrado){
   const prod=produtos.find(p=>p.id===prodId);
   const custoProd=prod?(consumo*prod.custo):0;
@@ -501,7 +498,7 @@ function calcCusto(tipo,prodId,consumo,tempo,cobrado){
   const lucro=cobrado-total;
   return{custoProd,custoSala,taxas,total,lucro,margem:cobrado>0?(lucro/cobrado*100):0};
 }
- 
+
 // =========================================================
 // CHATWOOT DASHBOARD APP — EVENTO DE CONTEXTO
 // Quando o app está dentro do iframe do Chatwoot, ele envia
@@ -532,7 +529,7 @@ function applyContextBanners() {
   const pill = document.getElementById('crm-pill');
   if (pill) { pill.className = 'crm-pill'; pill.textContent = '⚡ ' + crmContactCtx.name; }
 }
- 
+
 window.addEventListener('message', function(event) {
   try {
     const data = event.data;
@@ -543,20 +540,20 @@ window.addEventListener('message', function(event) {
     else if (data.sender) sender = data.sender;
     else if (data.contact) sender = data.contact;
     if (!sender || !sender.name) return;
- 
+
     crmContactCtx = {
       name: sender.name || '',
       email: sender.email || '',
       phone: sender.phone_number || '',
       id: sender.id
     };
- 
+
     // Só aplica banners se já estiver logado
     if (loggedUser) applyContextBanners();
- 
+
   } catch(e) { console.log('postMessage err:', e); }
 });
- 
+
 function usarContatoCRM() {
   if (!crmContactCtx) return;
   openModal('modal-proc');
@@ -573,7 +570,7 @@ function abrirProcParaContato() {
     mpTipoChange(); mpCalc();
   }, 100);
 }
- 
+
 // --- LOGIN ---
 function doLogin(){
   const u=document.getElementById('login-user').value.trim();
@@ -600,20 +597,18 @@ function doLogin(){
     if(crmContactCtx && crmContactCtx.name) {
       applyContextBanners();
     }
-    // Pedir contexto ao Chatwoot após login
-    // O Chatwoot reenvia quando recebe este evento
-    try {
-      window.parent.postMessage('chatwoot-dashboard-app:fetch-info', '*');
-    } catch(e) {}
-    // Tentar novamente após 1s e 3s (Chatwoot pode demorar para responder)
-    setTimeout(function(){
+    // Pedir contexto ao Chatwoot após login — tenta múltiplas vezes
+    function tentarContexto(tentativa) {
       try { window.parent.postMessage('chatwoot-dashboard-app:fetch-info', '*'); } catch(e) {}
-    }, 1000);
-    setTimeout(function(){
-      try { window.parent.postMessage('chatwoot-dashboard-app:fetch-info', '*'); } catch(e) {}
-      // Se ainda não tem contexto, verificar se o campo está vazio
-      if(crmContactCtx && crmContactCtx.name) applyContextBanners();
-    }, 3000);
+      if (crmContactCtx && crmContactCtx.name) {
+        applyContextBanners();
+        return;
+      }
+      if (tentativa < 8) {
+        setTimeout(function(){ tentarContexto(tentativa + 1); }, 500);
+      }
+    }
+    tentarContexto(0);
     // Se CRM token já configurado, pré-carregar contatos
     if(crmCfg.token) {
       const pill=document.getElementById('crm-pill');
@@ -633,7 +628,7 @@ function doLogout(){
 }
 document.getElementById('login-user').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('login-pass').focus();});
 document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
- 
+
 // --- NAV ---
 function nav(page){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
@@ -647,7 +642,7 @@ function nav(page){
   if(page==='calculadora'){populateProdSel('calc-produto','botox');calcUpdate();}
   if(page==='relatorios')renderRelatorios();
 }
- 
+
 // --- DASHBOARD ---
 function renderDashboard(){
   const now=new Date();
@@ -684,7 +679,7 @@ function renderDashboard(){
   });
   document.getElementById('dash-ultimos').innerHTML=hu||'<div style="padding:16px;text-align:center;color:var(--muted);font-size:12px">Sem procedimentos</div>';
 }
- 
+
 // --- PROCEDIMENTOS ---
 function renderProcedimentos(){
   let html='';
@@ -710,7 +705,7 @@ function excluirProc(id){
     procedimentos=procedimentos.filter(x=>x.id!==id);saveAll();renderProcedimentos();renderDashboard();showToast('Procedimento excluído');
   });
 }
- 
+
 // --- PRODUTOS ---
 function populateProdSel(selId,tipo){
   const sel=document.getElementById(selId);
@@ -767,7 +762,7 @@ function salvarProduto(){
   saveAll();closeModal('modal-produto');showToast('Produto cadastrado!');renderProdutos();
   ['prod-nome','prod-custo','prod-estoque','prod-lote','prod-validade'].forEach(id=>document.getElementById(id).value='');
 }
- 
+
 // --- CALCULADORA ---
 function calcUpdate(){
   const tipo=document.getElementById('calc-tipo').value;
@@ -803,7 +798,7 @@ function openProcFromCalc(){
   if(crmContactCtx)document.getElementById('mp-cliente').value=crmContactCtx.name||'';
   mpCalc();
 }
- 
+
 // --- MODAL PROC ---
 function mpTipoChange(){
   const tipo=document.getElementById('mp-tipo').value;
@@ -841,7 +836,7 @@ function salvarProcedimento(){
   renderDashboard();renderProcedimentos();
   document.getElementById('mp-cliente').value='';
 }
- 
+
 // --- CONFIG ---
 function salvarConfig(){
   cfg.horaSala=parseFloat(document.getElementById('cfg-hora').value)||84;
@@ -868,7 +863,7 @@ function alterarSenha(){
   u.pass=nw;saveAll();showToast('Senha alterada!');
   ['cfg-pass-old','cfg-pass-new','cfg-pass-conf'].forEach(id=>document.getElementById(id).value='');
 }
- 
+
 // --- CRM CHATWOOT ---
 async function testeCRM(){
   salvarCRMConfig();
@@ -919,7 +914,7 @@ function filterContactsInput(){
   if(!q||!crmContacts.length)return;
   renderContactList(crmContacts.filter(c=>(c.name||'').toLowerCase().includes(q)));
 }
- 
+
 // --- RELATÓRIOS ---
 function renderRelatorios(){
   const rec=procedimentos.reduce((s,p)=>s+p.cobrado,0);
@@ -949,19 +944,19 @@ function renderRelatorios(){
   ch+='</tbody></table>';
   document.getElementById('rel-consumo').innerHTML=ch;
 }
- 
+
 // --- INIT ---
 window.addEventListener('click',e=>{
   if(e.target.classList.contains('modal-overlay'))e.target.classList.remove('open');
   if(e.target.id==='confirm-overlay')closeConfirm();
 });
- 
+
 function usarContatoCRMModal() {
   if (!crmContactCtx) return;
   document.getElementById('mp-cliente').value = crmContactCtx.name || '';
   mpCalc();
 }
- 
+
 // Ao abrir modal proc
 const _origOpenModal=openModal;
 window.openModal=function(id){
@@ -985,4 +980,3 @@ window.openModal=function(id){
 </script>
 </body>
 </html>
- 
