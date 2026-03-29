@@ -347,13 +347,10 @@ tr:hover td{background:#faf9f7}
   <div class="modal">
     <div class="modal-header"><div class="modal-title">Registrar Procedimento</div><button class="modal-close" onclick="closeModal('modal-proc')">✕</button></div>
     <div id="crm-contacts-section" style="display:none">
-      <div class="crm-section">
-        <div class="crm-section-title">
-          <span>Buscar no CRM</span>
-          <button class="btn btn-ghost btn-sm" onclick="loadCRMContacts()" style="padding:2px 8px;font-size:10px">↻ Recarregar</button>
-        </div>
-        <input class="form-input" id="crm-search" placeholder="Pesquisar por nome..." oninput="searchCRMContacts()" style="margin-bottom:7px">
-        <div class="contact-list" id="contact-list"><div style="padding:12px;text-align:center;font-size:11px;color:var(--muted)">Carregando...</div></div>
+      <div class="crm-section" id="crm-ctx-info" style="background:#e8f7ef;border:1px solid #b8dfc9;">
+        <div style="font-size:12px;color:#1a6b3c;font-weight:600" id="crm-ctx-name">⚡ Cliente detectado</div>
+        <div style="font-size:11px;color:#2e7d52;margin-top:3px" id="crm-ctx-phone"></div>
+        <button class="btn btn-sm" style="margin-top:8px;background:#1a6b3c;color:#fff;font-size:11px" onclick="usarContatoCRMModal()">Usar este cliente</button>
       </div>
     </div>
     <div class="form-group"><label class="form-label">Cliente</label><input class="form-input" id="mp-cliente" placeholder="Nome do cliente" oninput="filterContactsInput()"></div>
@@ -508,6 +505,31 @@ function calcCusto(tipo,prodId,consumo,tempo,cobrado){
 // o contexto da conversa/contato via window.postMessage.
 // Documentação: https://www.chatwoot.com/hc/user-guide/articles/1677691702
 // =========================================================
+function applyContextBanners() {
+  if (!crmContactCtx || !crmContactCtx.name) return;
+  // Preencher campo cliente se modal aberto
+  const mpCliente = document.getElementById('mp-cliente');
+  if (mpCliente && !mpCliente.value) mpCliente.value = crmContactCtx.name;
+  // Banner topbar
+  const bar = document.getElementById('crm-context-bar');
+  if (bar) {
+    bar.style.display = 'block';
+    bar.innerHTML = '⚡ Conversa com: <strong>' + crmContactCtx.name + '</strong>' +
+      (crmContactCtx.phone ? ' · ' + crmContactCtx.phone : '') +
+      ' &nbsp;·&nbsp; <a href="#" onclick="usarContatoCRM(); return false;" style="color:#1a6b3c;font-weight:600;text-decoration:underline">+ Registrar procedimento</a>';
+  }
+  // Banner dashboard
+  const ctxDash = document.getElementById('ctx-dash-banner');
+  if (ctxDash) {
+    ctxDash.style.display = 'block';
+    ctxDash.innerHTML = '⚡ Conversa ativa: <strong>' + crmContactCtx.name + '</strong>' +
+      ' &nbsp;·&nbsp; <a href="#" onclick="abrirProcParaContato(); return false;" style="color:#1a6b3c;font-weight:600">Registrar procedimento</a>';
+  }
+  // Pill CRM
+  const pill = document.getElementById('crm-pill');
+  if (pill) { pill.className = 'crm-pill'; pill.textContent = '⚡ ' + crmContactCtx.name; }
+}
+ 
 window.addEventListener('message', function(event) {
   try {
     const data = event.data;
@@ -526,30 +548,8 @@ window.addEventListener('message', function(event) {
       id: sender.id
     };
  
-    // Preencher campo cliente se modal já estiver aberto
-    const mpCliente = document.getElementById('mp-cliente');
-    if (mpCliente && !mpCliente.value) mpCliente.value = crmContactCtx.name;
- 
-    // Banner topbar
-    const bar = document.getElementById('crm-context-bar');
-    if (bar) {
-      bar.style.display = 'block';
-      bar.innerHTML = '⚡ Conversa com: <strong>' + crmContactCtx.name + '</strong>' +
-        (crmContactCtx.phone ? ' · ' + crmContactCtx.phone : '') +
-        ' &nbsp;·&nbsp; <a href="#" onclick="usarContatoCRM(); return false;" style="color:#1a6b3c;font-weight:600;text-decoration:underline">+ Registrar procedimento</a>';
-    }
- 
-    // Banner dashboard
-    const ctxDash = document.getElementById('ctx-dash-banner');
-    if (ctxDash) {
-      ctxDash.style.display = 'block';
-      ctxDash.innerHTML = '⚡ Conversa ativa: <strong>' + crmContactCtx.name + '</strong>' +
-        ' &nbsp;·&nbsp; <a href="#" onclick="abrirProcParaContato(); return false;" style="color:#1a6b3c;font-weight:600">Registrar procedimento</a>';
-    }
- 
-    // Pill CRM
-    const pill = document.getElementById('crm-pill');
-    if (pill) { pill.className = 'crm-pill'; pill.textContent = '⚡ ' + crmContactCtx.name; }
+    // Só aplica banners se já estiver logado
+    if (loggedUser) applyContextBanners();
  
   } catch(e) { console.log('postMessage err:', e); }
 });
@@ -593,6 +593,10 @@ function doLogin(){
     document.getElementById('cfg-crm-account').value=crmCfg.account||'1';
     document.getElementById('login-err').style.display='none';
     renderDashboard();
+    // Aplicar contexto Chatwoot se já recebido antes do login
+    if(crmContactCtx && crmContactCtx.name) {
+      applyContextBanners();
+    }
     // Se CRM token já configurado, pré-carregar contatos
     if(crmCfg.token) {
       const pill=document.getElementById('crm-pill');
@@ -935,17 +939,28 @@ window.addEventListener('click',e=>{
   if(e.target.id==='confirm-overlay')closeConfirm();
 });
  
-// Ao abrir modal proc, checar CRM
+function usarContatoCRMModal() {
+  if (!crmContactCtx) return;
+  document.getElementById('mp-cliente').value = crmContactCtx.name || '';
+  mpCalc();
+}
+ 
+// Ao abrir modal proc
 const _origOpenModal=openModal;
 window.openModal=function(id){
   _origOpenModal(id);
   if(id==='modal-proc'){
-    const hasToken=crmCfg&&crmCfg.token&&crmCfg.token.length>4;
-    document.getElementById('crm-contacts-section').style.display=hasToken?'block':'none';
-    if(hasToken&&!crmContacts.length)loadCRMContacts();
-    // Se há contexto do Chatwoot, pré-preencher cliente
-    if(crmContactCtx&&!document.getElementById('mp-cliente').value){
-      document.getElementById('mp-cliente').value=crmContactCtx.name||'';
+    const hasCtx = crmContactCtx && crmContactCtx.name;
+    const section = document.getElementById('crm-contacts-section');
+    section.style.display = hasCtx ? 'block' : 'none';
+    if (hasCtx) {
+      const nameEl = document.getElementById('crm-ctx-name');
+      const phoneEl = document.getElementById('crm-ctx-phone');
+      if (nameEl) nameEl.textContent = '⚡ ' + crmContactCtx.name;
+      if (phoneEl) phoneEl.textContent = crmContactCtx.phone || crmContactCtx.email || '';
+      // Preencher campo cliente automaticamente
+      const mp = document.getElementById('mp-cliente');
+      if (mp) mp.value = crmContactCtx.name;
     }
     mpTipoChange();
   }
