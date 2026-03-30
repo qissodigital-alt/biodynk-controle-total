@@ -394,6 +394,25 @@ tr:hover td{background:#faf9f7}
       </div>
       <button class="btn btn-primary btn-sm" onclick="salvarEstoqueMin()">Salvar</button>
     </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">Integração Chatwoot</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+        Cole seu token para buscar contatos. Funciona 100% quando o app estiver hospedado no mesmo servidor do Chatwoot.<br>
+        Token: <strong>Chatwoot → Perfil → Token de acesso → Copiar</strong>
+      </div>
+      <div class="form-group"><label class="form-label">URL da API</label>
+        <input class="form-input" id="cfg-crm-url" value="https://appv3.biodynk.com.br" placeholder="https://appv3.biodynk.com.br"></div>
+      <div class="form-group"><label class="form-label">API Access Token</label>
+        <input class="form-input" id="cfg-crm-token" type="password" placeholder="Cole seu token aqui"></div>
+      <div class="form-group"><label class="form-label">Account ID</label>
+        <input class="form-input" id="cfg-crm-account" value="1" placeholder="1"></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary btn-sm" onclick="salvarCRMConfig()">Salvar CRM</button>
+        <button class="btn btn-ghost btn-sm" onclick="testeCRM()">Testar conexão</button>
+        <span id="crm-test-status" style="font-size:11px;color:var(--muted)"></span>
+      </div>
+    </div>
+
     <div class="card">
       <div class="card-title">Alterar Senha</div>
       <div class="form-group"><label class="form-label">Senha Atual</label><input type="password" class="form-input" id="cfg-pass-old"></div>
@@ -661,6 +680,7 @@ function doLogin(){
     document.getElementById('cfg-estoque-min').value=cfg.estoqueMin||20;
     document.getElementById('login-err').style.display='none';
     renderDashboard();
+    carregarCRMConfig();
     if(crmContactCtx && crmContactCtx.name) applyContextBanners();
     // Pedir contexto ao Chatwoot com polling
     function tentarContexto(n){
@@ -1146,6 +1166,44 @@ function exportarPDF(){
   </body></html>`);
   w.document.close();
   setTimeout(()=>w.print(),500);
+}
+
+// ===================== CRM CONFIG =====================
+function salvarCRMConfig(){
+  const url = (document.getElementById('cfg-crm-url').value||'').replace(/\/$/,'');
+  const token = document.getElementById('cfg-crm-token').value.trim();
+  const account = document.getElementById('cfg-crm-account').value.trim()||'1';
+  localStorage.setItem('bct3_crmurl', url);
+  localStorage.setItem('bct3_crmtoken', token);
+  localStorage.setItem('bct3_crmaccount', account);
+  showToast('Configuração CRM salva!');
+}
+async function testeCRM(){
+  const url = (document.getElementById('cfg-crm-url').value||'').replace(/\/$/,'');
+  const token = document.getElementById('cfg-crm-token').value.trim();
+  const s = document.getElementById('crm-test-status');
+  s.textContent = 'Testando...'; s.style.color = 'var(--muted)';
+  try {
+    const res = await fetch(url+'/auth/sign_in', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({email:'test'})
+    });
+    // Se chegar aqui (mesmo com erro 401/422), o servidor respondeu = CORS ok
+    s.textContent = '✓ Servidor acessível'; s.style.color = 'var(--success)';
+    const pill = document.getElementById('crm-pill');
+    if(pill){pill.className='crm-pill';pill.textContent='CRM acessível';}
+  } catch(e) {
+    s.textContent = '✗ Bloqueado por CORS (normal no GitHub Pages)'; s.style.color = 'var(--warning)';
+  }
+}
+function carregarCRMConfig(){
+  const url = localStorage.getItem('bct3_crmurl');
+  const token = localStorage.getItem('bct3_crmtoken');
+  const account = localStorage.getItem('bct3_crmaccount');
+  if(url) document.getElementById('cfg-crm-url').value = url;
+  if(token) document.getElementById('cfg-crm-token').value = token;
+  if(account) document.getElementById('cfg-crm-account').value = account;
 }
 
 // ===================== INIT =====================
