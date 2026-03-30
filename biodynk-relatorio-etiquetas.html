@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Biodynk · Relatório de Etiquetas</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Syne:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --brand:#1a1a2e;--accent:#e8b4b8;--gold:#f4c95d;
+  --success:#4caf7d;--danger:#e05252;--warning:#e8943a;
+  --bg:#f7f5f2;--card:#ffffff;--border:#e8e4df;
+  --text:#1a1a2e;--muted:#7a7880;
+  --font-head:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-height:100vh;font-size:14px}
+
+/* HEADER */
+.header{background:var(--brand);padding:16px 28px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.header-brand{font-family:var(--font-head);font-size:16px;font-weight:700;color:#fff;display:flex;align-items:center;gap:8px}
+.header-brand span{font-size:9px;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase}
+.header-status{font-size:11px;padding:3px 10px;border-radius:10px;font-weight:500}
+.status-ok{background:rgba(76,175,125,0.2);color:#4caf7d}
+.status-err{background:rgba(224,82,82,0.2);color:#e05252}
+.status-wait{background:rgba(244,201,93,0.2);color:#b8860b}
+
+/* SETUP */
+#setup-screen{max-width:520px;margin:48px auto;padding:0 20px}
+.setup-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:28px}
+.setup-title{font-family:var(--font-head);font-size:18px;font-weight:700;margin-bottom:6px}
+.setup-sub{color:var(--muted);font-size:13px;margin-bottom:24px;line-height:1.6}
+.form-group{margin-bottom:14px}
+.form-label{display:block;font-size:11px;font-weight:500;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.5px}
+.form-input{width:100%;padding:10px 12px;border:1px solid var(--border);border-radius:8px;font-family:var(--font-body);font-size:13px;color:var(--text);background:var(--card);outline:none;transition:border 0.15s}
+.form-input:focus{border-color:#b0a8f0}
+.btn{padding:10px 20px;border-radius:8px;border:none;cursor:pointer;font-family:var(--font-body);font-size:13px;font-weight:600;transition:all 0.15s}
+.btn-primary{background:var(--brand);color:#fff;width:100%}.btn-primary:hover{background:#2d2d50}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-ghost:hover{background:var(--bg)}
+.btn-sm{padding:6px 14px;font-size:12px;width:auto}
+.btn-success{background:var(--success);color:#fff}
+.setup-hint{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5}
+
+/* MAIN APP */
+#app-screen{display:none;padding:24px 28px}
+.page-title{font-family:var(--font-head);font-size:20px;font-weight:700;margin-bottom:4px}
+.page-sub{color:var(--muted);font-size:13px;margin-bottom:22px}
+
+/* FILTROS */
+.filtros{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px;margin-bottom:22px}
+.filtros-title{font-size:12px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+.filtros-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:12px;align-items:end;flex-wrap:wrap}
+.etiquetas-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.etiqueta-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:500;cursor:pointer;border:1.5px solid transparent;transition:all 0.15s;user-select:none}
+.etiqueta-chip.selected{border-color:currentColor;opacity:1}
+.etiqueta-chip:not(.selected){opacity:0.45}
+.chip-agendado{background:#e8f4ff;color:#185fa5}
+.chip-botox{background:#fde8f7;color:#8b2565}
+.chip-preenchedor{background:#e8f7ef;color:#1a6b3c}
+.chip-bioestimulador{background:#faeeda;color:#854f0b}
+.chip-default{background:#f0eeff;color:#4a3fa5}
+
+/* METRICS */
+.metrics-row{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-bottom:22px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:14px}
+.metric-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.metric-value{font-family:var(--font-head);font-size:22px;font-weight:700}
+.metric-sub{font-size:11px;color:var(--muted);margin-top:2px}
+
+/* TABELA */
+.table-card{background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-bottom:16px}
+.table-card-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.table-card-title{font-family:var(--font-head);font-size:14px;font-weight:600}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:13px}
+th{text-align:left;padding:10px 14px;font-size:10px;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap;background:#faf9f7}
+td{padding:11px 14px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#faf9f7}
+.td-muted{color:var(--muted);font-size:12px}
+
+/* TAGS */
+.tag{display:inline-flex;align-items:center;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500;margin:1px}
+
+/* LOADING */
+.loading{text-align:center;padding:48px;color:var(--muted)}
+.spinner{width:32px;height:32px;border:3px solid var(--border);border-top-color:var(--brand);border-radius:50%;animation:spin 0.8s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* EMPTY */
+.empty{text-align:center;padding:48px;color:var(--muted)}
+.empty-icon{font-size:32px;margin-bottom:10px}
+
+/* TOAST */
+.toast{position:fixed;bottom:20px;right:20px;background:var(--brand);color:#fff;padding:10px 18px;border-radius:9px;font-size:13px;font-weight:500;z-index:999;transform:translateY(80px);transition:transform 0.25s;pointer-events:none}
+.toast.show{transform:translateY(0)}
+.toast.error{background:var(--danger)}
+
+/* PRINT */
+@media print{
+  .header,.filtros,.no-print{display:none!important}
+  body{background:#fff}
+  .table-card{box-shadow:none;border:1px solid #ddd}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-brand">Biodynk <span>Relatório de Etiquetas</span></div>
+  <div style="display:flex;align-items:center;gap:10px">
+    <span id="header-status" class="header-status status-wait">Não conectado</span>
+    <button class="btn btn-ghost btn-sm no-print" onclick="voltarConfig()" style="color:rgba(255,255,255,0.6);border-color:rgba(255,255,255,0.2)">⚙ Config</button>
+  </div>
+</div>
+
+<!-- SETUP -->
+<div id="setup-screen">
+  <div class="setup-card">
+    <div class="setup-title">Configurar acesso</div>
+    <div class="setup-sub">Cole seu token do Chatwoot para buscar os contatos por etiqueta. Seus dados ficam salvos no navegador.</div>
+    
+    <div class="form-group">
+      <label class="form-label">URL do Chatwoot</label>
+      <input class="form-input" id="s-url" value="https://appv3.biodynk.com.br" placeholder="https://appv3.biodynk.com.br">
+    </div>
+    <div class="form-group">
+      <label class="form-label">API Access Token</label>
+      <input class="form-input" id="s-token" type="password" placeholder="Cole seu token aqui">
+      <div class="setup-hint">Chatwoot → Perfil (canto inferior esquerdo) → Token de acesso → Copiar</div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Account ID</label>
+      <input class="form-input" id="s-account" value="1" placeholder="1">
+    </div>
+    <button class="btn btn-primary" onclick="conectar()">Conectar e buscar dados</button>
+    <div id="setup-err" style="color:var(--danger);font-size:12px;margin-top:10px;display:none"></div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app-screen">
+  <div class="page-title">Relatório de Etiquetas</div>
+  <div class="page-sub">Clientes por etiqueta com nome, telefone e procedimento agendado</div>
+
+  <!-- FILTROS -->
+  <div class="filtros no-print">
+    <div class="filtros-title">Filtros</div>
+    <div class="filtros-grid">
+      <div class="form-group" style="margin:0">
+        <label class="form-label">Data inicial</label>
+        <input type="date" class="form-input" id="f-de">
+      </div>
+      <div class="form-group" style="margin:0">
+        <label class="form-label">Data final</label>
+        <input type="date" class="form-input" id="f-ate">
+      </div>
+      <div class="form-group" style="margin:0">
+        <label class="form-label">Buscar cliente</label>
+        <input type="text" class="form-input" id="f-busca" placeholder="Nome ou telefone..." oninput="aplicarFiltros()">
+      </div>
+      <div>
+        <button class="btn btn-primary btn-sm" onclick="buscarDados()">↻ Atualizar</button>
+      </div>
+    </div>
+    <div style="margin-top:14px">
+      <div class="form-label" style="margin-bottom:8px">Etiquetas</div>
+      <div class="etiquetas-chips" id="etiquetas-chips"></div>
+    </div>
+  </div>
+
+  <!-- MÉTRICAS -->
+  <div class="metrics-row" id="metrics-row">
+    <div class="metric-card"><div class="metric-label">Total clientes</div><div class="metric-value" id="m-total">—</div></div>
+    <div class="metric-card"><div class="metric-label">Agendados</div><div class="metric-value" id="m-agendado" style="color:#185fa5">—</div></div>
+    <div class="metric-card"><div class="metric-label">Botox</div><div class="metric-value" id="m-botox" style="color:#8b2565">—</div></div>
+    <div class="metric-card"><div class="metric-label">Preenchedor</div><div class="metric-value" id="m-preen" style="color:#1a6b3c">—</div></div>
+    <div class="metric-card"><div class="metric-label">Bioestimulador</div><div class="metric-value" id="m-bio" style="color:#854f0b">—</div></div>
+  </div>
+
+  <!-- TABELA -->
+  <div class="table-card">
+    <div class="table-card-header">
+      <div class="table-card-title" id="tabela-titulo">Clientes por etiqueta</div>
+      <div style="display:flex;gap:8px" class="no-print">
+        <button class="btn btn-ghost btn-sm" onclick="exportarPDF()">↓ PDF</button>
+        <button class="btn btn-ghost btn-sm" onclick="exportarCSV()">↓ CSV</button>
+      </div>
+    </div>
+    <div id="tabela-conteudo">
+      <div class="loading"><div class="spinner"></div>Buscando dados...</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span id="toast-msg"></span></div>
+
+<script>
+// ===== CONFIG =====
+let apiUrl = '';
+let apiToken = '';
+let apiAccount = '1';
+let todasConversas = [];
+let etiquetasDisponiveis = new Set();
+let etiquetasSelecionadas = new Set();
+
+const ETIQUETAS_PROC = ['botox','preenchedor','bioestimulador','bioestimulador'];
+const ETIQUETAS_CORES = {
+  agendado:'chip-agendado',
+  agendado_cliente:'chip-agendado',
+  botox:'chip-botox',
+  preenchedor:'chip-preenchedor',
+  bioestimulador:'chip-bioestimulador',
+};
+
+function getCor(etq) {
+  return ETIQUETAS_CORES[etq] || 'chip-default';
+}
+
+// ===== UTILS =====
+function showToast(msg, err=false){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  t.className='toast'+(err?' error':'');
+  t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);
+}
+
+function formatDate(dateStr){
+  if(!dateStr) return '—';
+  return new Date(dateStr).toLocaleDateString('pt-BR');
+}
+
+function formatPhone(phone){
+  if(!phone) return '—';
+  return phone.replace(/[^0-9+]/g,'');
+}
+
+function salvarConfig(){
+  localStorage.setItem('bct_rel_url', apiUrl);
+  localStorage.setItem('bct_rel_token', apiToken);
+  localStorage.setItem('bct_rel_account', apiAccount);
+}
+
+function carregarConfig(){
+  apiUrl = localStorage.getItem('bct_rel_url') || '';
+  apiToken = localStorage.getItem('bct_rel_token') || '';
+  apiAccount = localStorage.getItem('bct_rel_account') || '1';
+  if(apiUrl) document.getElementById('s-url').value = apiUrl;
+  if(apiToken) document.getElementById('s-token').value = apiToken;
+  if(apiAccount) document.getElementById('s-account').value = apiAccount;
+}
+
+// ===== DATAS PADRÃO =====
+function setDatasDefault(){
+  const hoje = new Date();
+  const inicioMes = new Date(hoje.getFullYear(), hoje.getMonth(), 1);
+  document.getElementById('f-ate').value = hoje.toISOString().slice(0,10);
+  document.getElementById('f-de').value = inicioMes.toISOString().slice(0,10);
+}
+
+// ===== CONECTAR =====
+async function conectar(){
+  apiUrl = (document.getElementById('s-url').value||'').replace(/\/$/,'');
+  apiToken = document.getElementById('s-token').value.trim();
+  apiAccount = document.getElementById('s-account').value.trim() || '1';
+
+  if(!apiToken){ document.getElementById('setup-err').style.display='block'; document.getElementById('setup-err').textContent='Cole o token do Chatwoot.'; return; }
+
+  document.getElementById('setup-err').style.display='none';
+  salvarConfig();
+  setDatasDefault();
+  document.getElementById('setup-screen').style.display='none';
+  document.getElementById('app-screen').style.display='block';
+  await buscarDados();
+}
+
+function voltarConfig(){
+  document.getElementById('setup-screen').style.display='block';
+  document.getElementById('app-screen').style.display='none';
+}
+
+// ===== BUSCAR DADOS =====
+async function buscarDados(){
+  document.getElementById('tabela-conteudo').innerHTML='<div class="loading"><div class="spinner"></div>Buscando conversas...</div>';
+  document.getElementById('header-status').className='header-status status-wait';
+  document.getElementById('header-status').textContent='Buscando...';
+
+  try {
+    todasConversas = [];
+    // Buscar todas as conversas paginadas
+    let pagina = 1;
+    let totalPages = 1;
+
+    while(pagina <= totalPages && pagina <= 50) {
+      const res = await fetch(`${apiUrl}/api/v1/accounts/${apiAccount}/conversations?page=${pagina}&assignee_type=all`, {
+        headers: {'api_access_token': apiToken, 'Content-Type': 'application/json'}
+      });
+      if(!res.ok) throw new Error('HTTP ' + res.status + ' — Verifique o token e Account ID');
+      const data = await res.json();
+      const convs = data.data?.payload || data.payload || [];
+      if(!convs.length) break;
+      todasConversas = todasConversas.concat(convs);
+      totalPages = data.data?.meta?.all_count ? Math.ceil(data.data.meta.all_count / 25) : 1;
+      pagina++;
+      document.getElementById('tabela-conteudo').innerHTML=`<div class="loading"><div class="spinner"></div>Buscando... ${todasConversas.length} conversas carregadas</div>`;
+    }
+
+    // Mapear etiquetas disponíveis
+    etiquetasDisponiveis = new Set();
+    todasConversas.forEach(c => {
+      (c.labels || []).forEach(l => etiquetasDisponiveis.add(l));
+    });
+
+    // Selecionar etiquetas relevantes por padrão
+    const relevantes = ['agendado','agendado_cliente','botox','preenchedor','bioestimulador'];
+    etiquetasSelecionadas = new Set([...etiquetasDisponiveis].filter(e => relevantes.includes(e)));
+    if(etiquetasSelecionadas.size === 0) etiquetasSelecionadas = new Set(etiquetasDisponiveis);
+
+    renderEtiquetasChips();
+    aplicarFiltros();
+
+    document.getElementById('header-status').className='header-status status-ok';
+    document.getElementById('header-status').textContent=`✓ ${todasConversas.length} conversas`;
+    showToast(`${todasConversas.length} conversas carregadas!`);
+
+  } catch(e) {
+    document.getElementById('header-status').className='header-status status-err';
+    document.getElementById('header-status').textContent='Erro de conexão';
+    document.getElementById('tabela-conteudo').innerHTML=`<div class="empty"><div class="empty-icon">⚠️</div><div style="font-size:14px;font-weight:500;margin-bottom:6px">Não foi possível conectar</div><div style="font-size:12px;color:var(--muted)">${e.message}</div></div>`;
+    showToast(e.message, true);
+  }
+}
+
+// ===== CHIPS DE ETIQUETAS =====
+function renderEtiquetasChips(){
+  const container = document.getElementById('etiquetas-chips');
+  const sorted = [...etiquetasDisponiveis].sort();
+  container.innerHTML = sorted.map(etq => {
+    const sel = etiquetasSelecionadas.has(etq);
+    const cor = getCor(etq);
+    return `<span class="etiqueta-chip ${cor} ${sel?'selected':''}" onclick="toggleEtiqueta('${etq}', this)">${etq}</span>`;
+  }).join('');
+}
+
+function toggleEtiqueta(etq, el){
+  if(etiquetasSelecionadas.has(etq)){
+    etiquetasSelecionadas.delete(etq);
+    el.classList.remove('selected');
+  } else {
+    etiquetasSelecionadas.add(etq);
+    el.classList.add('selected');
+  }
+  aplicarFiltros();
+}
+
+// ===== FILTRAR E RENDERIZAR =====
+function aplicarFiltros(){
+  const de = document.getElementById('f-de').value;
+  const ate = document.getElementById('f-ate').value;
+  const busca = (document.getElementById('f-busca').value||'').toLowerCase();
+
+  // Filtrar conversas
+  let filtradas = todasConversas.filter(c => {
+    const labels = c.labels || [];
+    // Tem alguma etiqueta selecionada?
+    if(!labels.some(l => etiquetasSelecionadas.has(l))) return false;
+    // Filtro de data
+    if(de || ate){
+      const dataConv = c.created_at ? new Date(c.created_at*1000).toISOString().slice(0,10) : '';
+      if(de && dataConv < de) return false;
+      if(ate && dataConv > ate) return false;
+    }
+    // Busca por nome/telefone
+    if(busca){
+      const nome = (c.meta?.sender?.name||'').toLowerCase();
+      const tel = (c.meta?.sender?.phone_number||'').replace(/[^0-9]/g,'');
+      if(!nome.includes(busca) && !tel.includes(busca)) return false;
+    }
+    return true;
+  });
+
+  renderTabela(filtradas);
+  renderMetricas(filtradas);
+}
+
+// ===== MÉTRICAS =====
+function renderMetricas(lista){
+  document.getElementById('m-total').textContent = lista.length;
+  const count = etq => lista.filter(c=>(c.labels||[]).includes(etq)).length;
+  document.getElementById('m-agendado').textContent = count('agendado') + count('agendado_cliente');
+  document.getElementById('m-botox').textContent = count('botox');
+  document.getElementById('m-preen').textContent = count('preenchedor');
+  document.getElementById('m-bio').textContent = count('bioestimulador');
+}
+
+// ===== TABELA =====
+function renderTabela(lista){
+  if(!lista.length){
+    document.getElementById('tabela-conteudo').innerHTML='<div class="empty"><div class="empty-icon">🔍</div><div>Nenhum cliente encontrado com os filtros selecionados</div></div>';
+    document.getElementById('tabela-titulo').textContent='Clientes por etiqueta (0)';
+    return;
+  }
+
+  document.getElementById('tabela-titulo').textContent=`Clientes por etiqueta (${lista.length})`;
+
+  // Ordenar por data mais recente
+  lista = lista.slice().sort((a,b)=>(b.created_at||0)-(a.created_at||0));
+
+  let html = `<div class="table-wrap"><table>
+    <thead><tr>
+      <th>Cliente</th>
+      <th>Telefone</th>
+      <th>WhatsApp</th>
+      <th>Etiquetas</th>
+      <th>Procedimento</th>
+      <th>Data</th>
+      <th>Conversa</th>
+    </tr></thead><tbody>`;
+
+  lista.forEach(c => {
+    const sender = c.meta?.sender || {};
+    const nome = sender.name || '—';
+    const tel = sender.phone_number || '';
+    const telLimpo = tel.replace(/[^0-9]/g,'');
+    const waLink = telLimpo ? `https://wa.me/${telLimpo}` : '';
+    const labels = c.labels || [];
+    const data = c.created_at ? new Date(c.created_at*1000).toLocaleDateString('pt-BR') : '—';
+    const convLink = `${apiUrl}/app/accounts/${apiAccount}/conversations/${c.id}`;
+
+    // Identificar procedimento pelas etiquetas
+    const procs = labels.filter(l => ['botox','preenchedor','bioestimulador'].includes(l));
+    const procHtml = procs.length
+      ? procs.map(p=>`<span class="tag ${getCor(p)}">${p}</span>`).join('')
+      : '<span style="color:var(--muted);font-size:12px">—</span>';
+
+    // Etiquetas (exceto procedimentos)
+    const outrasEtq = labels.filter(l => !['botox','preenchedor','bioestimulador'].includes(l));
+    const etqHtml = outrasEtq.map(l=>`<span class="tag ${getCor(l)}">${l}</span>`).join('') || '<span style="color:var(--muted);font-size:12px">—</span>';
+
+    html += `<tr>
+      <td style="font-weight:500">${nome}</td>
+      <td class="td-muted">${tel||'—'}</td>
+      <td>${waLink?`<a href="${waLink}" target="_blank" style="color:#25d366;font-weight:500;font-size:12px;text-decoration:none">📱 Abrir WA</a>`:'—'}</td>
+      <td>${etqHtml}</td>
+      <td>${procHtml}</td>
+      <td class="td-muted">${data}</td>
+      <td><a href="${convLink}" target="_blank" style="color:var(--brand);font-size:12px;text-decoration:none">→ Ver</a></td>
+    </tr>`;
+  });
+
+  html += '</tbody></table></div>';
+  document.getElementById('tabela-conteudo').innerHTML = html;
+}
+
+// ===== EXPORTAR CSV =====
+function exportarCSV(){
+  const de = document.getElementById('f-de').value;
+  const ate = document.getElementById('f-ate').value;
+  const busca = (document.getElementById('f-busca').value||'').toLowerCase();
+
+  let lista = todasConversas.filter(c => {
+    const labels = c.labels || [];
+    if(!labels.some(l => etiquetasSelecionadas.has(l))) return false;
+    if(de || ate){
+      const dataConv = c.created_at ? new Date(c.created_at*1000).toISOString().slice(0,10) : '';
+      if(de && dataConv < de) return false;
+      if(ate && dataConv > ate) return false;
+    }
+    if(busca){
+      const nome = (c.meta?.sender?.name||'').toLowerCase();
+      const tel = (c.meta?.sender?.phone_number||'').replace(/[^0-9]/g,'');
+      if(!nome.includes(busca) && !tel.includes(busca)) return false;
+    }
+    return true;
+  });
+
+  const rows = [['Cliente','Telefone','Etiquetas','Procedimento','Data']];
+  lista.forEach(c => {
+    const sender = c.meta?.sender || {};
+    const labels = c.labels || [];
+    const procs = labels.filter(l=>['botox','preenchedor','bioestimulador'].includes(l)).join(', ');
+    const outras = labels.filter(l=>!['botox','preenchedor','bioestimulador'].includes(l)).join(', ');
+    const data = c.created_at ? new Date(c.created_at*1000).toLocaleDateString('pt-BR') : '';
+    rows.push([sender.name||'', sender.phone_number||'', outras, procs, data]);
+  });
+
+  const csv = rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(',')).join('\n');
+  const blob = new Blob(['\uFEFF'+csv], {type:'text/csv;charset=utf-8'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href=url; a.download=`biodynk-etiquetas-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click(); URL.revokeObjectURL(url);
+  showToast('CSV exportado!');
+}
+
+// ===== EXPORTAR PDF =====
+function exportarPDF(){
+  window.print();
+}
+
+// ===== INIT =====
+carregarConfig();
+if(apiToken){
+  setDatasDefault();
+  document.getElementById('setup-screen').style.display='none';
+  document.getElementById('app-screen').style.display='block';
+  buscarDados();
+}
+
+document.getElementById('f-de').addEventListener('change', aplicarFiltros);
+document.getElementById('f-ate').addEventListener('change', aplicarFiltros);
+</script>
+</body>
+</html>
