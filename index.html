@@ -644,7 +644,14 @@ function setCRMStatus(ok,label){
 async function crmFetch(path){
   const{url,token,account}=getCRMCfg();
   if(!url||!token)throw new Error('CRM não configurado');
-  const res=await fetch(url+path,{headers:{'api_access_token':token,'Content-Type':'application/json'}});
+  // Dentro do iframe do Chatwoot usamos caminho relativo para evitar bloqueio CORS
+  const base=url||'';
+  const res=await fetch(base+path,{
+    method:'GET',
+    mode:'cors',
+    credentials:'include',
+    headers:{'api_access_token':token,'Content-Type':'application/json'}
+  });
   if(!res.ok)throw new Error('HTTP '+res.status);
   return res.json();
 }
@@ -1048,14 +1055,14 @@ async function testeCRM(){
   const{url,token,account}=getCRMCfg();
   if(!url||!token){s.textContent='Configure URL e token primeiro';s.style.color='var(--danger)';return;}
   try{
-    // ping servidor
-    await fetch(url+'/auth/sign_in',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({email:'test'})});
-    // testa token
-    try{
-      await crmFetch('/api/v1/accounts/'+account+'/contacts/search?q=test&page=1');
-      setCRMStatus(true,'CRM conectado');s.textContent='✓ API autenticada e funcionando';s.style.color='var(--success)';showToast('Chatwoot conectado!');
-    }catch(e2){s.textContent='⚠ Servidor ok · Token inválido ou Account ID errado';s.style.color='var(--warning)';setCRMStatus(false);}
-  }catch(e){s.textContent='✗ CORS bloqueado (normal fora do Chatwoot)';s.style.color='var(--warning)';}
+    await crmFetch('/api/v1/accounts/'+account+'/contacts/search?q=test&page=1');
+    setCRMStatus(true,'CRM conectado');s.textContent='✓ API autenticada e funcionando';s.style.color='var(--success)';showToast('Chatwoot conectado!');
+  }catch(e){
+    if(e.message&&e.message.includes('401'))s.textContent='✗ Token inválido (401)';
+    else if(e.message&&e.message.includes('404'))s.textContent='✗ Account ID errado (404)';
+    else s.textContent='✗ Erro: '+e.message;
+    s.style.color='var(--danger)';setCRMStatus(false);
+  }
 }
 async function testeCRMSilencioso(){
   const{url,token,account}=getCRMCfg();if(!url||!token)return;
