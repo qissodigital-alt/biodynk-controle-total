@@ -180,6 +180,16 @@ tr:hover td{background:#faf9f7}
 .prof-tag{display:inline-flex;align-items:center;gap:4px;background:#f0eeff;color:#4a3fa5;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500}
 .chart-wrap{position:relative;height:180px;margin-top:8px}
 .crm-cfg-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:600;margin-bottom:12px}
+
+/* ULTRAFORMER */
+.pont-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:14px;position:relative}
+.pont-card.warn{border-color:#f4c95d;background:#fffdf0}
+.pont-card.critical{border-color:var(--danger);background:#fff5f5}
+.pont-bar-bg{background:var(--bg);border-radius:5px;height:8px;overflow:hidden;margin-top:6px}
+.pont-bar-fill{height:100%;border-radius:5px;transition:width .5s}
+.uform-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+@media(max-width:900px){.uform-grid{grid-template-columns:repeat(2,1fr)}}
+
 .link-hist{cursor:pointer;color:var(--brand);text-decoration:none}
 .link-hist:hover{text-decoration:underline}
 </style>
@@ -194,7 +204,7 @@ tr:hover td{background:#faf9f7}
     <input type="password" id="login-pass" placeholder="Senha" autocomplete="current-password">
     <button class="login-btn" onclick="doLogin()">Entrar</button>
     <div class="login-err" id="login-err">Usuário ou senha incorretos</div>
-    <div class="login-hint">Padrão: admin / biodynk2024</div>
+    
   </div>
 </div>
 
@@ -231,6 +241,7 @@ tr:hover td{background:#faf9f7}
       <div class="nav-item" onclick="nav('produtos')"><span class="nav-icon">⬡</span>Produtos</div>
       <div class="nav-item" onclick="nav('profissionais')"><span class="nav-icon">♦</span>Profissionais</div>
       <div class="nav-item" onclick="nav('relatorios')"><span class="nav-icon">▤</span>Relatórios</div>
+      <div class="nav-item" onclick="nav('ultraformer')"><span class="nav-icon">⚡</span>Ultraformer</div>
       <div class="nav-item" onclick="nav('configuracoes')"><span class="nav-icon">⚙</span>Config</div>
       <div class="sidebar-footer"><div class="sidebar-user" id="sidebar-user"></div></div>
     </div>
@@ -388,6 +399,42 @@ tr:hover td{background:#faf9f7}
 </div>
 
 <!-- CONFIGURAÇÕES -->
+
+<!-- ULTRAFORMER -->
+<div id="page-ultraformer" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <div><div class="section-title">Ultraformer HIFU</div><div class="section-sub">Controle de ponteiras e sessões</div></div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-uform')">+ Registrar sessão</button>
+  </div>
+
+  <!-- ALERTA PONTEIRAS -->
+  <div id="ultra-alert" style="display:none;background:#fdeaea;border:1px solid #f7c1c1;border-radius:9px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#b52e2e"></div>
+
+  <!-- CARDS PONTEIRAS -->
+  <div style="margin-bottom:6px;display:flex;align-items:center;justify-content:space-between">
+    <div class="card-title" style="margin:0">Ponteiras</div>
+
+  </div>
+  <div class="uform-grid" id="pont-grid" style="margin-top:10px"></div>
+
+  <!-- SESSÕES -->
+  <div class="card" style="margin-top:4px">
+    <div class="card-header">
+      <div class="card-title" style="margin:0">Sessões registradas</div>
+      <div style="display:flex;gap:6px">
+        <input type="date" id="uf-de" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-family:var(--font-body);font-size:11px">
+        <input type="date" id="uf-ate" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-family:var(--font-body);font-size:11px">
+        <button class="btn btn-primary btn-sm" onclick="renderUltraformer()">Filtrar</button>
+      </div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Data</th><th>Cliente</th><th>Prof.</th><th>Ponteira</th><th>Disp.</th><th>Lucro</th><th></th></tr></thead>
+      <tbody id="uform-tbody"></tbody>
+    </table></div>
+    <div id="uform-total-bar" style="display:flex;gap:20px;padding:10px 14px;background:var(--bg);border-radius:8px;margin-top:10px;font-size:12px;flex-wrap:wrap"></div>
+  </div>
+</div>
+
 <div id="page-configuracoes" class="page">
   <div class="section-title">Configurações</div><div class="section-sub">Parâmetros e segurança</div>
   <div style="max-width:500px">
@@ -408,7 +455,12 @@ tr:hover td{background:#faf9f7}
     </div>
     <div class="card" style="margin-bottom:12px">
       <div class="card-title">Alerta de Estoque Baixo</div>
-      <div class="form-group"><label class="form-label">Alertar quando estoque abaixo de</label><input type="number" class="form-input" id="cfg-estoque-min" placeholder="Ex: 20" value="20"></div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Alertar quando o estoque de cada categoria ficar abaixo do limite.</div>
+      <div class="form-row col-3">
+        <div class="form-group"><label class="form-label">Botox (UI)</label><input type="number" class="form-input" id="cfg-estoque-botox" placeholder="100" value="100"></div>
+        <div class="form-group"><label class="form-label">Preenchedor (ml)</label><input type="number" class="form-input" id="cfg-estoque-preen" placeholder="6" value="6"></div>
+        <div class="form-group"><label class="form-label">Bioestimulador (ml)</label><input type="number" class="form-input" id="cfg-estoque-bio" placeholder="3" value="3"></div>
+      </div>
       <button class="btn btn-primary btn-sm" onclick="salvarEstoqueMin()">Salvar</button>
     </div>
     <div class="card" style="margin-bottom:12px">
@@ -419,7 +471,7 @@ tr:hover td{background:#faf9f7}
       </div>
       <div id="crm-cfg-badge" class="crm-cfg-badge" style="background:#fdeaea;color:#b52e2e">⬤ Desconectado</div>
       <div class="form-group"><label class="form-label">URL da API</label>
-        <input class="form-input" id="cfg-crm-url" value="https://appv3.biodynk.com.br" placeholder="https://appv3.biodynk.com.br"></div>
+        <input class="form-input" id="cfg-crm-url" value="https://controle.biodynk.com" placeholder="https://appv3.biodynk.com.br"></div>
       <div class="form-group"><label class="form-label">API Access Token</label>
         <input class="form-input" id="cfg-crm-token" type="password" placeholder="Cole seu token aqui"></div>
       <div class="form-group"><label class="form-label">Account ID</label>
@@ -430,14 +482,27 @@ tr:hover td{background:#faf9f7}
         <span id="crm-test-status" style="font-size:11px;color:var(--muted)"></span>
       </div>
     </div>
-    <div class="card">
-      <div class="card-title">Alterar Senha</div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">Alterar Senha de Login</div>
       <div class="form-group"><label class="form-label">Senha Atual</label><input type="password" class="form-input" id="cfg-pass-old"></div>
       <div class="form-row col-2">
         <div class="form-group"><label class="form-label">Nova Senha</label><input type="password" class="form-input" id="cfg-pass-new"></div>
         <div class="form-group"><label class="form-label">Confirmar</label><input type="password" class="form-input" id="cfg-pass-conf"></div>
       </div>
       <button class="btn btn-primary btn-sm" onclick="alterarSenha()">Alterar</button>
+    </div>
+    <div class="card">
+      <div class="card-title">🔐 Senha Master</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+        Senha exclusiva para: adicionar/editar ponteiras, recarregar disparos e editar sessões registradas.<br>
+        Padrão: <strong>biodynk@master</strong>
+      </div>
+      <div class="form-group"><label class="form-label">Senha Master Atual</label><input type="password" class="form-input" id="cfg-master-old"></div>
+      <div class="form-row col-2">
+        <div class="form-group"><label class="form-label">Nova Senha Master</label><input type="password" class="form-input" id="cfg-master-new"></div>
+        <div class="form-group"><label class="form-label">Confirmar</label><input type="password" class="form-input" id="cfg-master-conf"></div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="alterarSenhaMaster()">Alterar Senha Master</button>
     </div>
   </div>
 </div>
@@ -542,6 +607,126 @@ tr:hover td{background:#faf9f7}
   </div>
 </div>
 
+
+<!-- MODAL SESSÃO ULTRAFORMER -->
+<div class="modal-overlay" id="modal-uform">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Registrar Sessão Ultraformer</div><button class="modal-close" onclick="closeModal('modal-uform')">✕</button></div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-input" id="uf-data"></div>
+      <div class="form-group"><label class="form-label">Profissional</label><select class="form-input" id="uf-prof"><option value="">Selecione...</option></select></div>
+    </div>
+    <div class="form-group"><label class="form-label">Cliente</label><input class="form-input" id="uf-cliente" placeholder="Nome do cliente"></div>
+    <div class="form-group"><label class="form-label">Ponteira</label><select class="form-input" id="uf-pont" onchange="ufCalc()"><option value="">Selecione...</option></select></div>
+    <div class="form-group"><label class="form-label">Quantidade de disparos</label><input type="number" class="form-input" id="uf-disparos" value="100" min="1" oninput="ufCalc()"></div>
+    <div class="calc-block" id="uf-calc-block">
+      <div class="calc-row"><span>Custo (R$ 0,45/disparo)</span><span id="uf-cr-custo">—</span></div>
+      <div class="calc-row"><span>Receita (R$ 2,50/disparo)</span><span id="uf-cr-rec">—</span></div>
+      <div class="calc-row total"><span>Lucro</span><span id="uf-cr-lucro" style="color:var(--success)">—</span></div>
+      <div class="calc-row" style="margin-top:6px;font-size:11px;color:var(--muted)"><span>Vida útil restante após sessão</span><span id="uf-cr-resta">—</span></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-uform')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="salvarSessaoUF()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOVA PONTEIRA -->
+<div class="modal-overlay" id="modal-pont">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Cadastrar Ponteira</div><button class="modal-close" onclick="closeModal('modal-pont')">✕</button></div>
+    <div class="form-group"><label class="form-label">Nome da ponteira</label><input class="form-input" id="pont-nome" placeholder="Ex: DS4-3.0"></div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Total de disparos</label><input type="number" class="form-input" id="pont-total" placeholder="100000"></div>
+      <div class="form-group"><label class="form-label">Vida útil atual</label><input type="number" class="form-input" id="pont-restante" placeholder="100000"></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-pont')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="salvarPonteira()">Cadastrar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL EDIÇÃO SESSÃO UF (com senha) -->
+<div class="modal-overlay" id="modal-uform-edit">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">✏️ Editar Sessão</div><button class="modal-close" onclick="closeModal('modal-uform-edit')">✕</button></div>
+    <div style="background:#faeeda;border:1px solid #f4c95d;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#854f0b">
+      🔒 Alteração protegida. Informe a <strong>senha master</strong> para continuar.
+    </div>
+    <div class="form-group"><label class="form-label">Senha Master</label>
+      <input type="password" class="form-input" id="uf-edit-senha" placeholder="Sua senha master">
+    </div>
+    <div id="uf-edit-campos" style="display:none">
+      <div class="form-row col-2">
+        <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-input" id="uf-edit-data"></div>
+        <div class="form-group"><label class="form-label">Profissional</label><select class="form-input" id="uf-edit-prof"></select></div>
+      </div>
+      <div class="form-group"><label class="form-label">Cliente</label><input class="form-input" id="uf-edit-cliente" placeholder="Nome do cliente"></div>
+      <div class="form-group"><label class="form-label">Ponteira</label><select class="form-input" id="uf-edit-pont" onchange="ufEditCalc()"></select></div>
+      <div class="form-group"><label class="form-label">Quantidade de disparos</label><input type="number" class="form-input" id="uf-edit-disparos" min="1" oninput="ufEditCalc()"></div>
+      <div class="calc-block">
+        <div class="calc-row"><span>Custo (R$ 0,45/disparo)</span><span id="uf-edit-custo">—</span></div>
+        <div class="calc-row"><span>Receita (R$ 2,50/disparo)</span><span id="uf-edit-rec">—</span></div>
+        <div class="calc-row total"><span>Lucro</span><span id="uf-edit-lucro" style="color:var(--success)">—</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-uform-edit')">Cancelar</button>
+      <button class="btn btn-primary btn-sm" id="uf-edit-verificar-btn" onclick="verificarSenhaUFEdit()" style="flex:1">Verificar senha</button>
+      <button class="btn btn-success btn-sm" id="uf-edit-salvar-btn" onclick="salvarEdicaoUF()" style="display:none;flex:1">Salvar alteração</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL RECARGA DISPAROS (senha master) -->
+<div class="modal-overlay" id="modal-recarga">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">🔐 Recarregar Disparos</div><button class="modal-close" onclick="closeModal('modal-recarga')">✕</button></div>
+    <div style="background:#faeeda;border:1px solid #f4c95d;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#854f0b">
+      🔒 Função protegida. Informe a senha master para continuar.
+    </div>
+    <div class="form-group"><label class="form-label">Senha Master</label>
+      <input type="password" class="form-input" id="rec-senha" placeholder="Sua senha master">
+    </div>
+    <div id="rec-campos" style="display:none">
+      <div style="background:var(--crm-bg);border:1px solid var(--crm-border);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px">
+        <div style="font-weight:600;color:var(--crm)" id="rec-pont-nome">—</div>
+        <div style="color:#2e7d52;margin-top:2px">Vida útil atual: <strong id="rec-pont-atual">—</strong> disparos</div>
+      </div>
+      <div class="form-group"><label class="form-label">Disparos a adicionar</label>
+        <input type="number" class="form-input" id="rec-qtd" placeholder="Ex: 12000" min="1" oninput="recCalc()">
+      </div>
+      <div style="font-size:12px;color:var(--muted);padding:8px 0">
+        Nova vida útil: <strong id="rec-nova-vida" style="color:var(--success)">—</strong>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-recarga')">Cancelar</button>
+      <button class="btn btn-primary btn-sm" id="rec-verificar-btn" onclick="verificarSenhaMasterRecarga()" style="flex:1">Verificar senha</button>
+      <button class="btn btn-success btn-sm" id="rec-salvar-btn" onclick="salvarRecarga()" style="display:none;flex:1">✓ Recarregar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL MASTER GATE (nova ponteira) -->
+<div class="modal-overlay" id="modal-master-gate">
+  <div class="modal" style="max-width:360px">
+    <div class="modal-header"><div class="modal-title">🔐 Acesso restrito</div><button class="modal-close" onclick="closeModal('modal-master-gate')">✕</button></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Informe a senha master para acessar esta função.</div>
+    <div class="form-group"><label class="form-label">Senha Master</label>
+      <input type="password" class="form-input" id="gate-senha" placeholder="Senha master">
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-master-gate')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="verificarGateMaster()">Entrar</button>
+    </div>
+  </div>
+</div>
+
 <!-- CONFIRM -->
 <div class="confirm-overlay" id="confirm-overlay">
   <div class="confirm-box">
@@ -559,7 +744,7 @@ tr:hover td{background:#faf9f7}
 <script>
 // ── DEFAULTS ──────────────────────────────────────────────
 const DEFAULT_USERS=[{user:'admin',pass:'biodynk2024'},{user:'biomedica',pass:'iris2024'}];
-const DEFAULT_CFG={horaSala:84,gov:7,maq:10,comissao:10,meta:0,estoqueMin:20};
+const DEFAULT_CFG={horaSala:84,gov:7,maq:10,comissao:10,meta:0,estoqueMin:20,senhaMaster:'biodynk@master',estoqueMinBotox:100,estoqueMinPreen:6,estoqueMinBio:3};
 const DEFAULT_PRODS=[
   {id:1,nome:'Botox Allergan',cat:'botox',unidade:'UI',custo:4.20,estoque:200,lote:'LOT001',validade:'2025-06'},
   {id:2,nome:'Botox Dysport',cat:'botox',unidade:'UI',custo:2.80,estoque:150,lote:'LOT002',validade:'2025-08'},
@@ -624,7 +809,7 @@ function calcCusto(tipo,prodId,consumo,tempo,cobrado,profId){
 
 // ── CRM: CONFIGURAÇÃO ─────────────────────────────────────
 function getCRMCfg(){
-  return{url:(localStorage.getItem('bct3_crmurl')||'').replace(/\/$/,''),
+  return{url:(localStorage.getItem('bct3_crmurl')||'https://controle.biodynk.com').replace(/\/$/,''),
     token:localStorage.getItem('bct3_crmtoken')||'',
     account:localStorage.getItem('bct3_crmaccount')||'1'};
 }
@@ -643,10 +828,11 @@ function setCRMStatus(ok,label){
 // ── CRM: FETCH HELPER ─────────────────────────────────────
 async function crmFetch(path){
   const{url,token,account}=getCRMCfg();
-  if(!url||!token)throw new Error('CRM não configurado');
-  // Dentro do iframe do Chatwoot usamos caminho relativo para evitar bloqueio CORS
-  const base=url||'';
-  const res=await fetch(base+path,{
+  if(!token)throw new Error('CRM não configurado');
+  // Sempre usa proxy /chatwoot-api quando hospedado em controle.biodynk.com
+  const useProxy=window.location.hostname==='controle.biodynk.com';
+  const fetchUrl=useProxy?(window.location.origin+'/chatwoot-api'+path):(url+path);
+  const res=await fetch(fetchUrl,{
     method:'GET',
     mode:'cors',
     credentials:'include',
@@ -768,9 +954,10 @@ function doLogin(){
     document.getElementById('app').style.display='flex';
     document.getElementById('topbar-user').textContent=u;
     document.getElementById('sidebar-user').textContent=u;
-    document.getElementById('cfg-hora').value=cfg.horaSala;document.getElementById('cfg-gov').value=cfg.gov;
-    document.getElementById('cfg-maq').value=cfg.maq;document.getElementById('cfg-com').value=cfg.comissao;
-    document.getElementById('cfg-meta').value=cfg.meta||'';document.getElementById('cfg-estoque-min').value=cfg.estoqueMin||20;
+    function setVal(id,v){const el=document.getElementById(id);if(el)el.value=v;}
+    setVal('cfg-hora',cfg.horaSala);setVal('cfg-gov',cfg.gov);setVal('cfg-maq',cfg.maq);setVal('cfg-com',cfg.comissao);
+    document.getElementById('cfg-meta').value=cfg.meta||'';
+    carregarConfigEstoque();
     document.getElementById('login-err').style.display='none';
     renderDashboard();carregarCRMConfig();testeCRMSilencioso();
     if(crmContactCtx&&crmContactCtx.name)applyContextBanners();
@@ -801,11 +988,13 @@ function nav(page){
   if(page==='profissionais')renderProfissionais();
   if(page==='calculadora'){populateProdSel('calc-produto','botox');calcUpdate();}
   if(page==='relatorios')renderRelatorios();
+  if(page==='ultraformer'){renderUltraformer();}
 }
 
 // ── ESTOQUE ───────────────────────────────────────────────
 function checarEstoque(){
-  const min=cfg.estoqueMin||20,baixos=produtos.filter(p=>p.estoque<=min);
+  const limites={botox:cfg.estoqueMinBotox||100,preenchedor:cfg.estoqueMinPreen||6,bioestimulador:cfg.estoqueMinBio||3};
+  const baixos=produtos.filter(p=>p.estoque<=limites[p.cat]);
   const msg=baixos.length?'⚠️ Estoque baixo: '+baixos.map(p=>`<strong>${p.nome}</strong> (${p.estoque} ${p.unidade})`).join(', '):'';
   ['alert-estoque','alerta-estoque-prod'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=msg?'block':'none';if(msg)el.innerHTML=msg;});
 }
@@ -1007,7 +1196,17 @@ function salvarProcedimento(){
 // ── CONFIG ────────────────────────────────────────────────
 function salvarConfig(){cfg.horaSala=parseFloat(document.getElementById('cfg-hora').value)||84;cfg.gov=parseFloat(document.getElementById('cfg-gov').value)||7;cfg.maq=parseFloat(document.getElementById('cfg-maq').value)||10;cfg.comissao=parseFloat(document.getElementById('cfg-com').value)||10;saveAll();showToast('Configurações salvas!');}
 function salvarMeta(){cfg.meta=parseFloat(document.getElementById('cfg-meta').value)||0;saveAll();showToast('Meta salva!');renderDashboard();}
-function salvarEstoqueMin(){cfg.estoqueMin=parseFloat(document.getElementById('cfg-estoque-min').value)||20;saveAll();showToast('Alerta de estoque salvo!');checarEstoque();}
+function carregarConfigEstoque(){
+  const b=document.getElementById('cfg-estoque-botox');if(b)b.value=cfg.estoqueMinBotox||100;
+  const p=document.getElementById('cfg-estoque-preen');if(p)p.value=cfg.estoqueMinPreen||6;
+  const bi=document.getElementById('cfg-estoque-bio');if(bi)bi.value=cfg.estoqueMinBio||3;
+}
+function salvarEstoqueMin(){
+  cfg.estoqueMinBotox=parseFloat(document.getElementById('cfg-estoque-botox').value)||100;
+  cfg.estoqueMinPreen=parseFloat(document.getElementById('cfg-estoque-preen').value)||6;
+  cfg.estoqueMinBio=parseFloat(document.getElementById('cfg-estoque-bio').value)||3;
+  saveAll();showToast('Alertas de estoque salvos!');checarEstoque();
+}
 function alterarSenha(){
   const old=document.getElementById('cfg-pass-old').value,nw=document.getElementById('cfg-pass-new').value,cf=document.getElementById('cfg-pass-conf').value;
   const u=users.find(x=>x.user===loggedUser&&x.pass===old);
@@ -1069,6 +1268,282 @@ async function testeCRMSilencioso(){
   try{await crmFetch('/api/v1/accounts/'+account+'/contacts/search?q=a&page=1');setCRMStatus(true,'CRM conectado');}catch(e){}
 }
 
+
+// ── ULTRAFORMER ───────────────────────────────────────────
+const DEFAULT_PONTEIRAS=[
+  {id:101,nome:'DS4-3.0',total:100000,restante:98326},
+  {id:102,nome:'DS4-1.5',total:100000,restante:98968},
+  {id:103,nome:'DS4-4.5',total:100000,restante:99801},
+  {id:104,nome:'DS4-1.5 (B)',total:12000,restante:9453},
+  {id:105,nome:'DS4-3.0 (B)',total:12000,restante:6219},
+  {id:106,nome:'DS4-13.0',total:12000,restante:11387},
+  {id:107,nome:'DS4-7.0',total:12000,restante:11716},
+  {id:108,nome:'DS4-4.5 (B)',total:12000,restante:7347},
+];
+let ponteiras=ls('ponteiras',DEFAULT_PONTEIRAS);
+let sessoesUF=ls('sessoesUF',[]);
+const UF_CUSTO=0.45,UF_PRECO=2.50,UF_ALERTA=0.20;
+
+function saveUF(){lss('ponteiras',ponteiras);lss('sessoesUF',sessoesUF);}
+
+function pctVida(p){return p.total>0?(p.restante/p.total*100):0;}
+
+function checarAlertasPonteiras(){
+  const criticas=ponteiras.filter(p=>pctVida(p)<=UF_ALERTA*100);
+  const al=document.getElementById('ultra-alert');
+  if(criticas.length&&al){
+    al.style.display='block';
+    al.innerHTML='⚠️ Ponteiras com vida útil ≤20%: '+criticas.map(p=>`<strong>${p.nome}</strong> (${p.restante.toLocaleString('pt-BR')} disparos — ${pctVida(p).toFixed(1)}%)`).join(', ')+' — <strong>Compre recargas!</strong>';
+  }else if(al)al.style.display='none';
+}
+
+function renderPonteiras(){
+  checarAlertasPonteiras();
+  let html='';
+  ponteiras.forEach(p=>{
+    const pct=pctVida(p),warn=pct<=20,crit=pct<=10;
+    const cor=crit?'var(--danger)':warn?'#e8943a':'var(--success)';
+    const cls=crit?'pont-card critical':warn?'pont-card warn':'pont-card';
+    html+=`<div class="${cls}">
+      <div style="font-weight:600;font-size:12px;margin-bottom:2px;padding-right:22px">${p.nome}</div>
+      ${warn?`<span style="background:${crit?'#fdeaea':'#faeeda'};color:${crit?'#b52e2e':'#854f0b'};font-size:9px;padding:1px 6px;border-radius:8px;font-weight:600">${crit?'🔴 CRÍTICO':'⚠️ BAIXO'}</span>`:''}
+      <div style="margin-top:8px;font-family:var(--font-head);font-size:18px;font-weight:700;color:${cor}">${p.restante.toLocaleString('pt-BR')}</div>
+      <div style="font-size:10px;color:var(--muted)">de ${p.total.toLocaleString('pt-BR')} disparos</div>
+      <div class="pont-bar-bg"><div class="pont-bar-fill" style="width:${Math.min(100,pct)}%;background:${cor}"></div></div>
+      <div style="font-size:10px;color:${cor};margin-top:3px;font-weight:600">${pct.toFixed(1)}% restante</div>
+      <button onclick="abrirRecarga(${p.id})" style="margin-top:8px;width:100%;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-family:var(--font-body);font-size:11px;cursor:pointer;color:var(--muted)">🔐 Recarregar disparos</button>
+    </div>`;
+  });
+  const el=document.getElementById('pont-grid');
+  if(el)el.innerHTML=html||'<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted)">Nenhuma ponteira</div>';
+}
+
+function populatePontSel(){
+  const sel=document.getElementById('uf-pont');if(!sel)return;
+  sel.innerHTML='<option value="">Selecione...</option>'+ponteiras.map(p=>`<option value="${p.id}">${p.nome} (${p.restante.toLocaleString('pt-BR')} disp. restantes)</option>`).join('');
+}
+
+function ufCalc(){
+  const disp=parseInt(document.getElementById('uf-disparos')?.value)||0;
+  const pontId=parseInt(document.getElementById('uf-pont')?.value);
+  const pont=ponteiras.find(p=>p.id===pontId);
+  const custo=disp*UF_CUSTO,rec=disp*UF_PRECO,lucro=rec-custo;
+  const resta=pont?Math.max(0,pont.restante-disp):null;
+  document.getElementById('uf-cr-custo').textContent=brl(custo);
+  document.getElementById('uf-cr-rec').textContent=brl(rec);
+  document.getElementById('uf-cr-lucro').textContent=brl(lucro);
+  document.getElementById('uf-cr-resta').textContent=resta!==null?resta.toLocaleString('pt-BR')+' disparos':'—';
+}
+
+function salvarSessaoUF(){
+  const cliente=(document.getElementById('uf-cliente')?.value||'').trim();
+  if(!cliente){showToast('Informe o cliente',true);return;}
+  const pontId=parseInt(document.getElementById('uf-pont')?.value);
+  if(!pontId||isNaN(pontId)){showToast('Selecione a ponteira',true);return;}
+  const disp=parseInt(document.getElementById('uf-disparos')?.value)||0;
+  if(disp<=0){showToast('Informe os disparos',true);return;}
+  const pont=ponteiras.find(p=>p.id===pontId);
+  if(!pont){showToast('Ponteira não encontrada',true);return;}
+  if(disp>pont.restante){showToast('Disparos excedem vida útil restante ('+pont.restante+')',true);return;}
+  const profId=parseInt(document.getElementById('uf-prof')?.value)||null;
+  const data=document.getElementById('uf-data')?.value||new Date().toISOString().slice(0,10);
+  const custo=disp*UF_CUSTO,rec=disp*UF_PRECO,lucro=rec-custo;
+  sessoesUF.push({id:nid(),data,cliente,profId,pontId,disparos:disp,custo,receita:rec,lucro});
+  pont.restante=Math.max(0,pont.restante-disp);
+  saveUF();closeModal('modal-uform');showToast('Sessão registrada!');
+  renderUltraformer();
+  // alertar se caiu para zona crítica
+  if(pctVida(pont)<=UF_ALERTA*100)showToast('⚠️ Ponteira '+pont.nome+' com vida útil baixa!',true);
+}
+
+function renderUltraformer(){
+  renderPonteiras();
+  const de=document.getElementById('uf-de')?.value,ate=document.getElementById('uf-ate')?.value;
+  let lista=sessoesUF.filter(s=>{if(de&&s.data<de)return false;if(ate&&s.data>ate)return false;return true;});
+  let html='';
+  if(!lista.length)html='<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--muted)">Nenhuma sessão registrada</td></tr>';
+  else lista.slice().reverse().forEach(s=>{
+    const pont=ponteiras.find(p=>p.id===s.pontId),prof=profissionais.find(p=>p.id===s.profId);
+    html+=`<tr>
+      <td class="td-muted" style="white-space:nowrap">${new Date(s.data).toLocaleDateString('pt-BR')}</td>
+      <td style="font-weight:500;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.cliente}</td>
+      <td style="max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${prof?`<span class="prof-tag" style="font-size:9px">${prof.nome}</span>`:'<span class="td-muted">—</span>'}</td>
+      <td><span style="background:#f0eeff;color:#4a3fa5;padding:2px 6px;border-radius:10px;font-size:10px;font-weight:500;white-space:nowrap">${pont?pont.nome:'—'}</span></td>
+      <td style="font-weight:600;white-space:nowrap">${s.disparos.toLocaleString('pt-BR')}</td>
+      <td style="font-weight:600;color:var(--success);white-space:nowrap" title="Custo: ${brl(s.custo)} | Receita: ${brl(s.receita)}">${brl(s.lucro)}</td>
+      <td style="padding:4px 6px"><button class="btn-icon" title="Editar sessão (requer senha)" onclick="abrirEdicaoUF(${s.id})" style="font-size:15px">✏️</button></td></tr>`;
+  });
+  document.getElementById('uform-tbody').innerHTML=html;
+  const tc=lista.reduce((a,s)=>a+s.custo,0),tr=lista.reduce((a,s)=>a+s.receita,0),tl=lista.reduce((a,s)=>a+s.lucro,0),td=lista.reduce((a,s)=>a+s.disparos,0);
+  document.getElementById('uform-total-bar').innerHTML=`
+    <span style="font-size:11px;color:var(--muted)">${lista.length} sessões · ${td.toLocaleString('pt-BR')} disparos</span>
+    <span>Custo: <strong>${brl(tc)}</strong></span>
+    <span>Receita: <strong>${brl(tr)}</strong></span>
+    <span style="color:var(--success);font-weight:600">Lucro: ${brl(tl)}</span>`;
+}
+
+function excluirSessaoUF(id){
+  const s=sessoesUF.find(x=>x.id===id);if(!s)return;
+  openConfirm('Excluir sessão','Excluir sessão de '+s.cliente+'? Os disparos serão devolvidos à ponteira.',()=>{
+    const pont=ponteiras.find(p=>p.id===s.pontId);
+    if(pont)pont.restante=Math.min(pont.total,pont.restante+s.disparos);
+    sessoesUF=sessoesUF.filter(x=>x.id!==id);saveUF();renderUltraformer();showToast('Sessão excluída');
+  });
+}
+
+function salvarPonteira(){
+  const nome=(document.getElementById('pont-nome')?.value||'').trim();
+  if(!nome){showToast('Informe o nome',true);return;}
+  const total=parseInt(document.getElementById('pont-total')?.value)||0;
+  const restante=parseInt(document.getElementById('pont-restante')?.value)||total;
+  ponteiras.push({id:nid(),nome,total,restante});
+  saveUF();closeModal('modal-pont');showToast('Ponteira cadastrada!');renderPonteiras();
+  ['pont-nome','pont-total','pont-restante'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+}
+
+function excluirPonteira(id){
+  const p=ponteiras.find(x=>x.id===id);if(!p)return;
+  openConfirm('Excluir ponteira','Excluir ponteira "'+p.nome+'"?',()=>{
+    ponteiras=ponteiras.filter(x=>x.id!==id);saveUF();renderPonteiras();showToast('Ponteira excluída');
+  });
+}
+
+
+// ── EDIÇÃO SESSÃO UF (protegida por senha) ───────────────
+let _ufEditId=null;
+
+function abrirEdicaoUF(id){
+  _ufEditId=id;
+  const s=sessoesUF.find(x=>x.id===id);if(!s)return;
+  // reset estado
+  document.getElementById('uf-edit-senha').value='';
+  document.getElementById('uf-edit-campos').style.display='none';
+  document.getElementById('uf-edit-verificar-btn').style.display='';
+  document.getElementById('uf-edit-salvar-btn').style.display='none';
+  openModal('modal-uform-edit');
+}
+
+function verificarSenhaUFEdit(){
+  const senha=document.getElementById('uf-edit-senha').value;
+  if(!verificarMaster(senha)){showToast('Senha master incorreta',true);return;}
+  // senha ok — mostrar campos preenchidos
+  const s=sessoesUF.find(x=>x.id===_ufEditId);if(!s)return;
+  populateProfSel('uf-edit-prof');
+  // popular ponteiras
+  const psel=document.getElementById('uf-edit-pont');
+  psel.innerHTML=ponteiras.map(p=>`<option value="${p.id}">${p.nome} (${p.restante.toLocaleString('pt-BR')} disp.)</option>`).join('');
+  document.getElementById('uf-edit-data').value=s.data;
+  document.getElementById('uf-edit-prof').value=s.profId||'';
+  document.getElementById('uf-edit-cliente').value=s.cliente;
+  document.getElementById('uf-edit-pont').value=s.pontId;
+  document.getElementById('uf-edit-disparos').value=s.disparos;
+  document.getElementById('uf-edit-campos').style.display='block';
+  document.getElementById('uf-edit-verificar-btn').style.display='none';
+  document.getElementById('uf-edit-salvar-btn').style.display='';
+  ufEditCalc();
+}
+
+function ufEditCalc(){
+  const disp=parseInt(document.getElementById('uf-edit-disparos')?.value)||0;
+  const custo=disp*UF_CUSTO,rec=disp*UF_PRECO,lucro=rec-custo;
+  document.getElementById('uf-edit-custo').textContent=brl(custo);
+  document.getElementById('uf-edit-rec').textContent=brl(rec);
+  document.getElementById('uf-edit-lucro').textContent=brl(lucro);
+}
+
+function salvarEdicaoUF(){
+  const s=sessoesUF.find(x=>x.id===_ufEditId);if(!s)return;
+  const novaDisp=parseInt(document.getElementById('uf-edit-disparos').value)||0;
+  if(novaDisp<=0){showToast('Informe os disparos',true);return;}
+  const novaPontId=parseInt(document.getElementById('uf-edit-pont').value);
+  const novaPont=ponteiras.find(p=>p.id===novaPontId);
+  // devolver disparos antigos para ponteira antiga
+  const pontAntiga=ponteiras.find(p=>p.id===s.pontId);
+  if(pontAntiga)pontAntiga.restante=Math.min(pontAntiga.total,pontAntiga.restante+s.disparos);
+  // verificar se nova ponteira tem disparos suficientes
+  if(novaPont&&novaDisp>novaPont.restante){showToast('Disparos excedem vida útil da ponteira ('+novaPont.restante+')',true);if(pontAntiga)pontAntiga.restante-=s.disparos;return;}
+  // aplicar novos valores
+  if(novaPont)novaPont.restante=Math.max(0,novaPont.restante-novaDisp);
+  s.data=document.getElementById('uf-edit-data').value;
+  s.profId=parseInt(document.getElementById('uf-edit-prof').value)||null;
+  s.cliente=document.getElementById('uf-edit-cliente').value.trim();
+  s.pontId=novaPontId;
+  s.disparos=novaDisp;
+  s.custo=novaDisp*UF_CUSTO;
+  s.receita=novaDisp*UF_PRECO;
+  s.lucro=s.receita-s.custo;
+  saveUF();closeModal('modal-uform-edit');showToast('Sessão atualizada!');renderUltraformer();
+}
+
+
+// ── SENHA MASTER ──────────────────────────────────────────
+function getSenhaMaster(){return cfg.senhaMaster||'biodynk@master';}
+function verificarMaster(s){return s===getSenhaMaster();}
+
+function alterarSenhaMaster(){
+  const old=document.getElementById('cfg-master-old').value;
+  const nw=document.getElementById('cfg-master-new').value;
+  const cf=document.getElementById('cfg-master-conf').value;
+  if(!verificarMaster(old)){showToast('Senha master atual incorreta',true);return;}
+  if(nw.length<4){showToast('Mínimo 4 caracteres',true);return;}
+  if(nw!==cf){showToast('Senhas não coincidem',true);return;}
+  cfg.senhaMaster=nw;saveAll();showToast('Senha master alterada!');
+  ['cfg-master-old','cfg-master-new','cfg-master-conf'].forEach(id=>document.getElementById(id).value='');
+}
+
+// Gate genérico para qualquer modal protegido
+let _gateTargetModal=null;
+function abrirComMaster(targetModal){
+  _gateTargetModal=targetModal;
+  document.getElementById('gate-senha').value='';
+  openModal('modal-master-gate');
+}
+function verificarGateMaster(){
+  const s=document.getElementById('gate-senha').value;
+  if(!verificarMaster(s)){showToast('Senha master incorreta',true);return;}
+  closeModal('modal-master-gate');
+  if(_gateTargetModal)openModal(_gateTargetModal);
+  _gateTargetModal=null;
+}
+
+// Recarga de disparos
+let _recPontId=null;
+function abrirRecarga(pontId){
+  _recPontId=pontId;
+  document.getElementById('rec-senha').value='';
+  document.getElementById('rec-campos').style.display='none';
+  document.getElementById('rec-verificar-btn').style.display='';
+  document.getElementById('rec-salvar-btn').style.display='none';
+  document.getElementById('rec-qtd').value='';
+  document.getElementById('rec-nova-vida').textContent='—';
+  openModal('modal-recarga');
+}
+function verificarSenhaMasterRecarga(){
+  const s=document.getElementById('rec-senha').value;
+  if(!verificarMaster(s)){showToast('Senha master incorreta',true);return;}
+  const pont=ponteiras.find(p=>p.id===_recPontId);if(!pont)return;
+  document.getElementById('rec-pont-nome').textContent=pont.nome;
+  document.getElementById('rec-pont-atual').textContent=pont.restante.toLocaleString('pt-BR');
+  document.getElementById('rec-campos').style.display='block';
+  document.getElementById('rec-verificar-btn').style.display='none';
+  document.getElementById('rec-salvar-btn').style.display='';
+}
+function recCalc(){
+  const pont=ponteiras.find(p=>p.id===_recPontId);if(!pont)return;
+  const qtd=parseInt(document.getElementById('rec-qtd').value)||0;
+  const nova=pont.restante+qtd;
+  document.getElementById('rec-nova-vida').textContent=nova.toLocaleString('pt-BR')+' disparos';
+}
+function salvarRecarga(){
+  const pont=ponteiras.find(p=>p.id===_recPontId);if(!pont)return;
+  const qtd=parseInt(document.getElementById('rec-qtd').value)||0;
+  if(qtd<=0){showToast('Informe a quantidade',true);return;}
+  pont.restante+=qtd;
+  // Se ultrapassar o total, atualiza o total também
+  if(pont.restante>pont.total)pont.total=pont.restante;
+  saveUF();closeModal('modal-recarga');showToast('✓ '+qtd.toLocaleString('pt-BR')+' disparos adicionados à '+pont.nome+'!');renderUltraformer();
+}
+
 // ── INIT ──────────────────────────────────────────────────
 window.addEventListener('click',e=>{
   if(e.target.classList.contains('modal-overlay'))e.target.classList.remove('open');
@@ -1078,6 +1553,13 @@ window.addEventListener('click',e=>{
 const _origOpen=openModal;
 window.openModal=function(id){
   _origOpen(id);
+  if(id==='modal-uform'){
+    populateProfSel('uf-prof');
+    populatePontSel();
+    document.getElementById('uf-data').value=new Date().toISOString().slice(0,10);
+    if(crmContactCtx&&crmContactCtx.name){const cl=document.getElementById('uf-cliente');if(cl)cl.value=crmContactCtx.name;}
+    ufCalc();
+  }
   if(id==='modal-proc'){
     populateProfSel('mp-prof');
     // mostrar busca só se API ok
