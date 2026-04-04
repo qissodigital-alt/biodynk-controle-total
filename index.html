@@ -1569,51 +1569,12 @@ window.openModal=function(id){
     mpTipoChange();
   }
 };
-</script>
-<div id="modal-edit-proc" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;"><div style="background:var(--card);border-radius:16px;padding:28px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;"><h3 style="margin-bottom:20px;font-family:var(--font-head)">Editar Procedimento</h3><div style="display:grid;gap:10px;"><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Data</label><input type="date" id="ep-data" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cliente</label><input type="text" id="ep-cliente" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Tipo</label><select id="ep-tipo" class="form-input"><option value="botox">Botox</option><option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option><option value="outros">Outros</option></select></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Profissional</label><input type="text" id="ep-profissional" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Produto</label><input type="text" id="ep-produto" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Consumo</label><input type="number" id="ep-consumo" class="form-input" step="0.1"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cobrado (R$)</label><input type="number" id="ep-cobrado" class="form-input" step="0.01"></div></div><div style="display:flex;gap:12px;margin-top:20px;justify-content:flex-end;"><button class="btn btn-ghost" onclick="fecharEditProc()">Cancelar</button><button class="btn btn-primary" onclick="salvarEditarProc()">Salvar</button></div></div></div>
-<script>
 var _epId=null;
 function fecharEditProc(){document.getElementById("modal-edit-proc").style.display="none";}
-function editarProc(id){
-  var s=prompt("Senha master:");
-  if(!s||s!==cfg.senhaMaster){alert("Senha incorreta!");return;}
-  var p=procedimentos.find(function(x){return x.id===id;});
-  if(!p)return;
-  _epId=id;
-  document.getElementById("ep-data").value=p.data||"";
-  document.getElementById("ep-cliente").value=p.cliente||"";
-  document.getElementById("ep-tipo").value=p.tipo||"botox";
-  var prof=profissionais.find(function(x){return x.id===p.profId;});
-  document.getElementById("ep-profissional").value=prof?prof.nome:"";
-  var prod=produtos.find(function(x){return x.id===p.prodId;});
-  document.getElementById("ep-produto").value=prod?prod.nome:"";
-  document.getElementById("ep-consumo").value=p.consumo||"";
-  document.getElementById("ep-cobrado").value=p.cobrado||"";
-  document.getElementById("modal-edit-proc").style.display="flex";
-}
-function salvarEditarProc(){
-  var idx=procedimentos.findIndex(function(x){return x.id===_epId;});
-  if(idx===-1)return;
-  var p=procedimentos[idx];
-  p.data=document.getElementById("ep-data").value;
-  p.cliente=document.getElementById("ep-cliente").value.trim();
-  p.tipo=document.getElementById("ep-tipo").value;
-  var nomeProd=document.getElementById("ep-produto").value.trim();
-  var prod=produtos.find(function(x){return x.nome===nomeProd;});
-  if(prod)p.prodId=prod.id;
-  var nomeProf=document.getElementById("ep-profissional").value.trim();
-  var prof=profissionais.find(function(x){return x.nome===nomeProf;});
-  if(prof)p.profId=prof.id;
-  p.consumo=parseFloat(document.getElementById("ep-consumo").value)||0;
-  p.cobrado=parseFloat(document.getElementById("ep-cobrado").value)||0;
-  if(prod)p.custoTotal=prod.custo*p.consumo;
-  p.lucro=p.cobrado-(p.custoTotal||0);
-  procedimentos[idx]=p;
-  saveAll();
-  fecharEditProc();
-  renderProcedimentos();
-  alert("Procedimento atualizado!");
-}
-<\/script>
+function editarProc(id){var s=prompt("Senha master:");if(!s||s!==cfg.senhaMaster){alert("Senha incorreta!");return;}var p=procedimentos.find(function(x){return x.id===id;});if(!p)return;_epId=id;document.getElementById("ep-data").value=p.data||"";document.getElementById("ep-cliente").value=p.cliente||"";document.getElementById("ep-tipo").value=p.tipo||"botox";var prof=profissionais.find(function(x){return x.id===p.profId;});document.getElementById("ep-profissional").value=prof?prof.nome:"";var prod=produtos.find(function(x){return x.id===p.prodId;});document.getElementById("ep-produto").value=prod?prod.nome:"";document.getElementById("ep-consumo").value=p.consumo||"";document.getElementById("ep-cobrado").value=p.cobrado||"";document.getElementById("modal-edit-proc").style.display="flex";}
+function salvarEditarProc(){var idx=procedimentos.findIndex(function(x){return x.id===_epId;});if(idx===-1)return;var p=procedimentos[idx];p.data=document.getElementById("ep-data").value;p.cliente=document.getElementById("ep-cliente").value.trim();p.tipo=document.getElementById("ep-tipo").value;var nomeProd=document.getElementById("ep-produto").value.trim();var prod=produtos.find(function(x){return x.nome===nomeProd;});if(prod)p.prodId=prod.id;var nomeProf=document.getElementById("ep-profissional").value.trim();var prof=profissionais.find(function(x){return x.nome===nomeProf;});if(prof)p.profId=prof.id;p.consumo=parseFloat(document.getElementById("ep-consumo").value)||0;p.cobrado=parseFloat(document.getElementById("ep-cobrado").value)||0;if(prod)p.custoTotal=prod.custo*p.consumo;p.lucro=p.cobrado-(p.custoTotal||0);procedimentos[idx]=p;saveAll();fecharEditProc();renderProcedimentos();alert("Procedimento atualizado!");}
+
+</script>
+<div id="modal-edit-proc" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;"><div style="background:var(--card);border-radius:16px;padding:28px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;"><h3 style="margin-bottom:20px;font-family:var(--font-head)">Editar Procedimento</h3><div style="display:grid;gap:10px;"><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Data</label><input type="date" id="ep-data" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cliente</label><input type="text" id="ep-cliente" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Tipo</label><select id="ep-tipo" class="form-input"><option value="botox">Botox</option><option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option></select></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Profissional</label><input type="text" id="ep-profissional" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Produto</label><input type="text" id="ep-produto" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Consumo</label><input type="number" id="ep-consumo" class="form-input" step="0.1"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cobrado (R$)</label><input type="number" id="ep-cobrado" class="form-input" step="0.01"></div></div><div style="display:flex;gap:12px;margin-top:20px;justify-content:flex-end;"><button class="btn btn-ghost" onclick="fecharEditProc()">Cancelar</button><button class="btn btn-primary" onclick="salvarEditarProc()">Salvar</button></div></div></div>
 </body>
 </html>
