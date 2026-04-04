@@ -1,76 +1,3 @@
-Ir para o conteúdo
-qissodigital-alt
-biodynk-controle-total
-Navegação do repositório
-Código
-Problemas
-Solicitações de pull
-Ações
-Projetos
-Wiki
-Segurança e qualidade
-Percepções
-Configurações
-Arquivos
-Acesse o arquivo
-t
-biodynk-relatorio-etiquetas.html
-index.html
-biodynk-controle-total
-/
-index.html
-em
-principal
-
-Editar
-
-Pré-visualização
-Modo de recuo
-
-Espaços
-Tamanho do recuo
-
-2
-modo de quebra de linha
-
-Sem embrulho
-Editando o conteúdo do arquivo index.html
-  1
-  2
-  3
-  4
-  5
-  6
-  7
-  8
-  9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21
-22
-23
-24
-25
-26
-27
-28
-29
-30
-31
-32
-33
-34
-35
-36
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -107,4 +34,1586 @@ body{font-family:var(--font-body);background:var(--bg);color:var(--text);min-hei
 .topbar-right{display:flex;align-items:center;gap:8px}
 .crm-pill{font-size:10px;padding:2px 8px;border-radius:10px;font-weight:500;background:rgba(76,175,125,0.2);color:#4caf7d;max-width:180px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .crm-pill.off{background:rgba(224,82,82,0.15);color:#e05252}
-Use Control + Shift + mpara alternar o tabfoco da tecla. Como alternativa, use escpara tabmover para o próximo elemento interativo na página.
+.logout-btn{background:rgba(255,255,255,0.1);border:none;color:rgba(255,255,255,0.6);cursor:pointer;font-size:11px;font-family:var(--font-body);padding:4px 10px;border-radius:6px}
+.logout-btn:hover{background:rgba(255,255,255,0.2);color:#fff}
+/* CRM CONTEXT BAR */
+#crm-context-bar{background:var(--crm-bg);border-bottom:1px solid var(--crm-border);padding:7px 16px;font-size:11px;color:var(--crm);display:none;align-items:center;gap:10px;flex-wrap:wrap;flex-shrink:0}
+.crm-ctx-avatar{width:24px;height:24px;border-radius:50%;background:#1a6b3c;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:10px;font-weight:700;flex-shrink:0}
+.crm-ctx-info{flex:1;min-width:0}
+.crm-ctx-name-text{font-weight:600;font-size:12px}
+.crm-ctx-meta{font-size:10px;opacity:.7;margin-top:1px}
+.crm-ctx-actions{display:flex;gap:6px}
+.crm-ctx-btn{padding:3px 10px;border-radius:6px;border:none;cursor:pointer;font-family:var(--font-body);font-size:11px;font-weight:500;background:#1a6b3c;color:#fff;transition:all .15s}
+.crm-ctx-btn:hover{background:#145530}
+.crm-ctx-btn.ghost{background:transparent;color:#1a6b3c;border:1px solid #b8dfc9}
+.crm-ctx-btn.ghost:hover{background:rgba(26,107,60,0.08)}
+#body{display:flex;flex:1;overflow:hidden}
+#sidebar{width:var(--sidebar-w);background:var(--brand);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}
+.nav-sec{padding:14px 16px 5px;font-size:8px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.3);font-weight:600}
+.nav-item{display:flex;align-items:center;gap:8px;padding:8px 10px;cursor:pointer;color:rgba(255,255,255,0.5);font-size:12px;transition:all .15s;margin:1px 8px;border-radius:7px;position:relative}
+.nav-item:hover{background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.9)}
+.nav-item.active{background:rgba(232,180,184,0.18);color:var(--accent);font-weight:500}
+.nav-item.active::before{content:'';position:absolute;left:-8px;top:20%;height:60%;width:3px;background:var(--accent);border-radius:0 3px 3px 0}
+.nav-icon{font-size:13px;width:16px;text-align:center}
+.sidebar-footer{margin-top:auto;padding:12px 16px;border-top:1px solid rgba(255,255,255,0.08)}
+.sidebar-user{font-size:10px;color:rgba(255,255,255,0.35)}
+#main{flex:1;overflow-y:auto}
+.content{padding:20px}
+.page{display:none}.page.active{display:block}
+.card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:16px}
+.card-title{font-family:var(--font-head);font-size:13px;font-weight:600;margin-bottom:14px}
+.metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.metric-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:14px}
+.metric-label{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:1px;font-weight:500;margin-bottom:3px}
+.metric-value{font-family:var(--font-head);font-size:20px;font-weight:700}
+.metric-sub{font-size:10px;color:var(--muted);margin-top:2px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:18px}
+.grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:18px}
+.section-title{font-family:var(--font-head);font-size:17px;font-weight:700;margin-bottom:4px}
+.section-sub{color:var(--muted);font-size:12px;margin-bottom:18px}
+.highlight{background:linear-gradient(135deg,#1a1a2e,#2d2050);color:#fff;border-radius:12px;padding:18px;margin-bottom:18px;position:relative;overflow:hidden}
+.highlight::after{content:'B';position:absolute;right:16px;top:50%;transform:translateY(-50%);font-family:var(--font-head);font-size:64px;font-weight:700;color:rgba(255,255,255,0.04);pointer-events:none}
+.hl-label{font-size:8px;text-transform:uppercase;letter-spacing:2px;color:rgba(255,255,255,0.45);margin-bottom:3px}
+.hl-val{font-family:var(--font-head);font-size:26px;font-weight:700}
+.hl-sub{font-size:10px;color:rgba(255,255,255,0.4);margin-top:2px}
+.meta-bar-wrap{margin-top:10px}
+.meta-bar-label{display:flex;justify-content:space-between;font-size:10px;color:rgba(255,255,255,0.5);margin-bottom:4px}
+.meta-bar-bg{background:rgba(255,255,255,0.12);border-radius:6px;height:7px;overflow:hidden}
+.meta-bar-fill{height:100%;border-radius:6px;transition:width .8s;background:var(--accent)}
+.alert-box{background:#fdeaea;border:1px solid #f7c1c1;border-radius:9px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#b52e2e;display:none}
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:12px}
+th{text-align:left;padding:8px 10px;font-size:9px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);font-weight:600;border-bottom:1px solid var(--border);white-space:nowrap}
+td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+tr:last-child td{border-bottom:none}
+tr:hover td{background:#faf9f7}
+.td-muted{color:var(--muted)}
+.form-group{margin-bottom:12px}
+.form-label{display:block;font-size:10px;font-weight:500;color:var(--muted);margin-bottom:3px;text-transform:uppercase;letter-spacing:.5px}
+.form-input{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:7px;font-family:var(--font-body);font-size:12px;color:var(--text);background:var(--card);outline:none;transition:border .15s}
+.form-input:focus{border-color:#b0a8f0}
+.form-row{display:grid;gap:9px}
+.col-2{grid-template-columns:1fr 1fr}.col-3{grid-template-columns:1fr 1fr 1fr}
+.btn{padding:6px 14px;border-radius:7px;border:none;cursor:pointer;font-family:var(--font-body);font-size:12px;font-weight:500;transition:all .15s}
+.btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:#2d2d50}
+.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}.btn-ghost:hover{background:var(--bg)}
+.btn-danger{background:var(--danger);color:#fff}
+.btn-success{background:var(--success);color:#fff}
+.btn-sm{padding:4px 10px;font-size:11px}
+.btn-icon{background:none;border:none;cursor:pointer;padding:3px 5px;border-radius:5px;font-size:13px;color:var(--muted);transition:all .15s}
+.btn-icon:hover{background:var(--bg);color:var(--danger)}
+.chip{display:inline-flex;align-items:center;padding:2px 7px;border-radius:20px;font-size:10px;font-weight:500}
+.chip-botox{background:#e8f4ff;color:#185fa5}.chip-preen{background:#fde8f7;color:#8b2565}.chip-bio{background:#e8f7ef;color:#1a6b3c}
+.progress-wrap{background:var(--bg);border-radius:5px;height:5px;overflow:hidden}
+.progress-bar{height:100%;border-radius:5px;transition:width .5s}
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:14px}
+.tab{padding:7px 13px;cursor:pointer;font-size:12px;color:var(--muted);border-bottom:2px solid transparent;transition:all .15s;margin-bottom:-1px}
+.tab.active{color:var(--brand);font-weight:600;border-bottom-color:var(--brand)}
+.calc-block{background:var(--bg);border-radius:9px;padding:12px;margin-top:12px}
+.calc-row{display:flex;justify-content:space-between;align-items:center;padding:3px 0;font-size:12px}
+.calc-row.total{font-weight:600;font-size:13px;border-top:1px solid var(--border);margin-top:6px;padding-top:8px}
+.calc-row.profit{color:var(--success);font-family:var(--font-head);font-size:14px;font-weight:700}
+.calc-row.profit.neg{color:var(--danger)}
+.mbadge{display:inline-flex;align-items:center;padding:1px 7px;border-radius:10px;font-size:10px;font-weight:500}
+.mbadge-g{background:#e8f7ee;color:#2e7d52}.mbadge-a{background:#faeeda;color:#854f0b}.mbadge-r{background:#fdeaea;color:#b52e2e}
+.modal-overlay{position:fixed;inset:0;background:rgba(26,26,46,.55);z-index:200;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .2s}
+.modal-overlay.open{opacity:1;pointer-events:all}
+.modal{background:var(--card);border-radius:14px;width:500px;max-width:95vw;max-height:90vh;overflow-y:auto;padding:22px;transform:translateY(10px);transition:transform .2s}
+.modal-overlay.open .modal{transform:translateY(0)}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:17px}
+.modal-title{font-family:var(--font-head);font-size:14px;font-weight:700}
+.modal-close{background:none;border:none;font-size:17px;cursor:pointer;color:var(--muted);padding:3px}
+/* CRM CARD no modal */
+.crm-card{background:var(--crm-bg);border:1px solid var(--crm-border);border-radius:10px;padding:12px 14px;margin-bottom:14px;display:none}
+.crm-card.visible{display:block}
+.crm-card-header{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.crm-card-avatar{width:30px;height:30px;border-radius:50%;background:#1a6b3c;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:12px;font-weight:700;flex-shrink:0}
+.crm-card-name{font-size:13px;font-weight:600;color:#1a3d28}
+.crm-card-sub{font-size:11px;color:#2e7d52;margin-top:1px}
+.crm-use-btn{padding:4px 12px;border-radius:6px;border:none;cursor:pointer;font-family:var(--font-body);font-size:11px;font-weight:600;background:#1a6b3c;color:#fff;margin-top:6px}
+.crm-use-btn:hover{background:#145530}
+/* BUSCA CRM no modal */
+.crm-search-wrap{margin-bottom:14px;display:none}
+.crm-search-label{font-size:10px;font-weight:600;color:var(--crm);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+.crm-search-inner{position:relative}
+.crm-search-input{width:100%;padding:8px 10px 8px 30px;border:1px solid var(--crm-border);border-radius:7px;font-family:var(--font-body);font-size:12px;color:var(--text);background:var(--crm-bg);outline:none;transition:border .15s}
+.crm-search-input:focus{border-color:#1a6b3c}
+.crm-search-icon{position:absolute;left:9px;top:50%;transform:translateY(-50%);font-size:12px;color:#2e7d52;pointer-events:none}
+.crm-results{margin-top:5px;max-height:140px;overflow-y:auto;border:1px solid var(--crm-border);border-radius:7px;background:#fff;display:none}
+.crm-results.open{display:block}
+.crm-result-item{padding:8px 12px;cursor:pointer;font-size:12px;border-bottom:1px solid var(--crm-border);transition:background .1s;display:flex;align-items:center;gap:8px}
+.crm-result-item:last-child{border-bottom:none}
+.crm-result-item:hover{background:var(--crm-bg)}
+.crm-result-av{width:22px;height:22px;border-radius:50%;background:#1a6b3c;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-family:var(--font-head)}
+.crm-result-name{font-weight:500;font-size:12px}
+.crm-result-meta{font-size:10px;color:var(--muted)}
+.crm-loading,.crm-empty{padding:12px;text-align:center;font-size:11px;color:var(--muted)}
+/* HISTÓRICO CLIENTE no dashboard */
+.crm-hist-card{background:linear-gradient(135deg,#e8f7ef,#f7fdf9);border:1px solid var(--crm-border);border-radius:11px;padding:16px;margin-bottom:18px;display:none}
+.crm-hist-card.visible{display:block}
+.crm-hist-header{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.crm-hist-avatar{width:38px;height:38px;border-radius:50%;background:#1a6b3c;color:#fff;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-size:16px;font-weight:700;flex-shrink:0}
+.crm-hist-meta{flex:1}
+.crm-hist-name{font-family:var(--font-head);font-size:14px;font-weight:700;color:#1a3d28}
+.crm-hist-sub{font-size:11px;color:#2e7d52;margin-top:2px}
+.crm-hist-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.crm-hist-stat{background:#fff;border-radius:8px;padding:8px 10px;border:1px solid var(--crm-border)}
+.crm-hist-stat-label{font-size:8px;text-transform:uppercase;letter-spacing:1px;color:#2e7d52;margin-bottom:2px;font-weight:600}
+.crm-hist-stat-val{font-family:var(--font-head);font-size:14px;font-weight:700;color:#1a3d28}
+.crm-hist-procs-title{font-weight:600;color:#1a3d28;margin-bottom:6px;font-size:11px;text-transform:uppercase;letter-spacing:.5px}
+.crm-hist-proc-row{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px solid rgba(184,223,201,.5);font-size:11px;color:#1a3d28}
+.crm-hist-proc-row:last-child{border-bottom:none}
+.crm-hist-close{background:none;border:none;cursor:pointer;color:#2e7d52;font-size:16px;padding:2px;margin-left:auto}
+/* CONFIRM */
+.confirm-overlay{position:fixed;inset:0;background:rgba(26,26,46,.6);z-index:300;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .15s}
+.confirm-overlay.open{opacity:1;pointer-events:all}
+.confirm-box{background:var(--card);border-radius:12px;padding:22px;width:320px}
+.confirm-title{font-family:var(--font-head);font-size:14px;font-weight:700;margin-bottom:7px}
+.confirm-text{font-size:12px;color:var(--muted);margin-bottom:18px}
+.confirm-actions{display:flex;gap:8px}
+.toast{position:fixed;bottom:18px;right:18px;background:var(--brand);color:#fff;padding:9px 16px;border-radius:9px;font-size:12px;font-weight:500;z-index:999;transform:translateY(80px);transition:transform .25s;pointer-events:none}
+.toast.show{transform:translateY(0)}
+.toast.error{background:var(--danger)}
+.date-filter{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:16px}
+.date-filter label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.date-filter input,.date-filter select{padding:5px 9px;border:1px solid var(--border);border-radius:7px;font-family:var(--font-body);font-size:11px;color:var(--text);background:var(--card);outline:none}
+.prof-tag{display:inline-flex;align-items:center;gap:4px;background:#f0eeff;color:#4a3fa5;padding:2px 8px;border-radius:12px;font-size:10px;font-weight:500}
+.chart-wrap{position:relative;height:180px;margin-top:8px}
+.crm-cfg-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:10px;font-size:10px;font-weight:600;margin-bottom:12px}
+
+/* ULTRAFORMER */
+.pont-card{background:var(--card);border:1px solid var(--border);border-radius:11px;padding:14px;position:relative}
+.pont-card.warn{border-color:#f4c95d;background:#fffdf0}
+.pont-card.critical{border-color:var(--danger);background:#fff5f5}
+.pont-bar-bg{background:var(--bg);border-radius:5px;height:8px;overflow:hidden;margin-top:6px}
+.pont-bar-fill{height:100%;border-radius:5px;transition:width .5s}
+.uform-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+@media(max-width:900px){.uform-grid{grid-template-columns:repeat(2,1fr)}}
+
+.link-hist{cursor:pointer;color:var(--brand);text-decoration:none}
+.link-hist:hover{text-decoration:underline}
+</style>
+</head>
+<body>
+
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">Biodynk</div>
+    <div class="login-sub">Controle Total</div>
+    <input type="text" id="login-user" placeholder="Usuário" autocomplete="username">
+    <input type="password" id="login-pass" placeholder="Senha" autocomplete="current-password">
+    <button class="login-btn" onclick="doLogin()">Entrar</button>
+    <div class="login-err" id="login-err">Usuário ou senha incorretos</div>
+    
+  </div>
+</div>
+
+<div id="app" style="display:none;flex-direction:column;height:100vh">
+  <div id="topbar">
+    <div class="topbar-brand">Biodynk <span>Controle Total</span></div>
+    <div class="topbar-right">
+      <span id="crm-pill" class="crm-pill off">⬤ CRM desconectado</span>
+      <span id="topbar-user" style="font-size:11px;color:rgba(255,255,255,0.45)"></span>
+      <button class="logout-btn" onclick="doLogout()">Sair</button>
+    </div>
+  </div>
+
+  <!-- CRM CONTEXT BAR -->
+  <div id="crm-context-bar">
+    <div class="crm-ctx-avatar" id="crm-ctx-av">?</div>
+    <div class="crm-ctx-info">
+      <div class="crm-ctx-name-text" id="crm-ctx-name-bar">—</div>
+      <div class="crm-ctx-meta" id="crm-ctx-meta-bar"></div>
+    </div>
+    <div class="crm-ctx-actions">
+      <button class="crm-ctx-btn" onclick="abrirProcParaContato()">+ Registrar procedimento</button>
+      <button class="crm-ctx-btn ghost" onclick="verHistoricoCliente()">Ver histórico</button>
+    </div>
+  </div>
+
+  <div id="body" style="display:flex;flex:1;overflow:hidden">
+    <div id="sidebar">
+      <div class="nav-sec">Principal</div>
+      <div class="nav-item active" onclick="nav('dashboard')"><span class="nav-icon">◉</span>Dashboard</div>
+      <div class="nav-item" onclick="nav('procedimentos')"><span class="nav-icon">✦</span>Procedimentos</div>
+      <div class="nav-item" onclick="nav('calculadora')"><span class="nav-icon">◈</span>Calculadora</div>
+      <div class="nav-sec">Gestão</div>
+      <div class="nav-item" onclick="nav('produtos')"><span class="nav-icon">⬡</span>Produtos</div>
+      <div class="nav-item" onclick="nav('profissionais')"><span class="nav-icon">♦</span>Profissionais</div>
+      <div class="nav-item" onclick="nav('relatorios')"><span class="nav-icon">▤</span>Relatórios</div>
+      <div class="nav-item" onclick="nav('ultraformer')"><span class="nav-icon">⚡</span>Ultraformer</div>
+      <div class="nav-item" onclick="nav('configuracoes')"><span class="nav-icon">⚙</span>Config</div>
+      <div class="sidebar-footer"><div class="sidebar-user" id="sidebar-user"></div></div>
+    </div>
+
+    <div id="main"><div class="content">
+
+<!-- DASHBOARD -->
+<div id="page-dashboard" class="page active">
+  <!-- Card histórico cliente CRM -->
+  <div class="crm-hist-card" id="crm-hist-card">
+    <div class="crm-hist-header">
+      <div class="crm-hist-avatar" id="crm-hist-av">?</div>
+      <div class="crm-hist-meta">
+        <div class="crm-hist-name" id="crm-hist-name">—</div>
+        <div class="crm-hist-sub" id="crm-hist-sub"></div>
+      </div>
+      <button class="crm-hist-close" onclick="fecharHistoricoCliente()">✕</button>
+    </div>
+    <div class="crm-hist-stats" id="crm-hist-stats"></div>
+    <div id="crm-hist-procs"></div>
+  </div>
+
+  <div class="alert-box" id="alert-estoque"></div>
+  <div style="display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:18px;flex-wrap:wrap;gap:10px">
+    <div><div class="section-title">Dashboard</div><div class="section-sub" id="dash-date"></div></div>
+    <select class="form-input" id="dash-periodo" onchange="renderDashboard()" style="font-size:11px;padding:5px 9px;width:auto">
+      <option value="7">Últimos 7 dias</option><option value="30" selected>Últimos 30 dias</option>
+      <option value="90">Últimos 90 dias</option><option value="0">Tudo</option>
+    </select>
+  </div>
+  <div class="highlight">
+    <div class="hl-label">Lucro do Período</div>
+    <div class="hl-val" id="dash-lucro">R$ 0,00</div>
+    <div class="hl-sub" id="dash-lucro-sub">0 procedimentos</div>
+    <div class="meta-bar-wrap" id="meta-bar-wrap" style="display:none">
+      <div class="meta-bar-label"><span>Meta mensal</span><span id="meta-pct-label">0%</span></div>
+      <div class="meta-bar-bg"><div class="meta-bar-fill" id="meta-bar-fill" style="width:0%"></div></div>
+      <div style="font-size:9px;color:rgba(255,255,255,0.4);margin-top:3px" id="meta-falta"></div>
+    </div>
+  </div>
+  <div class="metrics-grid">
+    <div class="metric-card"><div class="metric-label">Receita</div><div class="metric-value" id="dash-rec">R$0</div><div class="metric-sub">cobrado</div></div>
+    <div class="metric-card"><div class="metric-label">Custo</div><div class="metric-value" id="dash-cus">R$0</div><div class="metric-sub">produto+sala+taxas</div></div>
+    <div class="metric-card"><div class="metric-label">Margem</div><div class="metric-value" id="dash-mar">0%</div><div class="metric-sub">média</div></div>
+    <div class="metric-card"><div class="metric-label">Procedimentos</div><div class="metric-value" id="dash-cnt">0</div></div>
+  </div>
+  <div class="grid-2">
+    <div class="card"><div class="card-title">Evolução de Lucro</div><div class="chart-wrap"><canvas id="chart-lucro"></canvas></div></div>
+    <div class="card"><div class="card-title">Por tipo</div><div id="dash-por-tipo"></div></div>
+  </div>
+  <div class="card"><div class="card-title">Últimos atendimentos</div><div id="dash-ultimos"></div></div>
+</div>
+
+<!-- PROCEDIMENTOS -->
+<div id="page-procedimentos" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">
+    <div><div class="section-title">Procedimentos</div><div class="section-sub">Histórico completo</div></div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-proc')">+ Novo</button>
+  </div>
+  <div class="date-filter">
+    <label>De</label><input type="date" id="proc-de">
+    <label>Até</label><input type="date" id="proc-ate">
+    <select id="proc-tipo-filtro" style="padding:5px 9px;border:1px solid var(--border);border-radius:7px;font-size:11px;font-family:var(--font-body);color:var(--text);background:var(--card);outline:none">
+      <option value="">Todos os tipos</option><option value="botox">Botox</option>
+      <option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option>
+    </select>
+    <button class="btn btn-primary btn-sm" onclick="renderProcedimentos()">Filtrar</button>
+    <button class="btn btn-ghost btn-sm" onclick="limparFiltroProc()">Limpar</button>
+  </div>
+  <div class="card"><div class="table-wrap"><table>
+    <thead><tr><th>Data</th><th>Cliente</th><th>Tipo</th><th>Profissional</th><th>Produto</th><th>Consumo</th><th>Cobrado</th><th>Custo</th><th>Lucro</th><th></th></tr></thead>
+    <tbody id="proc-tbody"></tbody>
+  </table></div></div>
+  <div id="proc-total-bar" style="display:flex;gap:20px;padding:12px 16px;background:var(--card);border:1px solid var(--border);border-radius:11px;margin-top:10px;font-size:12px;flex-wrap:wrap"></div>
+</div>
+
+<!-- CALCULADORA -->
+<div id="page-calculadora" class="page">
+  <div class="section-title">Calculadora</div><div class="section-sub">Simule custo e lucro</div>
+  <div class="grid-2">
+    <div class="card">
+      <div class="card-title">Parâmetros</div>
+      <div class="form-group"><label class="form-label">Tipo</label>
+        <select class="form-input" id="calc-tipo" onchange="calcUpdate()">
+          <option value="botox">Botox</option><option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option>
+        </select></div>
+      <div class="form-group"><label class="form-label">Produto</label><select class="form-input" id="calc-produto" onchange="calcUpdate()"></select></div>
+      <div class="form-group"><label class="form-label" id="calc-lbl">Consumo (UI)</label><input type="number" class="form-input" id="calc-consumo" value="20" step="0.5" oninput="calcUpdate()"></div>
+      <div class="form-group"><label class="form-label">Tempo (min)</label><input type="number" class="form-input" id="calc-tempo" value="30" oninput="calcUpdate()"></div>
+      <div class="form-group"><label class="form-label">Valor cobrado (R$)</label><input type="number" class="form-input" id="calc-cobrado" value="800" oninput="calcUpdate()"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Resultado</div>
+      <div class="calc-block">
+        <div class="calc-row"><span>Produto</span><span id="cr-prod">—</span></div>
+        <div class="calc-row"><span>Hora Sala</span><span id="cr-sala">—</span></div>
+        <div class="calc-row"><span>Imp. Gov (<span id="cr-gp">7</span>%)</span><span id="cr-gov">—</span></div>
+        <div class="calc-row"><span>Maquininha (<span id="cr-mp">10</span>%)</span><span id="cr-maq">—</span></div>
+        <div class="calc-row"><span>Comissão (<span id="cr-cp">10</span>%)</span><span id="cr-com">—</span></div>
+        <div class="calc-row total"><span>Custo Total</span><span id="cr-total">—</span></div>
+        <div class="calc-row profit" id="cr-row"><span>Lucro</span><span id="cr-lucro">—</span></div>
+      </div>
+      <div style="margin-top:12px">
+        <div class="form-label" style="margin-bottom:4px">Margem</div>
+        <div style="display:flex;align-items:center;gap:8px">
+          <div class="progress-wrap" style="flex:1"><div class="progress-bar" id="calc-bar" style="background:var(--success);width:0%"></div></div>
+          <span style="font-size:12px;font-weight:600;min-width:36px" id="calc-pct">0%</span>
+        </div>
+      </div>
+      <button class="btn btn-primary" style="width:100%;margin-top:14px" onclick="openProcFromCalc()">Registrar Procedimento</button>
+    </div>
+  </div>
+</div>
+
+<!-- PRODUTOS -->
+<div id="page-produtos" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+    <div><div class="section-title">Produtos</div><div class="section-sub">Insumos e custos</div></div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-produto')">+ Cadastrar</button>
+  </div>
+  <div id="alerta-estoque-prod" style="display:none;background:#fdeaea;border:1px solid #f7c1c1;border-radius:9px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#b52e2e"></div>
+  <div class="tabs">
+    <div class="tab active" onclick="filterProd('todos',this)">Todos</div>
+    <div class="tab" onclick="filterProd('botox',this)">Botox</div>
+    <div class="tab" onclick="filterProd('preenchedor',this)">Preenchedor</div>
+    <div class="tab" onclick="filterProd('bioestimulador',this)">Bioestimulador</div>
+  </div>
+  <div class="grid-3" id="produtos-grid"></div>
+</div>
+
+<!-- PROFISSIONAIS -->
+<div id="page-profissionais" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+    <div><div class="section-title">Profissionais</div><div class="section-sub">Equipe da clínica</div></div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-prof')">+ Adicionar</button>
+  </div>
+  <div class="grid-3" id="prof-grid"></div>
+</div>
+
+<!-- RELATÓRIOS -->
+<div id="page-relatorios" class="page">
+  <div class="section-title">Relatórios</div><div class="section-sub">Análise financeira detalhada</div>
+  <div class="date-filter" style="margin-bottom:18px">
+    <label>De</label><input type="date" id="rel-de"><label>Até</label><input type="date" id="rel-ate">
+    <button class="btn btn-primary btn-sm" onclick="renderRelatorios()">Filtrar</button>
+    <button class="btn btn-ghost btn-sm" onclick="limparFiltroRel()">Limpar</button>
+    <button class="btn btn-success btn-sm" onclick="exportarPDF()">↓ Exportar PDF</button>
+  </div>
+  <div class="grid-3" id="rel-summary" style="margin-bottom:18px"></div>
+  <div class="grid-2" style="margin-bottom:14px">
+    <div class="card"><div class="card-title">Por tipo de procedimento</div><div id="rel-por-tipo"></div></div>
+    <div class="card"><div class="card-title">Por profissional</div><div id="rel-por-prof"></div></div>
+  </div>
+  <div class="card"><div class="card-title">Consumo de produtos</div><div id="rel-consumo"></div></div>
+</div>
+
+<!-- CONFIGURAÇÕES -->
+
+<!-- ULTRAFORMER -->
+<div id="page-ultraformer" class="page">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:10px">
+    <div><div class="section-title">Ultraformer HIFU</div><div class="section-sub">Controle de ponteiras e sessões</div></div>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modal-uform')">+ Registrar sessão</button>
+  </div>
+
+  <!-- ALERTA PONTEIRAS -->
+  <div id="ultra-alert" style="display:none;background:#fdeaea;border:1px solid #f7c1c1;border-radius:9px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#b52e2e"></div>
+
+  <!-- CARDS PONTEIRAS -->
+  <div style="margin-bottom:6px;display:flex;align-items:center;justify-content:space-between">
+    <div class="card-title" style="margin:0">Ponteiras</div>
+
+  </div>
+  <div class="uform-grid" id="pont-grid" style="margin-top:10px"></div>
+
+  <!-- SESSÕES -->
+  <div class="card" style="margin-top:4px">
+    <div class="card-header">
+      <div class="card-title" style="margin:0">Sessões registradas</div>
+      <div style="display:flex;gap:6px">
+        <input type="date" id="uf-de" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-family:var(--font-body);font-size:11px">
+        <input type="date" id="uf-ate" style="padding:4px 8px;border:1px solid var(--border);border-radius:6px;font-family:var(--font-body);font-size:11px">
+        <button class="btn btn-primary btn-sm" onclick="renderUltraformer()">Filtrar</button>
+      </div>
+    </div>
+    <div class="table-wrap"><table>
+      <thead><tr><th>Data</th><th>Cliente</th><th>Prof.</th><th>Ponteira</th><th>Disp.</th><th>Lucro</th><th></th></tr></thead>
+      <tbody id="uform-tbody"></tbody>
+    </table></div>
+    <div id="uform-total-bar" style="display:flex;gap:20px;padding:10px 14px;background:var(--bg);border-radius:8px;margin-top:10px;font-size:12px;flex-wrap:wrap"></div>
+  </div>
+</div>
+
+<div id="page-configuracoes" class="page">
+  <div class="section-title">Configurações</div><div class="section-sub">Parâmetros e segurança</div>
+  <div style="max-width:500px">
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">Despesas & Taxas</div>
+      <div class="form-group"><label class="form-label">Custo Hora Sala (R$)</label><input type="number" class="form-input" id="cfg-hora" value="84" step="0.5"></div>
+      <div class="form-row col-3">
+        <div class="form-group"><label class="form-label">Gov (%)</label><input type="number" class="form-input" id="cfg-gov" value="7"></div>
+        <div class="form-group"><label class="form-label">Maquininha (%)</label><input type="number" class="form-input" id="cfg-maq" value="10"></div>
+        <div class="form-group"><label class="form-label">Comissão (%)</label><input type="number" class="form-input" id="cfg-com" value="10"></div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="salvarConfig()">Salvar</button>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">Meta de Lucro Mensal</div>
+      <div class="form-group"><label class="form-label">Meta (R$)</label><input type="number" class="form-input" id="cfg-meta" placeholder="Ex: 5000" step="100"></div>
+      <button class="btn btn-primary btn-sm" onclick="salvarMeta()">Salvar Meta</button>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">Alerta de Estoque Baixo</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px">Alertar quando o estoque de cada categoria ficar abaixo do limite.</div>
+      <div class="form-row col-3">
+        <div class="form-group"><label class="form-label">Botox (UI)</label><input type="number" class="form-input" id="cfg-estoque-botox" placeholder="100" value="100"></div>
+        <div class="form-group"><label class="form-label">Preenchedor (ml)</label><input type="number" class="form-input" id="cfg-estoque-preen" placeholder="6" value="6"></div>
+        <div class="form-group"><label class="form-label">Bioestimulador (ml)</label><input type="number" class="form-input" id="cfg-estoque-bio" placeholder="3" value="3"></div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="salvarEstoqueMin()">Salvar</button>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">Integração Chatwoot</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+        Configure para ativar busca de contatos, auto-preenchimento e histórico de clientes.<br>
+        Token: <strong>Chatwoot → Perfil → Token de acesso</strong>
+      </div>
+      <div id="crm-cfg-badge" class="crm-cfg-badge" style="background:#fdeaea;color:#b52e2e">⬤ Desconectado</div>
+      <div class="form-group"><label class="form-label">URL da API</label>
+        <input class="form-input" id="cfg-crm-url" value="https://appv3.biodynk.com.br" placeholder="https://appv3.biodynk.com.br"></div>
+      <div class="form-group"><label class="form-label">API Access Token</label>
+        <input class="form-input" id="cfg-crm-token" type="password" placeholder="Cole seu token aqui"></div>
+      <div class="form-group"><label class="form-label">Account ID</label>
+        <input class="form-input" id="cfg-crm-account" value="1" placeholder="1"></div>
+      <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <button class="btn btn-primary btn-sm" onclick="salvarCRMConfig()">Salvar CRM</button>
+        <button class="btn btn-ghost btn-sm" onclick="testeCRM()">Testar conexão</button>
+        <span id="crm-test-status" style="font-size:11px;color:var(--muted)"></span>
+      </div>
+    </div>
+    <div class="card" style="margin-bottom:12px">
+      <div class="card-title">Alterar Senha de Login</div>
+      <div class="form-group"><label class="form-label">Senha Atual</label><input type="password" class="form-input" id="cfg-pass-old"></div>
+      <div class="form-row col-2">
+        <div class="form-group"><label class="form-label">Nova Senha</label><input type="password" class="form-input" id="cfg-pass-new"></div>
+        <div class="form-group"><label class="form-label">Confirmar</label><input type="password" class="form-input" id="cfg-pass-conf"></div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="alterarSenha()">Alterar</button>
+    </div>
+    <div class="card">
+      <div class="card-title">🔐 Senha Master</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:12px;line-height:1.6">
+        Senha exclusiva para: adicionar/editar ponteiras, recarregar disparos e editar sessões registradas.<br>
+        Padrão: <strong>biodynk@master</strong>
+      </div>
+      <div class="form-group"><label class="form-label">Senha Master Atual</label><input type="password" class="form-input" id="cfg-master-old"></div>
+      <div class="form-row col-2">
+        <div class="form-group"><label class="form-label">Nova Senha Master</label><input type="password" class="form-input" id="cfg-master-new"></div>
+        <div class="form-group"><label class="form-label">Confirmar</label><input type="password" class="form-input" id="cfg-master-conf"></div>
+      </div>
+      <button class="btn btn-primary btn-sm" onclick="alterarSenhaMaster()">Alterar Senha Master</button>
+    </div>
+  </div>
+</div>
+
+    </div></div><!-- /content /main -->
+  </div><!-- /body -->
+</div><!-- /app -->
+
+<!-- MODAL PROCEDIMENTO -->
+<div class="modal-overlay" id="modal-proc">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Registrar Procedimento</div><button class="modal-close" onclick="closeModal('modal-proc')">✕</button></div>
+
+    <!-- Card contato detectado via postMessage -->
+    <div class="crm-card" id="crm-card-ctx">
+      <div class="crm-card-header">
+        <div class="crm-card-avatar" id="crm-card-av">?</div>
+        <div><div class="crm-card-name" id="crm-card-name">—</div><div class="crm-card-sub" id="crm-card-sub"></div></div>
+      </div>
+      <button class="crm-use-btn" onclick="usarContatoCRMModal()">✓ Usar este cliente</button>
+    </div>
+
+    <!-- Busca API Chatwoot -->
+    <div class="crm-search-wrap" id="crm-search-wrap">
+      <div class="crm-search-label">⚡ Buscar contato no Chatwoot</div>
+      <div class="crm-search-inner">
+        <span class="crm-search-icon">🔍</span>
+        <input type="text" class="crm-search-input" id="crm-search-input" placeholder="Nome ou telefone..." autocomplete="off" oninput="crmSearchDebounced()">
+      </div>
+      <div class="crm-results" id="crm-results"></div>
+    </div>
+
+    <div class="form-group"><label class="form-label">Cliente</label><input class="form-input" id="mp-cliente" placeholder="Nome do cliente"></div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Tipo</label>
+        <select class="form-input" id="mp-tipo" onchange="mpTipoChange()">
+          <option value="botox">Botox</option><option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option>
+        </select></div>
+      <div class="form-group"><label class="form-label">Profissional</label>
+        <select class="form-input" id="mp-prof" onchange="mpCalc()"><option value="">Selecione...</option></select>
+      </div>
+    </div>
+    <div class="form-group"><label class="form-label">Produto</label><select class="form-input" id="mp-produto" onchange="mpCalc()"></select></div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label" id="mp-lbl">Consumo (UI)</label><input type="number" class="form-input" id="mp-consumo" step="0.5" value="20" oninput="mpCalc()"></div>
+      <div class="form-group"><label class="form-label">Tempo (min)</label><input type="number" class="form-input" id="mp-tempo" value="30" oninput="mpCalc()"></div>
+    </div>
+    <div class="form-group"><label class="form-label">Valor cobrado (R$)</label><input type="number" class="form-input" id="mp-cobrado" value="800" oninput="mpCalc()"></div>
+    <div class="calc-block">
+      <div class="calc-row"><span>Produto</span><span id="mp-cr-prod">—</span></div>
+      <div class="calc-row"><span>Sala</span><span id="mp-cr-sala">—</span></div>
+      <div class="calc-row"><span>Impostos + Taxas</span><span id="mp-cr-tax">—</span></div>
+      <div class="calc-row total"><span>Custo Total</span><span id="mp-cr-total">—</span></div>
+      <div class="calc-row profit" id="mp-profit-row"><span>Lucro</span><span id="mp-cr-lucro">—</span></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-proc')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="salvarProcedimento()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PRODUTO -->
+<div class="modal-overlay" id="modal-produto">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Cadastrar Produto</div><button class="modal-close" onclick="closeModal('modal-produto')">✕</button></div>
+    <div class="form-group"><label class="form-label">Nome</label><input class="form-input" id="prod-nome" placeholder="Ex: Botox Allergan"></div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Categoria</label>
+        <select class="form-input" id="prod-cat"><option value="botox">Botox</option><option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option></select></div>
+      <div class="form-group"><label class="form-label">Unidade</label>
+        <select class="form-input" id="prod-unidade"><option value="UI">UI</option><option value="ml">ml</option></select></div>
+    </div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Custo/unidade (R$)</label><input type="number" class="form-input" id="prod-custo" step="0.01" placeholder="0,00"></div>
+      <div class="form-group"><label class="form-label">Estoque</label><input type="number" class="form-input" id="prod-estoque" placeholder="0"></div>
+    </div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Lote</label><input class="form-input" id="prod-lote" placeholder="LOT001"></div>
+      <div class="form-group"><label class="form-label">Validade</label><input type="date" class="form-input" id="prod-validade"></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-produto')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="salvarProduto()">Cadastrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL PROFISSIONAL -->
+<div class="modal-overlay" id="modal-prof">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Cadastrar Profissional</div><button class="modal-close" onclick="closeModal('modal-prof')">✕</button></div>
+    <div class="form-group"><label class="form-label">Nome</label><input class="form-input" id="prf-nome" placeholder="Ex: Dra. Ana Paula"></div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Especialidade</label><input class="form-input" id="prf-esp" placeholder="Ex: Biomédica, Enfermeira"></div>
+      <div class="form-group"><label class="form-label">Comissão própria (%)</label><input type="number" class="form-input" id="prf-com" placeholder="Deixe vazio para usar padrão"></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-prof')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="salvarProfissional()">Cadastrar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL SESSÃO ULTRAFORMER -->
+<div class="modal-overlay" id="modal-uform">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Registrar Sessão Ultraformer</div><button class="modal-close" onclick="closeModal('modal-uform')">✕</button></div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-input" id="uf-data"></div>
+      <div class="form-group"><label class="form-label">Profissional</label><select class="form-input" id="uf-prof"><option value="">Selecione...</option></select></div>
+    </div>
+    <div class="form-group"><label class="form-label">Cliente</label><input class="form-input" id="uf-cliente" placeholder="Nome do cliente"></div>
+    <div class="form-group"><label class="form-label">Ponteira</label><select class="form-input" id="uf-pont" onchange="ufCalc()"><option value="">Selecione...</option></select></div>
+    <div class="form-group"><label class="form-label">Quantidade de disparos</label><input type="number" class="form-input" id="uf-disparos" value="100" min="1" oninput="ufCalc()"></div>
+    <div class="calc-block" id="uf-calc-block">
+      <div class="calc-row"><span>Custo (R$ 0,45/disparo)</span><span id="uf-cr-custo">—</span></div>
+      <div class="calc-row"><span>Receita (R$ 2,50/disparo)</span><span id="uf-cr-rec">—</span></div>
+      <div class="calc-row total"><span>Lucro</span><span id="uf-cr-lucro" style="color:var(--success)">—</span></div>
+      <div class="calc-row" style="margin-top:6px;font-size:11px;color:var(--muted)"><span>Vida útil restante após sessão</span><span id="uf-cr-resta">—</span></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-uform')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="salvarSessaoUF()">Salvar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL NOVA PONTEIRA -->
+<div class="modal-overlay" id="modal-pont">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">Cadastrar Ponteira</div><button class="modal-close" onclick="closeModal('modal-pont')">✕</button></div>
+    <div class="form-group"><label class="form-label">Nome da ponteira</label><input class="form-input" id="pont-nome" placeholder="Ex: DS4-3.0"></div>
+    <div class="form-row col-2">
+      <div class="form-group"><label class="form-label">Total de disparos</label><input type="number" class="form-input" id="pont-total" placeholder="100000"></div>
+      <div class="form-group"><label class="form-label">Vida útil atual</label><input type="number" class="form-input" id="pont-restante" placeholder="100000"></div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:16px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-pont')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="salvarPonteira()">Cadastrar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL EDIÇÃO SESSÃO UF (com senha) -->
+<div class="modal-overlay" id="modal-uform-edit">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">✏️ Editar Sessão</div><button class="modal-close" onclick="closeModal('modal-uform-edit')">✕</button></div>
+    <div style="background:#faeeda;border:1px solid #f4c95d;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#854f0b">
+      🔒 Alteração protegida. Informe a <strong>senha master</strong> para continuar.
+    </div>
+    <div class="form-group"><label class="form-label">Senha Master</label>
+      <input type="password" class="form-input" id="uf-edit-senha" placeholder="Sua senha master">
+    </div>
+    <div id="uf-edit-campos" style="display:none">
+      <div class="form-row col-2">
+        <div class="form-group"><label class="form-label">Data</label><input type="date" class="form-input" id="uf-edit-data"></div>
+        <div class="form-group"><label class="form-label">Profissional</label><select class="form-input" id="uf-edit-prof"></select></div>
+      </div>
+      <div class="form-group"><label class="form-label">Cliente</label><input class="form-input" id="uf-edit-cliente" placeholder="Nome do cliente"></div>
+      <div class="form-group"><label class="form-label">Ponteira</label><select class="form-input" id="uf-edit-pont" onchange="ufEditCalc()"></select></div>
+      <div class="form-group"><label class="form-label">Quantidade de disparos</label><input type="number" class="form-input" id="uf-edit-disparos" min="1" oninput="ufEditCalc()"></div>
+      <div class="calc-block">
+        <div class="calc-row"><span>Custo (R$ 0,45/disparo)</span><span id="uf-edit-custo">—</span></div>
+        <div class="calc-row"><span>Receita (R$ 2,50/disparo)</span><span id="uf-edit-rec">—</span></div>
+        <div class="calc-row total"><span>Lucro</span><span id="uf-edit-lucro" style="color:var(--success)">—</span></div>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-uform-edit')">Cancelar</button>
+      <button class="btn btn-primary btn-sm" id="uf-edit-verificar-btn" onclick="verificarSenhaUFEdit()" style="flex:1">Verificar senha</button>
+      <button class="btn btn-success btn-sm" id="uf-edit-salvar-btn" onclick="salvarEdicaoUF()" style="display:none;flex:1">Salvar alteração</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- MODAL RECARGA DISPAROS (senha master) -->
+<div class="modal-overlay" id="modal-recarga">
+  <div class="modal">
+    <div class="modal-header"><div class="modal-title">🔐 Recarregar Disparos</div><button class="modal-close" onclick="closeModal('modal-recarga')">✕</button></div>
+    <div style="background:#faeeda;border:1px solid #f4c95d;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#854f0b">
+      🔒 Função protegida. Informe a senha master para continuar.
+    </div>
+    <div class="form-group"><label class="form-label">Senha Master</label>
+      <input type="password" class="form-input" id="rec-senha" placeholder="Sua senha master">
+    </div>
+    <div id="rec-campos" style="display:none">
+      <div style="background:var(--crm-bg);border:1px solid var(--crm-border);border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:12px">
+        <div style="font-weight:600;color:var(--crm)" id="rec-pont-nome">—</div>
+        <div style="color:#2e7d52;margin-top:2px">Vida útil atual: <strong id="rec-pont-atual">—</strong> disparos</div>
+      </div>
+      <div class="form-group"><label class="form-label">Disparos a adicionar</label>
+        <input type="number" class="form-input" id="rec-qtd" placeholder="Ex: 12000" min="1" oninput="recCalc()">
+      </div>
+      <div style="font-size:12px;color:var(--muted);padding:8px 0">
+        Nova vida útil: <strong id="rec-nova-vida" style="color:var(--success)">—</strong>
+      </div>
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-recarga')">Cancelar</button>
+      <button class="btn btn-primary btn-sm" id="rec-verificar-btn" onclick="verificarSenhaMasterRecarga()" style="flex:1">Verificar senha</button>
+      <button class="btn btn-success btn-sm" id="rec-salvar-btn" onclick="salvarRecarga()" style="display:none;flex:1">✓ Recarregar</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL MASTER GATE (nova ponteira) -->
+<div class="modal-overlay" id="modal-master-gate">
+  <div class="modal" style="max-width:360px">
+    <div class="modal-header"><div class="modal-title">🔐 Acesso restrito</div><button class="modal-close" onclick="closeModal('modal-master-gate')">✕</button></div>
+    <div style="font-size:12px;color:var(--muted);margin-bottom:14px">Informe a senha master para acessar esta função.</div>
+    <div class="form-group"><label class="form-label">Senha Master</label>
+      <input type="password" class="form-input" id="gate-senha" placeholder="Senha master">
+    </div>
+    <div style="display:flex;gap:8px;margin-top:14px">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeModal('modal-master-gate')">Cancelar</button>
+      <button class="btn btn-primary" style="flex:1" onclick="verificarGateMaster()">Entrar</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONFIRM -->
+<div class="confirm-overlay" id="confirm-overlay">
+  <div class="confirm-box">
+    <div class="confirm-title" id="confirm-title">Confirmar</div>
+    <div class="confirm-text" id="confirm-text"></div>
+    <div class="confirm-actions">
+      <button class="btn btn-ghost" style="flex:1" onclick="closeConfirm()">Cancelar</button>
+      <button class="btn btn-danger" style="flex:1" id="confirm-ok-btn">Excluir</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"><span id="toast-msg"></span></div>
+
+<script>
+// ── DEFAULTS ──────────────────────────────────────────────
+const DEFAULT_USERS=[{user:'admin',pass:'!Controle1'},{user:'biomedica',pass:'iris2024'}];
+const DEFAULT_CFG={horaSala:84,gov:7,maq:10,comissao:10,meta:0,estoqueMin:20,senhaMaster:'biodynk@master',estoqueMinBotox:100,estoqueMinPreen:6,estoqueMinBio:3};
+const DEFAULT_PRODS=[
+  {id:1,nome:'Botox Allergan',cat:'botox',unidade:'UI',custo:4.20,estoque:200,lote:'LOT001',validade:'2025-06'},
+  {id:2,nome:'Botox Dysport',cat:'botox',unidade:'UI',custo:2.80,estoque:150,lote:'LOT002',validade:'2025-08'},
+  {id:3,nome:'Juvederm Ultra 1ml',cat:'preenchedor',unidade:'ml',custo:380,estoque:10,lote:'LOT003',validade:'2025-12'},
+  {id:4,nome:'Restylane 1ml',cat:'preenchedor',unidade:'ml',custo:290,estoque:8,lote:'LOT004',validade:'2026-01'},
+  {id:5,nome:'Sculptra',cat:'bioestimulador',unidade:'ml',custo:420,estoque:6,lote:'LOT005',validade:'2025-09'},
+  {id:6,nome:'Radiesse',cat:'bioestimulador',unidade:'ml',custo:350,estoque:5,lote:'LOT006',validade:'2026-03'},
+];
+const DEFAULT_PROFS=[{id:1,nome:'Dra. Castro',esp:'Biomédica',com:null},{id:2,nome:'Dra. Ana',esp:'Enfermeira',com:null}];
+const DEFAULT_PROCS=[
+  {id:1,data:'2025-06-10',cliente:'Mariana Costa',tipo:'botox',prodId:1,profId:1,consumo:20,tempo:30,cobrado:850,custoTotal:247.8,lucro:602.2},
+  {id:2,data:'2025-06-11',cliente:'Paula Andrade',tipo:'preenchedor',prodId:3,profId:2,consumo:1,tempo:45,cobrado:1200,custoTotal:662.8,lucro:537.2},
+  {id:3,data:'2025-06-12',cliente:'Renata Silva',tipo:'bioestimulador',prodId:5,profId:1,consumo:2,tempo:60,cobrado:1800,custoTotal:1116,lucro:684},
+];
+
+// ── STORAGE ───────────────────────────────────────────────
+function ls(k,d){try{const v=localStorage.getItem('bct3_'+k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function lss(k,v){try{localStorage.setItem('bct3_'+k,JSON.stringify(v));}catch(e){}}
+let users=DEFAULT_USERS,cfg=ls('cfg',DEFAULT_CFG),produtos=ls('produtos',DEFAULT_PRODS);
+let profissionais=ls('profissionais',DEFAULT_PROFS),procedimentos=ls('procs',DEFAULT_PROCS),nextId=ls('nextid',20);
+function saveAll(){lss('users',users);lss('cfg',cfg);lss('produtos',produtos);lss('profissionais',profissionais);lss('procs',procedimentos);lss('nextid',nextId);}
+function nid(){return nextId++;}
+
+// ── STATE ─────────────────────────────────────────────────
+let loggedUser=null,crmContactCtx=null,crmApiOk=false;
+let prodFiltro='todos',confirmCb=null,chartLucro=null,crmSearchTimer=null;
+const tipoLabel={botox:'Botox',preenchedor:'Preenchedor',bioestimulador:'Bioestimulador'};
+const tipoChip={botox:'chip-botox',preenchedor:'chip-preen',bioestimulador:'chip-bio'};
+
+// ── UTILS ─────────────────────────────────────────────────
+function brl(v){return(+v||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'})}
+function pct(v){return(+v||0).toFixed(1)+'%'}
+function initials(n){return(n||'?').split(' ').slice(0,2).map(w=>w[0]||'').join('').toUpperCase()||'?'}
+function showToast(msg,err=false){
+  const t=document.getElementById('toast');
+  document.getElementById('toast-msg').textContent=msg;
+  t.className='toast'+(err?' error':'');t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2800);
+}
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function openConfirm(title,text,cb){
+  document.getElementById('confirm-title').textContent=title;document.getElementById('confirm-text').textContent=text;
+  confirmCb=cb;document.getElementById('confirm-overlay').classList.add('open');
+}
+function closeConfirm(){document.getElementById('confirm-overlay').classList.remove('open');confirmCb=null;}
+document.getElementById('confirm-ok-btn').onclick=()=>{if(confirmCb)confirmCb();closeConfirm();};
+function filtrarPorData(l,di,ai){
+  const de=document.getElementById(di)?.value,ate=document.getElementById(ai)?.value;
+  return l.filter(p=>{if(de&&p.data<de)return false;if(ate&&p.data>ate)return false;return true;});
+}
+function filtrarPorDias(l,dias){
+  if(!dias||dias==0)return l;const lim=new Date();lim.setDate(lim.getDate()-parseInt(dias));
+  return l.filter(p=>p.data>=lim.toISOString().slice(0,10));
+}
+function calcCusto(tipo,prodId,consumo,tempo,cobrado,profId){
+  const prod=produtos.find(p=>p.id===prodId),prof=profissionais.find(p=>p.id===profId);
+  const custoProd=prod?(consumo*prod.custo):0,custoSala=(tempo/60)*cfg.horaSala;
+  const comPct=(prof&&prof.com!=null&&prof.com!=='')?parseFloat(prof.com):cfg.comissao;
+  const taxas=(cobrado*(cfg.gov+cfg.maq+comPct))/100,total=custoProd+custoSala+taxas,lucro=cobrado-total;
+  return{custoProd,custoSala,taxas,total,lucro,margem:cobrado>0?(lucro/cobrado*100):0};
+}
+
+// ── CRM: CONFIGURAÇÃO ─────────────────────────────────────
+function getCRMCfg(){
+  return{url:(localStorage.getItem('bct3_crmurl')||'').replace(/\/$/,''),
+    token:localStorage.getItem('bct3_crmtoken')||'',
+    account:localStorage.getItem('bct3_crmaccount')||'1'};
+}
+function setCRMStatus(ok,label){
+  crmApiOk=ok;
+  const pill=document.getElementById('crm-pill'),badge=document.getElementById('crm-cfg-badge');
+  if(ok){
+    if(pill){pill.className='crm-pill';pill.textContent='⬤ '+(label||'CRM conectado');}
+    if(badge){badge.style.background='#e8f7ee';badge.style.color='#2e7d52';badge.textContent='⬤ Conectado';}
+  }else{
+    if(pill){pill.className='crm-pill off';pill.textContent='⬤ CRM desconectado';}
+    if(badge){badge.style.background='#fdeaea';badge.style.color='#b52e2e';badge.textContent='⬤ Desconectado';}
+  }
+}
+
+// ── CRM: FETCH HELPER ─────────────────────────────────────
+async function crmFetch(path){
+  const{url,token,account}=getCRMCfg();
+  if(!url||!token)throw new Error('CRM não configurado');
+  // Dentro do iframe do Chatwoot usamos caminho relativo para evitar bloqueio CORS
+  const base=url||'';
+  const res=await fetch(base+path,{
+    method:'GET',
+    mode:'cors',
+    credentials:'include',
+    headers:{'api_access_token':token,'Content-Type':'application/json'}
+  });
+  if(!res.ok)throw new Error('HTTP '+res.status);
+  return res.json();
+}
+
+// ── CRM: BUSCA DE CONTATOS ────────────────────────────────
+function crmSearchDebounced(){clearTimeout(crmSearchTimer);crmSearchTimer=setTimeout(crmSearch,350);}
+async function crmSearch(){
+  const q=(document.getElementById('crm-search-input')?.value||'').trim();
+  const el=document.getElementById('crm-results');if(!el)return;
+  if(q.length<2){el.classList.remove('open');return;}
+  el.classList.add('open');el.innerHTML='<div class="crm-loading">Buscando...</div>';
+  try{
+    const{account}=getCRMCfg();
+    const data=await crmFetch('/api/v1/accounts/'+account+'/contacts/search?q='+encodeURIComponent(q)+'&page=1');
+    const contacts=(data.payload||[]).slice(0,8);
+    if(!contacts.length){el.innerHTML='<div class="crm-empty">Nenhum contato encontrado</div>';return;}
+    el.innerHTML=contacts.map(c=>{
+      const phone=c.phone_number||'',email=c.email||'';
+      const meta=[phone,email].filter(Boolean).join(' · ')||'Sem contato';
+      const nameEsc=(c.name||'').replace(/'/g,"\\'");
+      return `<div class="crm-result-item" onclick="selecionarContatoCRM(${c.id},'${nameEsc}','${phone}','${email}')">
+        <div class="crm-result-av">${initials(c.name)}</div>
+        <div><div class="crm-result-name">${c.name||'—'}</div><div class="crm-result-meta">${meta}</div></div>
+      </div>`;
+    }).join('');
+  }catch(e){el.innerHTML='<div class="crm-empty">Erro: '+e.message+'</div>';}
+}
+function selecionarContatoCRM(id,name,phone,email){
+  const cl=document.getElementById('mp-cliente');if(cl)cl.value=name;
+  document.getElementById('crm-results').classList.remove('open');
+  document.getElementById('crm-search-input').value='';
+  crmContactCtx={id,name,phone,email};
+  atualizarCRMCard(crmContactCtx);mpCalc();
+  showToast('✓ '+name+' selecionado');
+}
+
+// ── CRM: POSTMESSAGE ──────────────────────────────────────
+window.addEventListener('message',function(e){
+  try{
+    const d=e.data;if(!d)return;
+    let sender=null;
+    if(d.meta&&d.meta.sender)sender=d.meta.sender;
+    else if(d.sender)sender=d.sender;
+    else if(d.contact)sender=d.contact;
+    if(!sender||!sender.name)return;
+    crmContactCtx={name:sender.name||'',email:sender.email||'',phone:sender.phone_number||sender.phone||'',id:sender.id};
+    if(loggedUser)applyContextBanners();
+  }catch(e){}
+});
+function applyContextBanners(){
+  if(!crmContactCtx||!crmContactCtx.name)return;
+  const pill=document.getElementById('crm-pill');
+  if(pill){pill.className='crm-pill';pill.textContent='⚡ '+crmContactCtx.name;}
+  const bar=document.getElementById('crm-context-bar');
+  if(bar){
+    bar.style.display='flex';
+    document.getElementById('crm-ctx-av').textContent=initials(crmContactCtx.name);
+    document.getElementById('crm-ctx-name-bar').textContent=crmContactCtx.name;
+    const meta=[crmContactCtx.phone,crmContactCtx.email].filter(Boolean).join(' · ');
+    document.getElementById('crm-ctx-meta-bar').textContent=meta||'Chatwoot';
+  }
+}
+function atualizarCRMCard(ctx){
+  if(!ctx||!ctx.name)return;
+  const card=document.getElementById('crm-card-ctx');if(!card)return;
+  card.classList.add('visible');
+  document.getElementById('crm-card-av').textContent=initials(ctx.name);
+  document.getElementById('crm-card-name').textContent=ctx.name;
+  document.getElementById('crm-card-sub').textContent=[ctx.phone,ctx.email].filter(Boolean).join(' · ')||'Chatwoot';
+}
+function usarContatoCRM(){if(!crmContactCtx)return;openModal('modal-proc');setTimeout(()=>{document.getElementById('mp-cliente').value=crmContactCtx.name||'';mpTipoChange();mpCalc();},100);}
+function abrirProcParaContato(){usarContatoCRM();}
+function usarContatoCRMModal(){if(!crmContactCtx)return;document.getElementById('mp-cliente').value=crmContactCtx.name||'';mpCalc();}
+
+// ── CRM: HISTÓRICO NO DASHBOARD ───────────────────────────
+function verHistoricoCliente(){if(!crmContactCtx||!crmContactCtx.name)return;renderHistoricoCliente(crmContactCtx.name);nav('dashboard');}
+function renderHistoricoCliente(nomeCliente){
+  const card=document.getElementById('crm-hist-card');if(!card)return;
+  const nome=nomeCliente.toLowerCase();
+  const procs=procedimentos.filter(p=>p.cliente&&p.cliente.toLowerCase()===nome);
+  card.classList.add('visible');
+  document.getElementById('crm-hist-av').textContent=initials(nomeCliente);
+  document.getElementById('crm-hist-name').textContent=nomeCliente;
+  const ctx=crmContactCtx&&crmContactCtx.name&&crmContactCtx.name.toLowerCase()===nome?crmContactCtx:null;
+  document.getElementById('crm-hist-sub').textContent=ctx?[ctx.phone,ctx.email].filter(Boolean).join(' · ')||'Cliente Chatwoot':'Cliente';
+  const rec=procs.reduce((s,p)=>s+p.cobrado,0),luc=procs.reduce((s,p)=>s+p.lucro,0);
+  const ultimo=procs.length?new Date(procs[procs.length-1].data).toLocaleDateString('pt-BR'):'—';
+  document.getElementById('crm-hist-stats').innerHTML=`
+    <div class="crm-hist-stat"><div class="crm-hist-stat-label">Procedimentos</div><div class="crm-hist-stat-val">${procs.length}</div></div>
+    <div class="crm-hist-stat"><div class="crm-hist-stat-label">Receita total</div><div class="crm-hist-stat-val" style="font-size:13px">${brl(rec)}</div></div>
+    <div class="crm-hist-stat"><div class="crm-hist-stat-label">Último</div><div class="crm-hist-stat-val" style="font-size:11px">${ultimo}</div></div>`;
+  let html='';
+  if(!procs.length){html='<div style="color:#2e7d52;font-size:11px;opacity:.7">Nenhum procedimento registrado ainda.</div>';}
+  else{
+    html='<div class="crm-hist-procs-title">Histórico de procedimentos</div>';
+    procs.slice().reverse().forEach(p=>{
+      const prod=produtos.find(x=>x.id===p.prodId);
+      html+=`<div class="crm-hist-proc-row">
+        <span>${new Date(p.data).toLocaleDateString('pt-BR')} · <span class="chip ${tipoChip[p.tipo]}" style="font-size:9px">${tipoLabel[p.tipo]}</span>${prod?' · '+prod.nome:''}</span>
+        <span style="font-weight:600">${brl(p.cobrado)}</span></div>`;
+    });
+  }
+  document.getElementById('crm-hist-procs').innerHTML=html;
+}
+function fecharHistoricoCliente(){document.getElementById('crm-hist-card').classList.remove('visible');}
+
+// ── LOGIN / LOGOUT ────────────────────────────────────────
+function doLogin(){
+  const u=document.getElementById('login-user').value.trim(),p=document.getElementById('login-pass').value;
+  const found=users.find(x=>x.user===u&&x.pass===p);
+  if(found){
+    loggedUser=u;
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('app').style.display='flex';
+    document.getElementById('topbar-user').textContent=u;
+    document.getElementById('sidebar-user').textContent=u;
+    function setVal(id,v){const el=document.getElementById(id);if(el)el.value=v;}
+    setVal('cfg-hora',cfg.horaSala);setVal('cfg-gov',cfg.gov);setVal('cfg-maq',cfg.maq);setVal('cfg-com',cfg.comissao);
+    document.getElementById('cfg-meta').value=cfg.meta||'';
+    carregarConfigEstoque();
+    document.getElementById('login-err').style.display='none';
+    renderDashboard();carregarCRMConfig();testeCRMSilencioso();
+    if(crmContactCtx&&crmContactCtx.name)applyContextBanners();
+    function tentarContexto(n){
+      try{window.parent.postMessage('chatwoot-dashboard-app:fetch-info','*');}catch(e){}
+      if(crmContactCtx&&crmContactCtx.name){applyContextBanners();return;}
+      if(n<8)setTimeout(()=>tentarContexto(n+1),500);
+    }
+    tentarContexto(0);
+  }else{document.getElementById('login-err').style.display='block';}
+}
+function doLogout(){
+  loggedUser=null;
+  document.getElementById('login-screen').style.display='flex';document.getElementById('app').style.display='none';
+  document.getElementById('login-user').value='';document.getElementById('login-pass').value='';
+}
+document.getElementById('login-user').addEventListener('keydown',e=>{if(e.key==='Enter')document.getElementById('login-pass').focus();});
+document.getElementById('login-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin();});
+
+// ── NAV ───────────────────────────────────────────────────
+function nav(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n=>n.classList.toggle('active',n.getAttribute('onclick')?n.getAttribute('onclick').includes("'"+page+"'"):false));
+  if(page==='dashboard')renderDashboard();
+  if(page==='procedimentos')renderProcedimentos();
+  if(page==='produtos')renderProdutos();
+  if(page==='profissionais')renderProfissionais();
+  if(page==='calculadora'){populateProdSel('calc-produto','botox');calcUpdate();}
+  if(page==='relatorios')renderRelatorios();
+  if(page==='ultraformer'){renderUltraformer();}
+}
+
+// ── ESTOQUE ───────────────────────────────────────────────
+function checarEstoque(){
+  const limites={botox:cfg.estoqueMinBotox||100,preenchedor:cfg.estoqueMinPreen||6,bioestimulador:cfg.estoqueMinBio||3};
+  const baixos=produtos.filter(p=>p.estoque<=limites[p.cat]);
+  const msg=baixos.length?'⚠️ Estoque baixo: '+baixos.map(p=>`<strong>${p.nome}</strong> (${p.estoque} ${p.unidade})`).join(', '):'';
+  ['alert-estoque','alerta-estoque-prod'].forEach(id=>{const el=document.getElementById(id);if(!el)return;el.style.display=msg?'block':'none';if(msg)el.innerHTML=msg;});
+}
+
+// ── DASHBOARD ─────────────────────────────────────────────
+function renderDashboard(){
+  checarEstoque();
+  const dias=parseInt(document.getElementById('dash-periodo')?.value||30);
+  const procs=filtrarPorDias(procedimentos,dias);
+  document.getElementById('dash-date').textContent='Referência: '+new Date().toLocaleDateString('pt-BR',{month:'long',year:'numeric'});
+  const rec=procs.reduce((s,p)=>s+p.cobrado,0),cus=procs.reduce((s,p)=>s+p.custoTotal,0),luc=procs.reduce((s,p)=>s+p.lucro,0),mar=rec>0?((luc/rec)*100):0;
+  document.getElementById('dash-lucro').textContent=brl(luc);document.getElementById('dash-lucro-sub').textContent=procs.length+' procedimentos no período';
+  document.getElementById('dash-rec').textContent=brl(rec);document.getElementById('dash-cus').textContent=brl(cus);
+  document.getElementById('dash-mar').textContent=pct(mar);document.getElementById('dash-cnt').textContent=procs.length;
+  const meta=parseFloat(cfg.meta)||0,mw=document.getElementById('meta-bar-wrap');
+  if(meta>0&&mw){
+    mw.style.display='block';const pm=Math.min(100,(luc/meta)*100);
+    document.getElementById('meta-bar-fill').style.width=pm+'%';document.getElementById('meta-pct-label').textContent=pm.toFixed(0)+'% da meta';
+    document.getElementById('meta-falta').textContent=luc<meta?'Faltam '+brl(meta-luc)+' para atingir a meta':'✓ Meta atingida!';
+    document.getElementById('meta-bar-fill').style.background=pm>=100?'#4caf7d':pm>=60?'#f4c95d':'#e8b4b8';
+  }else if(mw)mw.style.display='none';
+  renderChartLucro(procs,dias);
+  let ht='';
+  ['botox','preenchedor','bioestimulador'].forEach(t=>{
+    const ps=procs.filter(p=>p.tipo===t);
+    if(!ps.length){ht+=`<div style="padding:8px 0;border-bottom:1px solid var(--border);display:flex;justify-content:space-between"><span class="chip ${tipoChip[t]}">${tipoLabel[t]}</span><span style="font-size:11px;color:var(--muted)">Sem dados</span></div>`;return;}
+    const r=ps.reduce((s,p)=>s+p.cobrado,0),l=ps.reduce((s,p)=>s+p.lucro,0),m=r>0?((l/r)*100):0,bar=Math.max(0,Math.min(100,m));
+    ht+=`<div style="padding:8px 0;border-bottom:1px solid var(--border)">
+      <div style="display:flex;justify-content:space-between;margin-bottom:4px"><span class="chip ${tipoChip[t]}">${tipoLabel[t]}</span><span style="font-size:12px;font-weight:500">${brl(l)}</span></div>
+      <div class="progress-wrap"><div class="progress-bar" style="background:var(--success);width:${bar}%"></div></div>
+      <div style="font-size:10px;color:var(--muted);margin-top:2px">${ps.length} proc · margem ${pct(m)}</div></div>`;
+  });
+  document.getElementById('dash-por-tipo').innerHTML=ht;
+  let hu='';
+  procs.slice(-5).reverse().forEach(p=>{
+    const prof=profissionais.find(x=>x.id===p.profId);
+    const nameEsc=p.cliente.replace(/'/g,"\\'");
+    hu+=`<div style="display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border)">
+      <div>
+        <div style="font-size:12px;font-weight:500;cursor:pointer;color:var(--brand)" onclick="renderHistoricoCliente('${nameEsc}')" title="Ver histórico">${p.cliente}</div>
+        <div style="font-size:10px;color:var(--muted)">${new Date(p.data).toLocaleDateString('pt-BR')} · <span class="chip ${tipoChip[p.tipo]}">${tipoLabel[p.tipo]}</span>${prof?` · <span class="prof-tag">${prof.nome}</span>`:''}</div>
+      </div>
+      <div style="text-align:right"><div style="font-size:12px;font-weight:600;color:${p.lucro>=0?'var(--success)':'var(--danger)'}">${brl(p.lucro)}</div><div style="font-size:10px;color:var(--muted)">${brl(p.cobrado)}</div></div></div>`;
+  });
+  document.getElementById('dash-ultimos').innerHTML=hu||'<div style="padding:16px;text-align:center;color:var(--muted);font-size:12px">Sem procedimentos</div>';
+}
+function renderChartLucro(procs,dias){
+  const ctx=document.getElementById('chart-lucro');if(!ctx)return;
+  const n=dias>0?Math.min(dias,30):30,labels=[],data=[];
+  for(let i=n-1;i>=0;i--){const d=new Date();d.setDate(d.getDate()-i);const s=d.toISOString().slice(0,10);
+    labels.push(d.toLocaleDateString('pt-BR',{day:'2-digit',month:'2-digit'}));
+    data.push(parseFloat(procs.filter(p=>p.data===s).reduce((a,p)=>a+p.lucro,0).toFixed(2)));}
+  if(chartLucro)chartLucro.destroy();
+  chartLucro=new Chart(ctx,{type:'line',data:{labels,datasets:[{label:'Lucro',data,borderColor:'#4caf7d',backgroundColor:'rgba(76,175,125,0.08)',borderWidth:2,pointRadius:3,pointBackgroundColor:'#4caf7d',tension:.4,fill:true}]},
+    options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>brl(c.raw)}}},
+      scales:{x:{grid:{display:false},ticks:{font:{size:9},maxTicksLimit:8}},y:{grid:{color:'rgba(0,0,0,0.05)'},ticks:{font:{size:9},callback:v=>brl(v)}}}}});
+}
+
+// ── PROCEDIMENTOS ─────────────────────────────────────────
+function limparFiltroProc(){['proc-de','proc-ate'].forEach(id=>document.getElementById(id).value='');document.getElementById('proc-tipo-filtro').value='';renderProcedimentos();}
+function renderProcedimentos(){
+  let lista=filtrarPorData(procedimentos,'proc-de','proc-ate');
+  const tipo=document.getElementById('proc-tipo-filtro')?.value;if(tipo)lista=lista.filter(p=>p.tipo===tipo);
+  let html='';
+  if(!lista.length)html='<tr><td colspan="10" style="text-align:center;padding:24px;color:var(--muted)">Nenhum procedimento encontrado</td></tr>';
+  else lista.slice().reverse().forEach(p=>{
+    const prod=produtos.find(x=>x.id===p.prodId),prof=profissionais.find(x=>x.id===p.profId);
+    const ne=p.cliente.replace(/'/g,"\\'");
+    html+=`<tr>
+      <td class="td-muted">${new Date(p.data).toLocaleDateString('pt-BR')}</td>
+      <td style="font-weight:500;cursor:pointer;color:var(--brand)" onclick="renderHistoricoCliente('${ne}');nav('dashboard')" title="Ver histórico">${p.cliente}</td>
+      <td><span class="chip ${tipoChip[p.tipo]}">${tipoLabel[p.tipo]}</span></td>
+      <td>${prof?`<span class="prof-tag">${prof.nome}</span>`:'<span class="td-muted">—</span>'}</td>
+      <td class="td-muted" style="font-size:11px">${prod?prod.nome:'—'}</td>
+      <td class="td-muted">${p.consumo} ${prod?prod.unidade:'?'}</td>
+      <td style="font-weight:500">${brl(p.cobrado)}</td><td>${brl(p.custoTotal)}</td>
+      <td style="font-weight:600;color:${p.lucro>=0?'var(--success)':'var(--danger)'}">${brl(p.lucro)}</td>
+      <td><button class="btn-icon" onclick="editarProc(${p.id})" title="Editar">✏️</button> <button class="btn-icon" onclick="excluirProc(${p.id})">🗑</button></td></tr>`;
+  });
+  document.getElementById('proc-tbody').innerHTML=html;
+  const rec=lista.reduce((s,p)=>s+p.cobrado,0),cus=lista.reduce((s,p)=>s+p.custoTotal,0),luc=lista.reduce((s,p)=>s+p.lucro,0);
+  document.getElementById('proc-total-bar').innerHTML=`<span style="font-size:11px;color:var(--muted)">${lista.length} procedimentos</span><span>Receita: <strong>${brl(rec)}</strong></span><span>Custo: <strong>${brl(cus)}</strong></span><span style="color:var(--success);font-weight:600">Lucro: ${brl(luc)}</span>`;
+}
+function excluirProc(id){const p=procedimentos.find(x=>x.id===id);if(!p)return;
+  openConfirm('Excluir procedimento','Excluir procedimento de '+p.cliente+'?',()=>{procedimentos=procedimentos.filter(x=>x.id!==id);saveAll();renderProcedimentos();renderDashboard();showToast('Procedimento excluído');});}
+
+// ── PRODUTOS ──────────────────────────────────────────────
+function populateProdSel(sid,tipo){const sel=document.getElementById(sid);if(!sel)return;const ps=produtos.filter(p=>p.cat===tipo);sel.innerHTML=ps.length?ps.map(p=>`<option value="${p.id}">${p.nome} (${brl(p.custo)}/${p.unidade})</option>`).join(''):'<option value="">— nenhum produto —</option>';}
+function renderProdutos(){
+  checarEstoque();
+  const corBg={botox:'#e8f4ff',preenchedor:'#fde8f7',bioestimulador:'#e8f7ef'};
+  const cor={botox:'#185fa5',preenchedor:'#8b2565',bioestimulador:'#1a6b3c'};
+  const filt=prodFiltro==='todos'?produtos:produtos.filter(p=>p.cat===prodFiltro);
+  let html='';
+  filt.forEach(p=>{
+    const usados=procedimentos.filter(x=>x.prodId===p.id).reduce((s,x)=>s+x.consumo,0),baixo=p.estoque<=(cfg.estoqueMin||20);
+    html+=`<div class="card" style="position:relative${baixo?';border-color:#f7c1c1':''}">
+      <button class="btn-icon" style="position:absolute;top:8px;right:8px" onclick="excluirProd(${p.id})">🗑</button>
+      <div style="margin-bottom:8px"><div style="font-weight:600;font-size:12px;margin-bottom:3px;padding-right:22px">${p.nome}</div>
+      <span style="background:${corBg[p.cat]};color:${cor[p.cat]};font-size:9px;padding:2px 7px;border-radius:10px;font-weight:500">${tipoLabel[p.cat]}</span>
+      ${baixo?'<span style="background:#fdeaea;color:#b52e2e;font-size:9px;padding:2px 7px;border-radius:10px;font-weight:500;margin-left:4px">⚠️ Baixo</span>':''}</div>
+      <div style="font-size:16px;font-weight:700;font-family:var(--font-head);margin-bottom:8px">${brl(p.custo)}<span style="font-size:10px;color:var(--muted);font-family:var(--font-body)">/${p.unidade}</span></div>
+      <div style="border-top:1px solid var(--border);padding-top:7px;display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px">
+        <div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Estoque</div><div style="font-weight:600;color:${baixo?'var(--danger)':'inherit'}">${p.estoque} ${p.unidade}</div></div>
+        <div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Usado</div><div style="font-weight:600">${usados.toFixed(1)} ${p.unidade}</div></div>
+        <div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Lote</div><div>${p.lote||'—'}</div></div>
+        <div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Validade</div><div>${p.validade||'—'}</div></div>
+      </div></div>`;
+  });
+  document.getElementById('produtos-grid').innerHTML=html||'<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted)">Nenhum produto</div>';
+}
+function excluirProd(id){const p=produtos.find(x=>x.id===id);openConfirm('Excluir produto','Excluir "'+p.nome+'"?',()=>{produtos=produtos.filter(x=>x.id!==id);saveAll();renderProdutos();showToast('Produto excluído');});}
+function filterProd(cat,el){prodFiltro=cat;document.querySelectorAll('.tabs .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderProdutos();}
+function salvarProduto(){
+  const nome=document.getElementById('prod-nome').value.trim();if(!nome){showToast('Informe o nome',true);return;}
+  const custo=parseFloat(document.getElementById('prod-custo').value)||0;if(!custo){showToast('Informe o custo',true);return;}
+  produtos.push({id:nid(),nome,cat:document.getElementById('prod-cat').value,unidade:document.getElementById('prod-unidade').value,custo,estoque:parseFloat(document.getElementById('prod-estoque').value)||0,lote:document.getElementById('prod-lote').value||'—',validade:document.getElementById('prod-validade').value||null});
+  saveAll();closeModal('modal-produto');showToast('Produto cadastrado!');renderProdutos();
+  ['prod-nome','prod-custo','prod-estoque','prod-lote','prod-validade'].forEach(id=>document.getElementById(id).value='');
+}
+
+// ── PROFISSIONAIS ─────────────────────────────────────────
+function populateProfSel(sid){const sel=document.getElementById(sid);if(!sel)return;sel.innerHTML='<option value="">Selecione...</option>'+profissionais.map(p=>`<option value="${p.id}">${p.nome}${p.esp?' · '+p.esp:''}</option>`).join('');}
+function renderProfissionais(){
+  let html='';
+  profissionais.forEach(p=>{
+    const procs=procedimentos.filter(x=>x.profId===p.id),luc=procs.reduce((s,x)=>s+x.lucro,0);
+    const com=(p.com!=null&&p.com!=='')?p.com+'%':cfg.comissao+'% (padrão)';
+    html+=`<div class="card" style="position:relative">
+      <button class="btn-icon" style="position:absolute;top:8px;right:8px" onclick="excluirProf(${p.id})">🗑</button>
+      <div style="width:36px;height:36px;border-radius:50%;background:#f0eeff;display:flex;align-items:center;justify-content:center;font-family:var(--font-head);font-weight:700;font-size:14px;color:#4a3fa5;margin-bottom:8px">${p.nome.charAt(0).toUpperCase()}</div>
+      <div style="font-weight:600;font-size:13px;margin-bottom:2px;padding-right:22px">${p.nome}</div>
+      <div style="font-size:11px;color:var(--muted);margin-bottom:8px">${p.esp||'—'}</div>
+      <div style="border-top:1px solid var(--border);padding-top:8px;display:grid;grid-template-columns:1fr 1fr;gap:5px;font-size:11px">
+        <div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Procedimentos</div><div style="font-weight:600">${procs.length}</div></div>
+        <div><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Lucro gerado</div><div style="font-weight:600;color:var(--success)">${brl(luc)}</div></div>
+        <div style="grid-column:1/-1"><div style="font-size:8px;color:var(--muted);text-transform:uppercase;letter-spacing:1px">Comissão</div><div>${com}</div></div>
+      </div></div>`;
+  });
+  document.getElementById('prof-grid').innerHTML=html||'<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted)">Nenhum profissional cadastrado</div>';
+}
+function salvarProfissional(){
+  const nome=document.getElementById('prf-nome').value.trim();if(!nome){showToast('Informe o nome',true);return;}
+  const com=document.getElementById('prf-com').value;
+  profissionais.push({id:nid(),nome,esp:document.getElementById('prf-esp').value.trim(),com:com!==''?parseFloat(com):null});
+  saveAll();closeModal('modal-prof');showToast('Profissional cadastrado!');renderProfissionais();populateProfSel('mp-prof');
+  ['prf-nome','prf-esp','prf-com'].forEach(id=>document.getElementById(id).value='');
+}
+function excluirProf(id){const p=profissionais.find(x=>x.id===id);openConfirm('Excluir profissional','Excluir "'+p.nome+'"?',()=>{profissionais=profissionais.filter(x=>x.id!==id);saveAll();renderProfissionais();populateProfSel('mp-prof');showToast('Profissional excluído');});}
+
+// ── CALCULADORA ───────────────────────────────────────────
+function calcUpdate(){
+  const tipo=document.getElementById('calc-tipo').value;populateProdSel('calc-produto',tipo);
+  document.getElementById('calc-lbl').textContent='Consumo ('+(tipo==='botox'?'UI':'ml')+')';
+  const prodId=parseInt(document.getElementById('calc-produto').value),consumo=parseFloat(document.getElementById('calc-consumo').value)||0;
+  const tempo=parseFloat(document.getElementById('calc-tempo').value)||0,cobrado=parseFloat(document.getElementById('calc-cobrado').value)||0;
+  const r=calcCusto(tipo,prodId,consumo,tempo,cobrado,null);
+  document.getElementById('cr-prod').textContent=brl(r.custoProd);document.getElementById('cr-sala').textContent=brl(r.custoSala);
+  document.getElementById('cr-gp').textContent=cfg.gov;document.getElementById('cr-mp').textContent=cfg.maq;document.getElementById('cr-cp').textContent=cfg.comissao;
+  document.getElementById('cr-gov').textContent=brl(cobrado*cfg.gov/100);document.getElementById('cr-maq').textContent=brl(cobrado*cfg.maq/100);document.getElementById('cr-com').textContent=brl(cobrado*cfg.comissao/100);
+  document.getElementById('cr-total').textContent=brl(r.total);document.getElementById('cr-lucro').textContent=brl(r.lucro);
+  document.getElementById('cr-row').className='calc-row profit'+(r.lucro<0?' neg':'');
+  document.getElementById('calc-bar').style.cssText=`background:${r.margem>=30?'var(--success)':r.margem>=10?'#f4c95d':'var(--danger)'};width:${Math.max(0,Math.min(100,r.margem))}%`;
+  document.getElementById('calc-pct').textContent=pct(r.margem);
+}
+function openProcFromCalc(){
+  openModal('modal-proc');const tipo=document.getElementById('calc-tipo').value;
+  document.getElementById('mp-tipo').value=tipo;mpTipoChange();
+  document.getElementById('mp-consumo').value=document.getElementById('calc-consumo').value;
+  document.getElementById('mp-tempo').value=document.getElementById('calc-tempo').value;
+  document.getElementById('mp-cobrado').value=document.getElementById('calc-cobrado').value;
+  if(crmContactCtx)document.getElementById('mp-cliente').value=crmContactCtx.name||'';mpCalc();
+}
+
+// ── MODAL PROC ────────────────────────────────────────────
+function mpTipoChange(){const tipo=document.getElementById('mp-tipo').value;populateProdSel('mp-produto',tipo);document.getElementById('mp-lbl').textContent='Consumo ('+(tipo==='botox'?'UI':'ml')+')';mpCalc();}
+function mpCalc(){
+  const tipo=document.getElementById('mp-tipo').value,prodId=parseInt(document.getElementById('mp-produto').value);
+  const consumo=parseFloat(document.getElementById('mp-consumo').value)||0,tempo=parseFloat(document.getElementById('mp-tempo').value)||0;
+  const cobrado=parseFloat(document.getElementById('mp-cobrado').value)||0,profId=parseInt(document.getElementById('mp-prof').value)||null;
+  const r=calcCusto(tipo,prodId,consumo,tempo,cobrado,profId);
+  document.getElementById('mp-cr-prod').textContent=brl(r.custoProd);document.getElementById('mp-cr-sala').textContent=brl(r.custoSala);
+  document.getElementById('mp-cr-tax').textContent=brl(r.taxas);document.getElementById('mp-cr-total').textContent=brl(r.total);
+  document.getElementById('mp-cr-lucro').textContent=brl(r.lucro);
+  document.getElementById('mp-profit-row').className='calc-row profit'+(r.lucro<0?' neg':'');
+}
+function salvarProcedimento(){
+  const cliente=document.getElementById('mp-cliente').value.trim();if(!cliente){showToast('Informe o cliente',true);return;}
+  const prodId=parseInt(document.getElementById('mp-produto').value);if(!prodId||isNaN(prodId)){showToast('Selecione um produto',true);return;}
+  const tipo=document.getElementById('mp-tipo').value,profId=parseInt(document.getElementById('mp-prof').value)||null;
+  const consumo=parseFloat(document.getElementById('mp-consumo').value)||0,tempo=parseFloat(document.getElementById('mp-tempo').value)||0;
+  const cobrado=parseFloat(document.getElementById('mp-cobrado').value)||0,r=calcCusto(tipo,prodId,consumo,tempo,cobrado,profId);
+  procedimentos.push({id:nid(),data:new Date().toISOString().slice(0,10),cliente,tipo,prodId,profId,consumo,tempo,cobrado,custoTotal:r.total,lucro:r.lucro});
+  const prod=produtos.find(p=>p.id===prodId);if(prod)prod.estoque=Math.max(0,prod.estoque-consumo);
+  saveAll();closeModal('modal-proc');showToast('Procedimento salvo!');renderDashboard();renderProcedimentos();
+  document.getElementById('mp-cliente').value='';document.getElementById('crm-search-input').value='';document.getElementById('crm-results').classList.remove('open');
+}
+
+// ── CONFIG ────────────────────────────────────────────────
+function salvarConfig(){cfg.horaSala=parseFloat(document.getElementById('cfg-hora').value)||84;cfg.gov=parseFloat(document.getElementById('cfg-gov').value)||7;cfg.maq=parseFloat(document.getElementById('cfg-maq').value)||10;cfg.comissao=parseFloat(document.getElementById('cfg-com').value)||10;saveAll();showToast('Configurações salvas!');}
+function salvarMeta(){cfg.meta=parseFloat(document.getElementById('cfg-meta').value)||0;saveAll();showToast('Meta salva!');renderDashboard();}
+function carregarConfigEstoque(){
+  const b=document.getElementById('cfg-estoque-botox');if(b)b.value=cfg.estoqueMinBotox||100;
+  const p=document.getElementById('cfg-estoque-preen');if(p)p.value=cfg.estoqueMinPreen||6;
+  const bi=document.getElementById('cfg-estoque-bio');if(bi)bi.value=cfg.estoqueMinBio||3;
+}
+function salvarEstoqueMin(){
+  cfg.estoqueMinBotox=parseFloat(document.getElementById('cfg-estoque-botox').value)||100;
+  cfg.estoqueMinPreen=parseFloat(document.getElementById('cfg-estoque-preen').value)||6;
+  cfg.estoqueMinBio=parseFloat(document.getElementById('cfg-estoque-bio').value)||3;
+  saveAll();showToast('Alertas de estoque salvos!');checarEstoque();
+}
+function alterarSenha(){
+  const old=document.getElementById('cfg-pass-old').value,nw=document.getElementById('cfg-pass-new').value,cf=document.getElementById('cfg-pass-conf').value;
+  const u=users.find(x=>x.user===loggedUser&&x.pass===old);
+  if(!u){showToast('Senha atual incorreta',true);return;}if(nw.length<4){showToast('Mínimo 4 caracteres',true);return;}if(nw!==cf){showToast('Senhas não coincidem',true);return;}
+  u.pass=nw;saveAll();showToast('Senha alterada!');['cfg-pass-old','cfg-pass-new','cfg-pass-conf'].forEach(id=>document.getElementById(id).value='');
+}
+
+// ── RELATÓRIOS ────────────────────────────────────────────
+function limparFiltroRel(){['rel-de','rel-ate'].forEach(id=>document.getElementById(id).value='');renderRelatorios();}
+function renderRelatorios(){
+  const lista=filtrarPorData(procedimentos,'rel-de','rel-ate');
+  const rec=lista.reduce((s,p)=>s+p.cobrado,0),cus=lista.reduce((s,p)=>s+p.custoTotal,0),luc=lista.reduce((s,p)=>s+p.lucro,0);
+  document.getElementById('rel-summary').innerHTML=`<div class="metric-card"><div class="metric-label">Receita</div><div class="metric-value">${brl(rec)}</div></div><div class="metric-card"><div class="metric-label">Custo</div><div class="metric-value">${brl(cus)}</div></div><div class="metric-card"><div class="metric-label">Lucro</div><div class="metric-value" style="color:var(--success)">${brl(luc)}</div></div>`;
+  let th='<table><thead><tr><th>Tipo</th><th>Qtd</th><th>Receita</th><th>Custo Médio</th><th>Lucro</th><th>Margem</th></tr></thead><tbody>';
+  ['botox','preenchedor','bioestimulador'].forEach(t=>{const ps=lista.filter(p=>p.tipo===t);if(!ps.length){th+=`<tr><td>${tipoLabel[t]}</td><td colspan="5" class="td-muted">Sem dados</td></tr>`;return;}const r=ps.reduce((s,p)=>s+p.cobrado,0),c=ps.reduce((s,p)=>s+p.custoTotal,0),l=ps.reduce((s,p)=>s+p.lucro,0),m=r>0?((l/r)*100):0;th+=`<tr><td style="font-weight:500">${tipoLabel[t]}</td><td>${ps.length}</td><td>${brl(r)}</td><td>${brl(c/ps.length)}</td><td style="color:var(--success);font-weight:600">${brl(l)}</td><td><span class="mbadge ${m>=30?'mbadge-g':m>=10?'mbadge-a':'mbadge-r'}">${pct(m)}</span></td></tr>`;});
+  th+='</tbody></table>';document.getElementById('rel-por-tipo').innerHTML=th;
+  let ph='<table><thead><tr><th>Profissional</th><th>Procedimentos</th><th>Receita</th><th>Lucro</th><th>Margem</th></tr></thead><tbody>';
+  profissionais.forEach(prof=>{const ps=lista.filter(p=>p.profId===prof.id);if(!ps.length){ph+=`<tr><td style="font-weight:500">${prof.nome}</td><td colspan="4" class="td-muted">Sem procedimentos</td></tr>`;return;}const r=ps.reduce((s,p)=>s+p.cobrado,0),l=ps.reduce((s,p)=>s+p.lucro,0),m=r>0?((l/r)*100):0;ph+=`<tr><td style="font-weight:500">${prof.nome}<br><span style="font-size:10px;color:var(--muted)">${prof.esp||''}</span></td><td>${ps.length}</td><td>${brl(r)}</td><td style="color:var(--success);font-weight:600">${brl(l)}</td><td><span class="mbadge ${m>=30?'mbadge-g':m>=10?'mbadge-a':'mbadge-r'}">${pct(m)}</span></td></tr>`;});
+  ph+='</tbody></table>';document.getElementById('rel-por-prof').innerHTML=ph;
+  let ch='<table><thead><tr><th>Produto</th><th>Tipo</th><th>Usos</th><th>Total usado</th><th>Custo insumo</th></tr></thead><tbody>';
+  produtos.forEach(p=>{const ps=lista.filter(x=>x.prodId===p.id);if(!ps.length)return;const tot=ps.reduce((s,x)=>s+x.consumo,0);ch+=`<tr><td style="font-weight:500">${p.nome}</td><td class="td-muted">${tipoLabel[p.cat]}</td><td>${ps.length}</td><td>${tot.toFixed(1)} ${p.unidade}</td><td>${brl(tot*p.custo)}</td></tr>`;});
+  ch+='</tbody></table>';document.getElementById('rel-consumo').innerHTML=ch;
+}
+function exportarPDF(){
+  const de=document.getElementById('rel-de').value,ate=document.getElementById('rel-ate').value;
+  const lista=filtrarPorData(procedimentos,'rel-de','rel-ate');
+  const rec=lista.reduce((s,p)=>s+p.cobrado,0),cus=lista.reduce((s,p)=>s+p.custoTotal,0),luc=lista.reduce((s,p)=>s+p.lucro,0);
+  const w=window.open('','_blank');
+  w.document.write(`<html><head><title>Relatório Biodynk</title><style>body{font-family:Arial,sans-serif;padding:32px;color:#1a1a2e;font-size:13px}h1{font-size:20px;margin-bottom:4px}h2{font-size:14px;margin:20px 0 8px;border-bottom:1px solid #ddd;padding-bottom:4px}table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px}th{background:#f7f5f2;padding:7px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px}td{padding:7px 10px;border-bottom:1px solid #eee}.sum{display:flex;gap:32px;margin-bottom:20px}.sum-label{font-size:10px;color:#888;text-transform:uppercase}.sum-val{font-size:20px;font-weight:700}.lucro{color:#4caf7d}</style></head><body><h1>Biodynk · Relatório Financeiro</h1><p style="color:#888;font-size:12px">Período: ${de||'início'} até ${ate||'hoje'} · Gerado em ${new Date().toLocaleDateString('pt-BR')}</p><div class="sum"><div><div class="sum-label">Receita</div><div class="sum-val">${brl(rec)}</div></div><div><div class="sum-label">Custo</div><div class="sum-val">${brl(cus)}</div></div><div><div class="sum-label">Lucro</div><div class="sum-val lucro">${brl(luc)}</div></div></div><h2>Procedimentos</h2><table><thead><tr><th>Data</th><th>Cliente</th><th>Tipo</th><th>Profissional</th><th>Cobrado</th><th>Custo</th><th>Lucro</th></tr></thead><tbody>${lista.slice().reverse().map(p=>{const prof=profissionais.find(x=>x.id===p.profId);return `<tr><td>${new Date(p.data).toLocaleDateString('pt-BR')}</td><td>${p.cliente}</td><td>${tipoLabel[p.tipo]}</td><td>${prof?prof.nome:'—'}</td><td>${brl(p.cobrado)}</td><td>${brl(p.custoTotal)}</td><td style="color:${p.lucro>=0?'#4caf7d':'#e05252'};font-weight:600">${brl(p.lucro)}</td></tr>`;}).join('')}</tbody></table></body></html>`);
+  w.document.close();setTimeout(()=>w.print(),500);
+}
+
+// ── CRM CONFIG / TESTE ────────────────────────────────────
+function salvarCRMConfig(){
+  const url=(document.getElementById('cfg-crm-url').value||'').replace(/\/$/,'');
+  localStorage.setItem('bct3_crmurl',url);localStorage.setItem('bct3_crmtoken',document.getElementById('cfg-crm-token').value.trim());localStorage.setItem('bct3_crmaccount',document.getElementById('cfg-crm-account').value.trim()||'1');
+  showToast('Configuração CRM salva!');testeCRMSilencioso();
+}
+function carregarCRMConfig(){
+  const url=localStorage.getItem('bct3_crmurl'),token=localStorage.getItem('bct3_crmtoken'),account=localStorage.getItem('bct3_crmaccount');
+  if(url)document.getElementById('cfg-crm-url').value=url;if(token)document.getElementById('cfg-crm-token').value=token;if(account)document.getElementById('cfg-crm-account').value=account;
+}
+async function testeCRM(){
+  const s=document.getElementById('crm-test-status');s.textContent='Testando...';s.style.color='var(--muted)';
+  const{url,token,account}=getCRMCfg();
+  if(!url||!token){s.textContent='Configure URL e token primeiro';s.style.color='var(--danger)';return;}
+  try{
+    await crmFetch('/api/v1/accounts/'+account+'/contacts/search?q=test&page=1');
+    setCRMStatus(true,'CRM conectado');s.textContent='✓ API autenticada e funcionando';s.style.color='var(--success)';showToast('Chatwoot conectado!');
+  }catch(e){
+    if(e.message&&e.message.includes('401'))s.textContent='✗ Token inválido (401)';
+    else if(e.message&&e.message.includes('404'))s.textContent='✗ Account ID errado (404)';
+    else s.textContent='✗ Erro: '+e.message;
+    s.style.color='var(--danger)';setCRMStatus(false);
+  }
+}
+async function testeCRMSilencioso(){
+  const{url,token,account}=getCRMCfg();if(!url||!token)return;
+  try{await crmFetch('/api/v1/accounts/'+account+'/contacts/search?q=a&page=1');setCRMStatus(true,'CRM conectado');}catch(e){}
+}
+
+
+// ── ULTRAFORMER ───────────────────────────────────────────
+const DEFAULT_PONTEIRAS=[
+  {id:101,nome:'DS4-3.0',total:100000,restante:98326},
+  {id:102,nome:'DS4-1.5',total:100000,restante:98968},
+  {id:103,nome:'DS4-4.5',total:100000,restante:99801},
+  {id:104,nome:'DS4-1.5 (B)',total:12000,restante:9453},
+  {id:105,nome:'DS4-3.0 (B)',total:12000,restante:6219},
+  {id:106,nome:'DS4-13.0',total:12000,restante:11387},
+  {id:107,nome:'DS4-7.0',total:12000,restante:11716},
+  {id:108,nome:'DS4-4.5 (B)',total:12000,restante:7347},
+];
+let ponteiras=ls('ponteiras',DEFAULT_PONTEIRAS);
+let sessoesUF=ls('sessoesUF',[]);
+const UF_CUSTO=0.45,UF_PRECO=2.50,UF_ALERTA=0.20;
+
+function saveUF(){lss('ponteiras',ponteiras);lss('sessoesUF',sessoesUF);}
+
+function pctVida(p){return p.total>0?(p.restante/p.total*100):0;}
+
+function checarAlertasPonteiras(){
+  const criticas=ponteiras.filter(p=>pctVida(p)<=UF_ALERTA*100);
+  const al=document.getElementById('ultra-alert');
+  if(criticas.length&&al){
+    al.style.display='block';
+    al.innerHTML='⚠️ Ponteiras com vida útil ≤20%: '+criticas.map(p=>`<strong>${p.nome}</strong> (${p.restante.toLocaleString('pt-BR')} disparos — ${pctVida(p).toFixed(1)}%)`).join(', ')+' — <strong>Compre recargas!</strong>';
+  }else if(al)al.style.display='none';
+}
+
+function renderPonteiras(){
+  checarAlertasPonteiras();
+  let html='';
+  ponteiras.forEach(p=>{
+    const pct=pctVida(p),warn=pct<=20,crit=pct<=10;
+    const cor=crit?'var(--danger)':warn?'#e8943a':'var(--success)';
+    const cls=crit?'pont-card critical':warn?'pont-card warn':'pont-card';
+    html+=`<div class="${cls}">
+      <div style="font-weight:600;font-size:12px;margin-bottom:2px;padding-right:22px">${p.nome}</div>
+      ${warn?`<span style="background:${crit?'#fdeaea':'#faeeda'};color:${crit?'#b52e2e':'#854f0b'};font-size:9px;padding:1px 6px;border-radius:8px;font-weight:600">${crit?'🔴 CRÍTICO':'⚠️ BAIXO'}</span>`:''}
+      <div style="margin-top:8px;font-family:var(--font-head);font-size:18px;font-weight:700;color:${cor}">${p.restante.toLocaleString('pt-BR')}</div>
+      <div style="font-size:10px;color:var(--muted)">de ${p.total.toLocaleString('pt-BR')} disparos</div>
+      <div class="pont-bar-bg"><div class="pont-bar-fill" style="width:${Math.min(100,pct)}%;background:${cor}"></div></div>
+      <div style="font-size:10px;color:${cor};margin-top:3px;font-weight:600">${pct.toFixed(1)}% restante</div>
+      <button onclick="abrirRecarga(${p.id})" style="margin-top:8px;width:100%;padding:4px;border-radius:6px;border:1px solid var(--border);background:var(--bg);font-family:var(--font-body);font-size:11px;cursor:pointer;color:var(--muted)">🔐 Recarregar disparos</button>
+    </div>`;
+  });
+  const el=document.getElementById('pont-grid');
+  if(el)el.innerHTML=html||'<div style="grid-column:1/-1;text-align:center;padding:24px;color:var(--muted)">Nenhuma ponteira</div>';
+}
+
+function populatePontSel(){
+  const sel=document.getElementById('uf-pont');if(!sel)return;
+  sel.innerHTML='<option value="">Selecione...</option>'+ponteiras.map(p=>`<option value="${p.id}">${p.nome} (${p.restante.toLocaleString('pt-BR')} disp. restantes)</option>`).join('');
+}
+
+function ufCalc(){
+  const disp=parseInt(document.getElementById('uf-disparos')?.value)||0;
+  const pontId=parseInt(document.getElementById('uf-pont')?.value);
+  const pont=ponteiras.find(p=>p.id===pontId);
+  const custo=disp*UF_CUSTO,rec=disp*UF_PRECO,lucro=rec-custo;
+  const resta=pont?Math.max(0,pont.restante-disp):null;
+  document.getElementById('uf-cr-custo').textContent=brl(custo);
+  document.getElementById('uf-cr-rec').textContent=brl(rec);
+  document.getElementById('uf-cr-lucro').textContent=brl(lucro);
+  document.getElementById('uf-cr-resta').textContent=resta!==null?resta.toLocaleString('pt-BR')+' disparos':'—';
+}
+
+function salvarSessaoUF(){
+  const cliente=(document.getElementById('uf-cliente')?.value||'').trim();
+  if(!cliente){showToast('Informe o cliente',true);return;}
+  const pontId=parseInt(document.getElementById('uf-pont')?.value);
+  if(!pontId||isNaN(pontId)){showToast('Selecione a ponteira',true);return;}
+  const disp=parseInt(document.getElementById('uf-disparos')?.value)||0;
+  if(disp<=0){showToast('Informe os disparos',true);return;}
+  const pont=ponteiras.find(p=>p.id===pontId);
+  if(!pont){showToast('Ponteira não encontrada',true);return;}
+  if(disp>pont.restante){showToast('Disparos excedem vida útil restante ('+pont.restante+')',true);return;}
+  const profId=parseInt(document.getElementById('uf-prof')?.value)||null;
+  const data=document.getElementById('uf-data')?.value||new Date().toISOString().slice(0,10);
+  const custo=disp*UF_CUSTO,rec=disp*UF_PRECO,lucro=rec-custo;
+  sessoesUF.push({id:nid(),data,cliente,profId,pontId,disparos:disp,custo,receita:rec,lucro});
+  pont.restante=Math.max(0,pont.restante-disp);
+  saveUF();closeModal('modal-uform');showToast('Sessão registrada!');
+  renderUltraformer();
+  // alertar se caiu para zona crítica
+  if(pctVida(pont)<=UF_ALERTA*100)showToast('⚠️ Ponteira '+pont.nome+' com vida útil baixa!',true);
+}
+
+function renderUltraformer(){
+  renderPonteiras();
+  const de=document.getElementById('uf-de')?.value,ate=document.getElementById('uf-ate')?.value;
+  let lista=sessoesUF.filter(s=>{if(de&&s.data<de)return false;if(ate&&s.data>ate)return false;return true;});
+  let html='';
+  if(!lista.length)html='<tr><td colspan="9" style="text-align:center;padding:24px;color:var(--muted)">Nenhuma sessão registrada</td></tr>';
+  else lista.slice().reverse().forEach(s=>{
+    const pont=ponteiras.find(p=>p.id===s.pontId),prof=profissionais.find(p=>p.id===s.profId);
+    html+=`<tr>
+      <td class="td-muted" style="white-space:nowrap">${new Date(s.data).toLocaleDateString('pt-BR')}</td>
+      <td style="font-weight:500;max-width:90px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${s.cliente}</td>
+      <td style="max-width:70px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${prof?`<span class="prof-tag" style="font-size:9px">${prof.nome}</span>`:'<span class="td-muted">—</span>'}</td>
+      <td><span style="background:#f0eeff;color:#4a3fa5;padding:2px 6px;border-radius:10px;font-size:10px;font-weight:500;white-space:nowrap">${pont?pont.nome:'—'}</span></td>
+      <td style="font-weight:600;white-space:nowrap">${s.disparos.toLocaleString('pt-BR')}</td>
+      <td style="font-weight:600;color:var(--success);white-space:nowrap" title="Custo: ${brl(s.custo)} | Receita: ${brl(s.receita)}">${brl(s.lucro)}</td>
+      <td style="padding:4px 6px"><button class="btn-icon" title="Editar sessão (requer senha)" onclick="abrirEdicaoUF(${s.id})" style="font-size:15px">✏️</button></td></tr>`;
+  });
+  document.getElementById('uform-tbody').innerHTML=html;
+  const tc=lista.reduce((a,s)=>a+s.custo,0),tr=lista.reduce((a,s)=>a+s.receita,0),tl=lista.reduce((a,s)=>a+s.lucro,0),td=lista.reduce((a,s)=>a+s.disparos,0);
+  document.getElementById('uform-total-bar').innerHTML=`
+    <span style="font-size:11px;color:var(--muted)">${lista.length} sessões · ${td.toLocaleString('pt-BR')} disparos</span>
+    <span>Custo: <strong>${brl(tc)}</strong></span>
+    <span>Receita: <strong>${brl(tr)}</strong></span>
+    <span style="color:var(--success);font-weight:600">Lucro: ${brl(tl)}</span>`;
+}
+
+function excluirSessaoUF(id){
+  const s=sessoesUF.find(x=>x.id===id);if(!s)return;
+  openConfirm('Excluir sessão','Excluir sessão de '+s.cliente+'? Os disparos serão devolvidos à ponteira.',()=>{
+    const pont=ponteiras.find(p=>p.id===s.pontId);
+    if(pont)pont.restante=Math.min(pont.total,pont.restante+s.disparos);
+    sessoesUF=sessoesUF.filter(x=>x.id!==id);saveUF();renderUltraformer();showToast('Sessão excluída');
+  });
+}
+
+function salvarPonteira(){
+  const nome=(document.getElementById('pont-nome')?.value||'').trim();
+  if(!nome){showToast('Informe o nome',true);return;}
+  const total=parseInt(document.getElementById('pont-total')?.value)||0;
+  const restante=parseInt(document.getElementById('pont-restante')?.value)||total;
+  ponteiras.push({id:nid(),nome,total,restante});
+  saveUF();closeModal('modal-pont');showToast('Ponteira cadastrada!');renderPonteiras();
+  ['pont-nome','pont-total','pont-restante'].forEach(id=>{const el=document.getElementById(id);if(el)el.value='';});
+}
+
+function excluirPonteira(id){
+  const p=ponteiras.find(x=>x.id===id);if(!p)return;
+  openConfirm('Excluir ponteira','Excluir ponteira "'+p.nome+'"?',()=>{
+    ponteiras=ponteiras.filter(x=>x.id!==id);saveUF();renderPonteiras();showToast('Ponteira excluída');
+  });
+}
+
+
+// ── EDIÇÃO SESSÃO UF (protegida por senha) ───────────────
+let _ufEditId=null;
+
+function abrirEdicaoUF(id){
+  _ufEditId=id;
+  const s=sessoesUF.find(x=>x.id===id);if(!s)return;
+  // reset estado
+  document.getElementById('uf-edit-senha').value='';
+  document.getElementById('uf-edit-campos').style.display='none';
+  document.getElementById('uf-edit-verificar-btn').style.display='';
+  document.getElementById('uf-edit-salvar-btn').style.display='none';
+  openModal('modal-uform-edit');
+}
+
+function verificarSenhaUFEdit(){
+  const senha=document.getElementById('uf-edit-senha').value;
+  if(!verificarMaster(senha)){showToast('Senha master incorreta',true);return;}
+  // senha ok — mostrar campos preenchidos
+  const s=sessoesUF.find(x=>x.id===_ufEditId);if(!s)return;
+  populateProfSel('uf-edit-prof');
+  // popular ponteiras
+  const psel=document.getElementById('uf-edit-pont');
+  psel.innerHTML=ponteiras.map(p=>`<option value="${p.id}">${p.nome} (${p.restante.toLocaleString('pt-BR')} disp.)</option>`).join('');
+  document.getElementById('uf-edit-data').value=s.data;
+  document.getElementById('uf-edit-prof').value=s.profId||'';
+  document.getElementById('uf-edit-cliente').value=s.cliente;
+  document.getElementById('uf-edit-pont').value=s.pontId;
+  document.getElementById('uf-edit-disparos').value=s.disparos;
+  document.getElementById('uf-edit-campos').style.display='block';
+  document.getElementById('uf-edit-verificar-btn').style.display='none';
+  document.getElementById('uf-edit-salvar-btn').style.display='';
+  ufEditCalc();
+}
+
+function ufEditCalc(){
+  const disp=parseInt(document.getElementById('uf-edit-disparos')?.value)||0;
+  const custo=disp*UF_CUSTO,rec=disp*UF_PRECO,lucro=rec-custo;
+  document.getElementById('uf-edit-custo').textContent=brl(custo);
+  document.getElementById('uf-edit-rec').textContent=brl(rec);
+  document.getElementById('uf-edit-lucro').textContent=brl(lucro);
+}
+
+function salvarEdicaoUF(){
+  const s=sessoesUF.find(x=>x.id===_ufEditId);if(!s)return;
+  const novaDisp=parseInt(document.getElementById('uf-edit-disparos').value)||0;
+  if(novaDisp<=0){showToast('Informe os disparos',true);return;}
+  const novaPontId=parseInt(document.getElementById('uf-edit-pont').value);
+  const novaPont=ponteiras.find(p=>p.id===novaPontId);
+  // devolver disparos antigos para ponteira antiga
+  const pontAntiga=ponteiras.find(p=>p.id===s.pontId);
+  if(pontAntiga)pontAntiga.restante=Math.min(pontAntiga.total,pontAntiga.restante+s.disparos);
+  // verificar se nova ponteira tem disparos suficientes
+  if(novaPont&&novaDisp>novaPont.restante){showToast('Disparos excedem vida útil da ponteira ('+novaPont.restante+')',true);if(pontAntiga)pontAntiga.restante-=s.disparos;return;}
+  // aplicar novos valores
+  if(novaPont)novaPont.restante=Math.max(0,novaPont.restante-novaDisp);
+  s.data=document.getElementById('uf-edit-data').value;
+  s.profId=parseInt(document.getElementById('uf-edit-prof').value)||null;
+  s.cliente=document.getElementById('uf-edit-cliente').value.trim();
+  s.pontId=novaPontId;
+  s.disparos=novaDisp;
+  s.custo=novaDisp*UF_CUSTO;
+  s.receita=novaDisp*UF_PRECO;
+  s.lucro=s.receita-s.custo;
+  saveUF();closeModal('modal-uform-edit');showToast('Sessão atualizada!');renderUltraformer();
+}
+
+
+// ── SENHA MASTER ──────────────────────────────────────────
+function getSenhaMaster(){return cfg.senhaMaster||'biodynk@master';}
+function verificarMaster(s){return s===getSenhaMaster();}
+
+function alterarSenhaMaster(){
+  const old=document.getElementById('cfg-master-old').value;
+  const nw=document.getElementById('cfg-master-new').value;
+  const cf=document.getElementById('cfg-master-conf').value;
+  if(!verificarMaster(old)){showToast('Senha master atual incorreta',true);return;}
+  if(nw.length<4){showToast('Mínimo 4 caracteres',true);return;}
+  if(nw!==cf){showToast('Senhas não coincidem',true);return;}
+  cfg.senhaMaster=nw;saveAll();showToast('Senha master alterada!');
+  ['cfg-master-old','cfg-master-new','cfg-master-conf'].forEach(id=>document.getElementById(id).value='');
+}
+
+// Gate genérico para qualquer modal protegido
+let _gateTargetModal=null;
+function abrirComMaster(targetModal){
+  _gateTargetModal=targetModal;
+  document.getElementById('gate-senha').value='';
+  openModal('modal-master-gate');
+}
+function verificarGateMaster(){
+  const s=document.getElementById('gate-senha').value;
+  if(!verificarMaster(s)){showToast('Senha master incorreta',true);return;}
+  closeModal('modal-master-gate');
+  if(_gateTargetModal)openModal(_gateTargetModal);
+  _gateTargetModal=null;
+}
+
+// Recarga de disparos
+let _recPontId=null;
+function abrirRecarga(pontId){
+  _recPontId=pontId;
+  document.getElementById('rec-senha').value='';
+  document.getElementById('rec-campos').style.display='none';
+  document.getElementById('rec-verificar-btn').style.display='';
+  document.getElementById('rec-salvar-btn').style.display='none';
+  document.getElementById('rec-qtd').value='';
+  document.getElementById('rec-nova-vida').textContent='—';
+  openModal('modal-recarga');
+}
+function verificarSenhaMasterRecarga(){
+  const s=document.getElementById('rec-senha').value;
+  if(!verificarMaster(s)){showToast('Senha master incorreta',true);return;}
+  const pont=ponteiras.find(p=>p.id===_recPontId);if(!pont)return;
+  document.getElementById('rec-pont-nome').textContent=pont.nome;
+  document.getElementById('rec-pont-atual').textContent=pont.restante.toLocaleString('pt-BR');
+  document.getElementById('rec-campos').style.display='block';
+  document.getElementById('rec-verificar-btn').style.display='none';
+  document.getElementById('rec-salvar-btn').style.display='';
+}
+function recCalc(){
+  const pont=ponteiras.find(p=>p.id===_recPontId);if(!pont)return;
+  const qtd=parseInt(document.getElementById('rec-qtd').value)||0;
+  const nova=pont.restante+qtd;
+  document.getElementById('rec-nova-vida').textContent=nova.toLocaleString('pt-BR')+' disparos';
+}
+function salvarRecarga(){
+  const pont=ponteiras.find(p=>p.id===_recPontId);if(!pont)return;
+  const qtd=parseInt(document.getElementById('rec-qtd').value)||0;
+  if(qtd<=0){showToast('Informe a quantidade',true);return;}
+  pont.restante+=qtd;
+  // Se ultrapassar o total, atualiza o total também
+  if(pont.restante>pont.total)pont.total=pont.restante;
+  saveUF();closeModal('modal-recarga');showToast('✓ '+qtd.toLocaleString('pt-BR')+' disparos adicionados à '+pont.nome+'!');renderUltraformer();
+}
+
+// ── INIT ──────────────────────────────────────────────────
+window.addEventListener('click',e=>{
+  if(e.target.classList.contains('modal-overlay'))e.target.classList.remove('open');
+  if(e.target.id==='confirm-overlay')closeConfirm();
+  if(!e.target.closest('#crm-search-wrap'))document.getElementById('crm-results')?.classList.remove('open');
+});
+const _origOpen=openModal;
+window.openModal=function(id){
+  _origOpen(id);
+  if(id==='modal-uform'){
+    populateProfSel('uf-prof');
+    populatePontSel();
+    document.getElementById('uf-data').value=new Date().toISOString().slice(0,10);
+    if(crmContactCtx&&crmContactCtx.name){const cl=document.getElementById('uf-cliente');if(cl)cl.value=crmContactCtx.name;}
+    ufCalc();
+  }
+  if(id==='modal-proc'){
+    populateProfSel('mp-prof');
+    // mostrar busca só se API ok
+    const sw=document.getElementById('crm-search-wrap');if(sw)sw.style.display=crmApiOk?'block':'none';
+    // card contexto postMessage
+    if(crmContactCtx&&crmContactCtx.name){atualizarCRMCard(crmContactCtx);document.getElementById('mp-cliente').value=crmContactCtx.name;}
+    else document.getElementById('crm-card-ctx')?.classList.remove('visible');
+    mpTipoChange();
+  }
+};
+</script>
+<div id="modal-edit-proc" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;"><div style="background:var(--card);border-radius:16px;padding:28px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;"><h3 style="margin-bottom:20px;font-family:var(--font-head)">Editar Procedimento</h3><div style="display:grid;gap:10px;"><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Data</label><input type="date" id="ep-data" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cliente</label><input type="text" id="ep-cliente" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Tipo</label><select id="ep-tipo" class="form-input"><option value="botox">Botox</option><option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option><option value="outros">Outros</option></select></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Profissional</label><input type="text" id="ep-profissional" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Produto</label><input type="text" id="ep-produto" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Consumo</label><input type="number" id="ep-consumo" class="form-input" step="0.1"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cobrado (R$)</label><input type="number" id="ep-cobrado" class="form-input" step="0.01"></div></div><div style="display:flex;gap:12px;margin-top:20px;justify-content:flex-end;"><button class="btn btn-ghost" onclick="fecharEditProc()">Cancelar</button><button class="btn btn-primary" onclick="salvarEditarProc()">Salvar</button></div></div></div>
+<script>
+var _epId=null;
+function fecharEditProc(){document.getElementById("modal-edit-proc").style.display="none";}
+function editarProc(id){
+  var s=prompt("Senha master:");
+  if(!s||s!==cfg.senhaMaster){alert("Senha incorreta!");return;}
+  var p=procedimentos.find(function(x){return x.id===id;});
+  if(!p)return;
+  _epId=id;
+  document.getElementById("ep-data").value=p.data||"";
+  document.getElementById("ep-cliente").value=p.cliente||"";
+  document.getElementById("ep-tipo").value=p.tipo||"botox";
+  var prof=profissionais.find(function(x){return x.id===p.profId;});
+  document.getElementById("ep-profissional").value=prof?prof.nome:"";
+  var prod=produtos.find(function(x){return x.id===p.prodId;});
+  document.getElementById("ep-produto").value=prod?prod.nome:"";
+  document.getElementById("ep-consumo").value=p.consumo||"";
+  document.getElementById("ep-cobrado").value=p.cobrado||"";
+  document.getElementById("modal-edit-proc").style.display="flex";
+}
+function salvarEditarProc(){
+  var idx=procedimentos.findIndex(function(x){return x.id===_epId;});
+  if(idx===-1)return;
+  var p=procedimentos[idx];
+  p.data=document.getElementById("ep-data").value;
+  p.cliente=document.getElementById("ep-cliente").value.trim();
+  p.tipo=document.getElementById("ep-tipo").value;
+  var nomeProd=document.getElementById("ep-produto").value.trim();
+  var prod=produtos.find(function(x){return x.nome===nomeProd;});
+  if(prod)p.prodId=prod.id;
+  var nomeProf=document.getElementById("ep-profissional").value.trim();
+  var prof=profissionais.find(function(x){return x.nome===nomeProf;});
+  if(prof)p.profId=prof.id;
+  p.consumo=parseFloat(document.getElementById("ep-consumo").value)||0;
+  p.cobrado=parseFloat(document.getElementById("ep-cobrado").value)||0;
+  if(prod)p.custoTotal=prod.custo*p.consumo;
+  p.lucro=p.cobrado-(p.custoTotal||0);
+  procedimentos[idx]=p;
+  saveAll();
+  fecharEditProc();
+  renderProcedimentos();
+  alert("Procedimento atualizado!");
+}
+<\/script>
+</body>
+</html>
