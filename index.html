@@ -471,7 +471,7 @@ tr:hover td{background:#faf9f7}
       </div>
       <div id="crm-cfg-badge" class="crm-cfg-badge" style="background:#fdeaea;color:#b52e2e">⬤ Desconectado</div>
       <div class="form-group"><label class="form-label">URL da API</label>
-        <input class="form-input" id="cfg-crm-url" value="https://controle.biodynk.com" placeholder="https://appv3.biodynk.com.br"></div>
+        <input class="form-input" id="cfg-crm-url" value="https://appv3.biodynk.com.br" placeholder="https://appv3.biodynk.com.br"></div>
       <div class="form-group"><label class="form-label">API Access Token</label>
         <input class="form-input" id="cfg-crm-token" type="password" placeholder="Cole seu token aqui"></div>
       <div class="form-group"><label class="form-label">Account ID</label>
@@ -743,7 +743,7 @@ tr:hover td{background:#faf9f7}
 
 <script>
 // ── DEFAULTS ──────────────────────────────────────────────
-const DEFAULT_USERS=[{user:'admin',pass:'biodynk2024'},{user:'biomedica',pass:'iris2024'}];
+const DEFAULT_USERS=[{user:'admin',pass:'!Controle1'},{user:'biomedica',pass:'iris2024'}];
 const DEFAULT_CFG={horaSala:84,gov:7,maq:10,comissao:10,meta:0,estoqueMin:20,senhaMaster:'biodynk@master',estoqueMinBotox:100,estoqueMinPreen:6,estoqueMinBio:3};
 const DEFAULT_PRODS=[
   {id:1,nome:'Botox Allergan',cat:'botox',unidade:'UI',custo:4.20,estoque:200,lote:'LOT001',validade:'2025-06'},
@@ -763,7 +763,7 @@ const DEFAULT_PROCS=[
 // ── STORAGE ───────────────────────────────────────────────
 function ls(k,d){try{const v=localStorage.getItem('bct3_'+k);return v?JSON.parse(v):d;}catch(e){return d;}}
 function lss(k,v){try{localStorage.setItem('bct3_'+k,JSON.stringify(v));}catch(e){}}
-let users=ls('users',DEFAULT_USERS),cfg=ls('cfg',DEFAULT_CFG),produtos=ls('produtos',DEFAULT_PRODS);
+let users=DEFAULT_USERS,cfg=ls('cfg',DEFAULT_CFG),produtos=ls('produtos',DEFAULT_PRODS);
 let profissionais=ls('profissionais',DEFAULT_PROFS),procedimentos=ls('procs',DEFAULT_PROCS),nextId=ls('nextid',20);
 function saveAll(){lss('users',users);lss('cfg',cfg);lss('produtos',produtos);lss('profissionais',profissionais);lss('procs',procedimentos);lss('nextid',nextId);}
 function nid(){return nextId++;}
@@ -809,7 +809,7 @@ function calcCusto(tipo,prodId,consumo,tempo,cobrado,profId){
 
 // ── CRM: CONFIGURAÇÃO ─────────────────────────────────────
 function getCRMCfg(){
-  return{url:(localStorage.getItem('bct3_crmurl')||'https://controle.biodynk.com').replace(/\/$/,''),
+  return{url:(localStorage.getItem('bct3_crmurl')||'').replace(/\/$/,''),
     token:localStorage.getItem('bct3_crmtoken')||'',
     account:localStorage.getItem('bct3_crmaccount')||'1'};
 }
@@ -828,11 +828,10 @@ function setCRMStatus(ok,label){
 // ── CRM: FETCH HELPER ─────────────────────────────────────
 async function crmFetch(path){
   const{url,token,account}=getCRMCfg();
-  if(!token)throw new Error('CRM não configurado');
-  // Sempre usa proxy /chatwoot-api quando hospedado em controle.biodynk.com
-  const useProxy=window.location.hostname==='controle.biodynk.com';
-  const fetchUrl=useProxy?(window.location.origin+'/chatwoot-api'+path):(url+path);
-  const res=await fetch(fetchUrl,{
+  if(!url||!token)throw new Error('CRM não configurado');
+  // Dentro do iframe do Chatwoot usamos caminho relativo para evitar bloqueio CORS
+  const base=url||'';
+  const res=await fetch(base+path,{
     method:'GET',
     mode:'cors',
     credentials:'include',
@@ -1072,7 +1071,7 @@ function renderProcedimentos(){
       <td class="td-muted">${p.consumo} ${prod?prod.unidade:'?'}</td>
       <td style="font-weight:500">${brl(p.cobrado)}</td><td>${brl(p.custoTotal)}</td>
       <td style="font-weight:600;color:${p.lucro>=0?'var(--success)':'var(--danger)'}">${brl(p.lucro)}</td>
-      <td><button class="btn-icon" onclick="excluirProc(${p.id})">🗑</button></td></tr>`;
+      <td><button class="btn-icon" onclick="editarProc(${p.id})" title="Editar">✏️</button> <button class="btn-icon" onclick="excluirProc(${p.id})">🗑</button></td></tr>`;
   });
   document.getElementById('proc-tbody').innerHTML=html;
   const rec=lista.reduce((s,p)=>s+p.cobrado,0),cus=lista.reduce((s,p)=>s+p.custoTotal,0),luc=lista.reduce((s,p)=>s+p.lucro,0);
@@ -1235,7 +1234,51 @@ function exportarPDF(){
   const lista=filtrarPorData(procedimentos,'rel-de','rel-ate');
   const rec=lista.reduce((s,p)=>s+p.cobrado,0),cus=lista.reduce((s,p)=>s+p.custoTotal,0),luc=lista.reduce((s,p)=>s+p.lucro,0);
   const w=window.open('','_blank');
-  w.document.write(`<html><head><title>Relatório Biodynk</title><style>body{font-family:Arial,sans-serif;padding:32px;color:#1a1a2e;font-size:13px}h1{font-size:20px;margin-bottom:4px}h2{font-size:14px;margin:20px 0 8px;border-bottom:1px solid #ddd;padding-bottom:4px}table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px}th{background:#f7f5f2;padding:7px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px}td{padding:7px 10px;border-bottom:1px solid #eee}.sum{display:flex;gap:32px;margin-bottom:20px}.sum-label{font-size:10px;color:#888;text-transform:uppercase}.sum-val{font-size:20px;font-weight:700}.lucro{color:#4caf7d}</style></head><body><h1>Biodynk · Relatório Financeiro</h1><p style="color:#888;font-size:12px">Período: ${de||'início'} até ${ate||'hoje'} · Gerado em ${new Date().toLocaleDateString('pt-BR')}</p><div class="sum"><div><div class="sum-label">Receita</div><div class="sum-val">${brl(rec)}</div></div><div><div class="sum-label">Custo</div><div class="sum-val">${brl(cus)}</div></div><div><div class="sum-label">Lucro</div><div class="sum-val lucro">${brl(luc)}</div></div></div><h2>Procedimentos</h2><table><thead><tr><th>Data</th><th>Cliente</th><th>Tipo</th><th>Profissional</th><th>Cobrado</th><th>Custo</th><th>Lucro</th></tr></thead><tbody>${lista.slice().reverse().map(p=>{const prof=profissionais.find(x=>x.id===p.profId);return `<tr><td>${new Date(p.data).toLocaleDateString('pt-BR')}</td><td>${p.cliente}</td><td>${tipoLabel[p.tipo]}</td><td>${prof?prof.nome:'—'}</td><td>${brl(p.cobrado)}</td><td>${brl(p.custoTotal)}</td><td style="color:${p.lucro>=0?'#4caf7d':'#e05252'};font-weight:600">${brl(p.lucro)}</td></tr>`;}).join('')}</tbody></table></body></html>`);
+  w.document.write(`<html><head><title>Relatório Biodynk</title><style>body{font-family:Arial,sans-serif;padding:32px;color:#1a1a2e;font-size:13px}h1{font-size:20px;margin-bottom:4px}h2{font-size:14px;margin:20px 0 8px;border-bottom:1px solid #ddd;padding-bottom:4px}table{width:100%;border-collapse:collapse;margin-bottom:16px;font-size:12px}th{background:#f7f5f2;padding:7px 10px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.5px}td{padding:7px 10px;border-bottom:1px solid #eee}.sum{display:flex;gap:32px;margin-bottom:20px}.sum-label{font-size:10px;color:#888;text-transform:uppercase}.sum-val{font-size:20px;font-weight:700}.lucro{color:#4caf7d}</style></head><body><h1>Biodynk · Relatório Financeiro</h1><p style="color:#888;font-size:12px">Período: ${de||'início'} até ${ate||'hoje'} · Gerado em ${new Date().toLocaleDateString('pt-BR')}</p><div class="sum"><div><div class="sum-label">Receita</div><div class="sum-val">${brl(rec)}</div></div><div><div class="sum-label">Custo</div><div class="sum-val">${brl(cus)}</div></div><div><div class="sum-label">Lucro</div><div class="sum-val lucro">${brl(luc)}</div></div></div><h2>Procedimentos</h2><table><thead><tr><th>Data</th><th>Cliente</th><th>Tipo</th><th>Profissional</th><th>Cobrado</th><th>Custo</th><th>Lucro</th></tr></thead><tbody>${lista.slice().reverse().map(p=>{const prof=profissionais.find(x=>x.id===p.profId);return `<tr><td>${new Date(p.data).toLocaleDateString('pt-BR')}</td><td>${p.cliente}</td><td>${tipoLabel[p.tipo]}</td><td>${prof?prof.nome:'—'}</td><td>${brl(p.cobrado)}</td><td>${brl(p.custoTotal)}</td><td style="color:${p.lucro>=0?'#4caf7d':'#e05252'};font-weight:600">${brl(p.lucro)}</td></tr>`;}).join('')}</tbody></table><div id="modal-edit-proc" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;"><div style="background:var(--card);border-radius:16px;padding:28px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;"><h3 style="margin-bottom:20px;font-family:var(--font-head)">Editar Procedimento</h3><div style="display:grid;gap:12px;"><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Data</label><input type="date" id="ep-data" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cliente</label><input type="text" id="ep-cliente" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Tipo</label><select id="ep-tipo" class="form-input"><option value="botox">Botox</option><option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option><option value="outros">Outros</option></select></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Profissional</label><input type="text" id="ep-profissional" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Produto</label><input type="text" id="ep-produto" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Consumo</label><input type="number" id="ep-consumo" class="form-input" step="0.1"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cobrado (R$)</label><input type="number" id="ep-cobrado" class="form-input" step="0.01"></div></div><div style="display:flex;gap:12px;margin-top:20px;justify-content:flex-end;"><button class="btn btn-ghost" onclick="document.getElementById('modal-edit-proc').style.display='none'">Cancelar</button><button class="btn btn-primary" onclick="salvarEditarProc()">Salvar</button></div></div></div>
+<script>
+var _epId=null;
+function editarProc(id){
+  var s=prompt("Senha master:");
+  if(!s||s!==cfg.senhaMaster){alert("Senha incorreta!");return;}
+  var p=procedimentos.find(function(x){return x.id===id;});
+  if(!p)return;
+  _epId=id;
+  document.getElementById("ep-data").value=p.data||"";
+  document.getElementById("ep-cliente").value=p.cliente||"";
+  document.getElementById("ep-tipo").value=p.tipo||"botox";
+  var prof=profissionais.find(function(x){return x.id===p.profId;});
+  document.getElementById("ep-profissional").value=prof?prof.nome:"";
+  var prod=produtos.find(function(x){return x.id===p.prodId;});
+  document.getElementById("ep-produto").value=prod?prod.nome:"";
+  document.getElementById("ep-consumo").value=p.consumo||"";
+  document.getElementById("ep-cobrado").value=p.cobrado||"";
+  document.getElementById("modal-edit-proc").style.display="flex";
+}
+function salvarEditarProc(){
+  var idx=procedimentos.findIndex(function(x){return x.id===_epId;});
+  if(idx===-1)return;
+  var p=procedimentos[idx];
+  p.data=document.getElementById("ep-data").value;
+  p.cliente=document.getElementById("ep-cliente").value.trim();
+  p.tipo=document.getElementById("ep-tipo").value;
+  var nomeProd=document.getElementById("ep-produto").value.trim();
+  var prod=produtos.find(function(x){return x.nome===nomeProd;});
+  if(prod)p.prodId=prod.id;
+  var nomeProf=document.getElementById("ep-profissional").value.trim();
+  var prof=profissionais.find(function(x){return x.nome===nomeProf;});
+  if(prof)p.profId=prof.id;
+  p.consumo=parseFloat(document.getElementById("ep-consumo").value)||0;
+  p.cobrado=parseFloat(document.getElementById("ep-cobrado").value)||0;
+  if(prod)p.custoTotal=prod.custo*p.consumo;
+  p.lucro=p.cobrado-p.custoTotal;
+  procedimentos[idx]=p;
+  saveAll();
+  document.getElementById("modal-edit-proc").style.display="none";
+  renderProcedimentos();
+  alert("Procedimento atualizado!");
+}
+</script>
+</body></html>`);
   w.document.close();setTimeout(()=>w.print(),500);
 }
 
@@ -1570,6 +1613,50 @@ window.openModal=function(id){
     mpTipoChange();
   }
 };
+</script>
+<div id="modal-edit-proc" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);z-index:9999;align-items:center;justify-content:center;"><div style="background:var(--card);border-radius:16px;padding:28px;width:90%;max-width:480px;max-height:90vh;overflow-y:auto;"><h3 style="margin-bottom:20px;font-family:var(--font-head)">Editar Procedimento</h3><div style="display:grid;gap:12px;"><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Data</label><input type="date" id="ep-data" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cliente</label><input type="text" id="ep-cliente" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Tipo</label><select id="ep-tipo" class="form-input"><option value="botox">Botox</option><option value="preenchedor">Preenchedor</option><option value="bioestimulador">Bioestimulador</option><option value="outros">Outros</option></select></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Profissional</label><input type="text" id="ep-profissional" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Produto</label><input type="text" id="ep-produto" class="form-input"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Consumo</label><input type="number" id="ep-consumo" class="form-input" step="0.1"></div><div><label style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;display:block;margin-bottom:3px">Cobrado (R$)</label><input type="number" id="ep-cobrado" class="form-input" step="0.01"></div></div><div style="display:flex;gap:12px;margin-top:20px;justify-content:flex-end;"><button class="btn btn-ghost" onclick="document.getElementById('modal-edit-proc').style.display='none'">Cancelar</button><button class="btn btn-primary" onclick="salvarEditarProc()">Salvar</button></div></div></div>
+<script>
+var _epId=null;
+function editarProc(id){
+  var s=prompt("Senha master:");
+  if(!s||s!==cfg.senhaMaster){alert("Senha incorreta!");return;}
+  var p=procedimentos.find(function(x){return x.id===id;});
+  if(!p)return;
+  _epId=id;
+  document.getElementById("ep-data").value=p.data||"";
+  document.getElementById("ep-cliente").value=p.cliente||"";
+  document.getElementById("ep-tipo").value=p.tipo||"botox";
+  var prof=profissionais.find(function(x){return x.id===p.profId;});
+  document.getElementById("ep-profissional").value=prof?prof.nome:"";
+  var prod=produtos.find(function(x){return x.id===p.prodId;});
+  document.getElementById("ep-produto").value=prod?prod.nome:"";
+  document.getElementById("ep-consumo").value=p.consumo||"";
+  document.getElementById("ep-cobrado").value=p.cobrado||"";
+  document.getElementById("modal-edit-proc").style.display="flex";
+}
+function salvarEditarProc(){
+  var idx=procedimentos.findIndex(function(x){return x.id===_epId;});
+  if(idx===-1)return;
+  var p=procedimentos[idx];
+  p.data=document.getElementById("ep-data").value;
+  p.cliente=document.getElementById("ep-cliente").value.trim();
+  p.tipo=document.getElementById("ep-tipo").value;
+  var nomeProd=document.getElementById("ep-produto").value.trim();
+  var prod=produtos.find(function(x){return x.nome===nomeProd;});
+  if(prod)p.prodId=prod.id;
+  var nomeProf=document.getElementById("ep-profissional").value.trim();
+  var prof=profissionais.find(function(x){return x.nome===nomeProf;});
+  if(prof)p.profId=prof.id;
+  p.consumo=parseFloat(document.getElementById("ep-consumo").value)||0;
+  p.cobrado=parseFloat(document.getElementById("ep-cobrado").value)||0;
+  if(prod)p.custoTotal=prod.custo*p.consumo;
+  p.lucro=p.cobrado-p.custoTotal;
+  procedimentos[idx]=p;
+  saveAll();
+  document.getElementById("modal-edit-proc").style.display="none";
+  renderProcedimentos();
+  alert("Procedimento atualizado!");
+}
 </script>
 </body>
 </html>
